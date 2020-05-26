@@ -1,0 +1,133 @@
+.panelSetup {
+    font-family: 'Lato', sans-serif;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 7rem;
+       
+   h2{
+       text-align: right;
+       text-transform: uppercase;
+       color: #2e2e2e;
+       font-weight: bold;
+       margin-left: auto;
+       margin-right: 10%;
+   }
+
+   &__accountSetup {
+    position: absolute;
+    top: -111px;
+    left: -50%;
+    text-transform: uppercase;  
+    background-color: #fff;
+    width: 200%;
+    height: 6rem;
+    margin-right: 9px;
+    color: #2F353A;
+    letter-spacing: 0.257143px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+
+    span {
+      position: relative;
+      top: 15%;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      margin-left: auto;
+      margin-right: 25%;
+      margin-bottom: auto;
+      margin-top: 0;
+    }
+  }
+
+    &__btnSetup {
+      width: 16rem;
+      height: 44px;
+      margin-right: 9px;
+      color: #2F353A;
+      letter-spacing: 0.257143px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  
+    &__btnSetup:active {
+        color: #fff;
+        background: #2f353a;
+    }
+
+    &__icon {
+      margin-top: 15px;
+      font-size: 23px;
+      color: #D5D6D8;
+      cursor: pointer;
+      margin-right: 6px;
+      margin-left: 6px;
+      margin-bottom: 10px;
+    }
+  }
+ 
+.btns{
+    margin-left: auto;
+    margin-right: 10%;
+    background-color: #e4e5e6;
+    border-color: #2f353a;
+    color: #2f353a;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    transition: background 9999999s;
+}
+
+.btns:active {
+    span {
+      color: #fff;
+    }
+    color: #fff;
+    background: #2f353a;
+    transition: background 0s;
+}
+
+.promote {
+    font-family: 'Lato', sans-serif;
+   
+
+      &__icon {
+        font-size: 20px;
+        color: #2F353A;
+      }
+    
+      &__icon:active {
+        font-size: 20px;
+        color: white;
+      }
+
+    }     
+
+@media (min-width: 900px) and (max-width: 1199px){
+  .panelSetup {
+    &__accountSetup {
+      margin-left: -50%;
+      span {
+        position: relative;
+        top: 15%;
+        margin-left: auto;
+        margin-right: 4%;
+        
+      }
+    }
+    
+  }
+}  
+
+@media all and (max-width: 1101px){
+  .panelSetup {
+            .form2 {
+             position: relative;
+             top: 25rem;
+             left: -25rem;  
+            }
+          }
+
+          
+
+}

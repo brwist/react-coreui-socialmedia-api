@@ -1,0 +1,41 @@
+.company {
+  font-family: 'Lato', sans-serif;
+
+  &__button {
+    height: 35px;
+    margin-bottom: 11px;
+  }
+
+  &__upload {
+    margin-bottom: 30px;
+    min-width: 123px!important;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .company {
+    &__buttons-wrapper {
+      margin-top: 60px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__button {
+      width: 123px!important;
+    }
+  }
+}
+
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .company {
+    &__buttons-block {
+      margin-left: 40px;
+    }
+
+    &__buttons-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
