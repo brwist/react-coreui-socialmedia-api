@@ -17,3 +17,17 @@
   background-position: 10px;
   border-bottom: 1px solid white;
 }
+
+.title-page {
+  font-family: 'Lato', sans-serif;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-transform: uppercase;
+  top: 17px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  width: 100%;
+  text-align: center;
+}

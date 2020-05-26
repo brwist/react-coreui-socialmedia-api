@@ -59,7 +59,13 @@ html:not([dir="rtl"]) .sidebar {
   height: 100%;
 }
 
-@media (min-width: 768px) and (max-width: 880px) {
+@media all and (max-width: 768px) {
+  .promote__icon-block {
+    padding-top: 30px;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 880px) {
   .promote {
     &__button {
       margin-bottom: 20px;
@@ -86,4 +92,5 @@ html:not([dir="rtl"]) .sidebar {
   }
   }
 }
+
 

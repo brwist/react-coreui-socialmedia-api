@@ -1,0 +1,71 @@
+.panel {
+    font-family: 'Lato', sans-serif;
+    margin-left: auto;
+    margin-right: 0;
+       
+   h2{
+       text-align: right;
+       text-transform: uppercase;
+       color: #2e2e2e;
+       font-weight: bold;
+       margin-left: auto;
+       margin-right: 10%;
+   }
+
+   .accountSetup{
+    height: 10em;
+    position: relative
+   }
+
+   .accountSetup h2{
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+   }
+
+.promote {
+    font-family: 'Lato', sans-serif;
+   
+
+      &__icon {
+        font-size: 20px;
+        color: #2F353A;
+      }
+    
+      &__icon:active {
+        font-size: 20px;
+        color: white;
+      }
+
+    }     
+} 
+  @media (min-width: 650px) and (max-width: 1200px) {
+      
+      .panel {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        flex-basis: auto;
+        margin-top:500px;
+        margin-left: -100rem;
+        margin-right: auto;
+      }
+}
+
+  @media (min-width: 651px) and (max-width: 767px) {
+    .panel {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        flex-basis: auto;
+        margin-left: -125rem;
+        margin-right: auto;
+        margin-top: 15%;
+      }
+  }
+
+ 

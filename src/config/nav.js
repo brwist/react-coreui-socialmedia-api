@@ -55,12 +55,12 @@ export default {
         },
         {
           name: 'Company Announcement',
-          url: '/company',
+          url: links.companyAnnoun,
           icon: 'icon-envelope-letter',
         },
         {
           name: 'Department Announcem',
-          url: '/department',
+          url: links.departmentAnnoun,
           icon: 'icon-envelope-open',
         },
         {

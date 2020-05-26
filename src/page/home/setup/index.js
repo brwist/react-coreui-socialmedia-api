@@ -11,13 +11,13 @@ import {
 } from '@coreui/react';
 import { Col, Container, Row } from 'reactstrap';
 
-import Panel from '../../../components/panel/index';
-import SocialImg from '../../../components/social-img/index'
+import Panel from '../../../components/setupPanel/index';
+import SocialImg from '../../../components/overview/index';
 import './index.scss';
 import navigation from '../../../config/nav'
 
 
-class Promote extends React.Component {
+class Setup extends React.Component {
   state = {
     activeLink: 'image',
   }
@@ -33,7 +33,6 @@ class Promote extends React.Component {
 
     return (
       <Container className='promote' fluid>
-        <p className='title-page'>Promote a Product</p>
         <Row>
           <Col md={3} xl={2}>
             <AppSidebar fixed display="md">
@@ -84,8 +83,12 @@ class Promote extends React.Component {
                     </div>
                   </div>
                   <button className='promote__button'>
+                  <i
+                        className={activeLink === 'instagram' ? "fa fa-instagram promote__icon-active" : "fa fa-instagram promote__icon"}
+                  />
                     Connect IG
                   </button>
+                
                 </Col>
               </Row>
             </SocialImg>
@@ -99,4 +102,4 @@ class Promote extends React.Component {
   }
 }
 
-export default Promote 
+export default Setup 

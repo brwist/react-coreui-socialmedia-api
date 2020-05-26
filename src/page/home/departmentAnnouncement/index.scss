@@ -1,0 +1,41 @@
+.department {
+  font-family: 'Lato', sans-serif;
+
+  &__button {
+    height: 35px;
+    margin-bottom: 11px;
+  }
+
+  &__upload {
+    margin-bottom: 30px;
+    min-width: 123px!important;
+  }
+
+  &__buttons-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .department {
+    &__buttons-wrapper {
+      margin-top: 60px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__button {
+      width: 123px!important;
+    }
+  }
+}
+
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .department {
+    &__buttons-block {
+      margin-left: 40px;
+    }
+  }
+}
