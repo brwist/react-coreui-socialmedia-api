@@ -5,6 +5,7 @@ import {
   AppSidebarNav2 as AppSidebarNav,
   AppSidebarHeader,
   AppSidebarForm,
+  AppSidebarToggler
 } from '@coreui/react';
 import { Col, Container, Row, Button } from 'reactstrap';
 
@@ -61,6 +62,18 @@ class DeprtmentAnnouncement extends React.Component {
                   >
                     Google Slides
                   </Button>
+                </Col>
+                <Col className='d-flex justify-content-center' xs={2}>
+                  <div className='d-flex'>
+                    <AppSidebarToggler
+                      className="d-md-none promote__wrapper-icon"
+                      mobile
+                    >
+                      <i
+                        className="fa fa-navicon promote__icon"
+                      />
+                    </AppSidebarToggler>
+                  </div>
                 </Col>
               </Row>
               {activeButton === 'Google Slides' && (

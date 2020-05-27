@@ -11,6 +11,8 @@ import CompanyAnnouncement from './page/home/companyAnnouncement/index'
 import DeprtmentAnnouncement from './page/home/departmentAnnouncement/index'
 import Analytics from './page/home/analytics/index'
 import Setup from './page/home/setup/index'
+import Support from './page/home/support/index'
+import Editor from './page/home/editor/index'
 
 const history = createBrowserHistory();
 
@@ -25,6 +27,8 @@ function App() {
         <Route exact path={links.departmentAnnoun} component={DeprtmentAnnouncement} />
         <Route exact path={links.analytics} component={Analytics} />
         <Route exact path={links.setup} component={Setup} />
+        <Route exact path={links.support} component={Support} />
+        <Route exact path={links.editor} component={Editor}/>
       </Switch>
     </Router>
   );

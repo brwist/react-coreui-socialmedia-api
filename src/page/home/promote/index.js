@@ -51,7 +51,6 @@ class Promote extends React.Component {
                   <div className='d-flex'>
                     <AppSidebarToggler
                       className="d-md-none promote__wrapper-icon"
-                      // display="lg"
                       mobile
                     >
                       <i

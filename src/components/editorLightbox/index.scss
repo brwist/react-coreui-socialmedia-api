@@ -1,0 +1,18 @@
+.light-box {
+     position: absolute;
+     top: 25%;   
+
+     .drops{
+        background-color: red($color: #000000);
+     }
+}
+
+  
+  
+  @media all and (max-width: 768px) {
+    .light-box {
+      margin-top: 30px;
+    }
+  }
+  
+  

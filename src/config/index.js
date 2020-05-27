@@ -6,4 +6,7 @@ export default {
   departmentAnnoun: '/department-announcement',
   analytics: '/analytics',
   setup: '/setup',
+  support: '/help',
+  editor: '/editor'
 }
+

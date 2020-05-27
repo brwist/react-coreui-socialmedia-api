@@ -1,0 +1,95 @@
+.container-fluid{
+    overflow: hidden;
+    padding: 0;
+  }
+  
+  .promote {
+    font-family: 'Lato', sans-serif;
+  
+    &__wrapper-icon {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #2F353A;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 38px;
+      margin-right: 9px;
+      cursor: pointer;
+    }
+  
+    &__wrapper-icon-active {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #2F353A;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 38px;
+      margin-right: 9px;
+      cursor: pointer;
+      background-color: #2F353A;
+    }
+  
+    &__icon {
+      font-size: 20px;
+      color: #2F353A;
+    }
+  
+    &__icon-active {
+      font-size: 20px;
+      color: white;
+    }
+    
+    &__button {
+      min-width: 123px;
+      height: 35px;
+      border: 1px solid #2F353A;
+      color: #2F353A;
+      font-weight: bold;
+      font-size: 15px;
+    }
+  }
+ 
+  .editor-light-box {
+     position: relative;
+     top: 100px;
+  }
+  
+  html:not([dir="rtl"]) .sidebar {
+    margin-left: -253px;
+  }
+  
+  .sidebar {
+    height: 100%;
+  }
+  
+  @media (min-width: 768px) and (max-width: 880px) {
+    .promote {
+      &__button {
+        margin-bottom: 20px;
+      }
+  
+    .promote__icon-block {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    }
+  }
+  
+  @media (min-width: 1200px) and (max-width: 1240px) {
+    .promote {
+      &__button {
+        margin-bottom: 20px;
+      }
+  
+    .promote__icon-block {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    }
+  }
+  
+  
