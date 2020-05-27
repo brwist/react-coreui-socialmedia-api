@@ -28,7 +28,7 @@ export default {
         },
         {
           name: 'Analytics',
-          url: '/analytics',
+          url: links.analytics,
           icon: 'icon-chart',
         }
       ],
@@ -82,7 +82,7 @@ export default {
     },
     {
       name: 'Account Setup',
-      url: '/setup',
+      url: links.setup,
       icon: 'icon-note',
     },
     {
@@ -92,7 +92,7 @@ export default {
     },
     {
       name: 'Support',
-      url: '/support',
+      url: links.support,
       icon: 'icon-settings'
     },
     {

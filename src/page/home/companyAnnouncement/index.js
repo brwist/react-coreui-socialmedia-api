@@ -5,6 +5,7 @@ import {
   AppSidebarNav2 as AppSidebarNav,
   AppSidebarHeader,
   AppSidebarForm,
+  AppSidebarToggler
 } from '@coreui/react';
 import { Col, Container, Row, Button } from 'reactstrap';
 
@@ -40,7 +41,7 @@ class CompanyAnnouncement extends React.Component {
           <Col style={{ paddingLeft: '30px' }} stlye={{ marginLeft: '100px' }} md={4} xl={3}>
             <SocialImg>
               <Row className='company__buttons-wrapper'>
-                <Col className='company__buttons-block' xs={5} md={11} lg={6}>
+                <Col className='company__buttons-block d-flex justify-content-center' xs={5} md={11} lg={6}>
                   <Button
                     active={activeButton === 'Templates'}
                     block
@@ -61,6 +62,18 @@ class CompanyAnnouncement extends React.Component {
                   >
                     Libary
                     </Button>
+                </Col>
+                <Col className='d-flex justify-content-center' xs={2}>
+                  <div className='d-flex'>
+                    <AppSidebarToggler
+                      className="d-md-none promote__wrapper-icon"
+                      mobile
+                    >
+                      <i
+                        className="fa fa-navicon promote__icon"
+                      />
+                    </AppSidebarToggler>
+                  </div>
                 </Col>
               </Row>
               {activeButton === 'Libary' && (

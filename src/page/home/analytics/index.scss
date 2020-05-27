@@ -1,0 +1,71 @@
+.analytics {
+  font-family: 'Lato', sans-serif;
+
+  &__card {
+    background-color: #FFC033;
+    max-width: 529px;
+    height: 251px;
+    padding: 22px, 22px, 26px;
+
+    & canvas {
+      height: 100px!important;
+      position: absolute;
+      bottom: 0px;
+      left: 20px;
+      width: 95%!important;
+      margin: auto;
+    }
+  }
+
+  &__value {
+    font-weight: 900;
+    font-size: 45px;
+    letter-spacing: 0.642857px;
+  }
+
+  &__description {
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 0.357143px;
+  }
+
+  &__calendar {
+    margin-top: 55px;
+    margin-bottom: 24px;
+  }
+
+  &__calendar-picker {
+    width: 200px;
+    height: 30px;
+  }
+
+  &__page {
+    margin-left: 250px;
+    margin-right: 30px;
+  }
+
+  &__wrapper-card {
+    width: 98%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .analytics {
+    &__page {
+      margin-left: 20px;
+      margin-right: 0;
+    }
+
+    &__wrapper-card {
+      width: 100%;
+    }
+
+    &__card {
+  
+      & canvas {
+       left: 5px;
+      }
+    }
+  }
+}
