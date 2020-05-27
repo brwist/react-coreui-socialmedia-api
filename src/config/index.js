@@ -9,3 +9,4 @@ export default {
   support: '/help',
   editor: '/editor'
 }
+
