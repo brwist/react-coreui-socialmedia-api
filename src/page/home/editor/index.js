@@ -41,15 +41,12 @@ class Editor extends React.Component {
               </Suspense>
             </AppSidebar>
           </Col>
-          <Col style={{ paddingLeft: '30px' }} stlye={{ marginLeft: '100px' }} md={4} xl={3}>
+          <Col style={{ paddingLeft: '30px' }}  md={4} xl={3}>
             <EditorLightbox className="editor-light-box">
-                
             </EditorLightbox>
-
-
-
           </Col>
-          <Col md={5} lg={5} xl={7}>
+          <Col md={5} lg={5} xl={6} style={{ marginLeft: '100px' }}>
+          
             <Panel />
           </Col>
         </Row>

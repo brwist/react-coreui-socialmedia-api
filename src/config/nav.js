@@ -6,7 +6,7 @@ export default {
   items: [
     {
       title: true,
-      // url: '/dashboard',
+      url: '/',
       icon: { logo },
       class: 'title-logo',
       wrapper: {
@@ -50,7 +50,7 @@ export default {
         },
         {
           name: 'Promote a Brand Stor',
-          url: '/brand',
+          url: links.brand,
           icon: 'icon-envelope-open',
         },
         {

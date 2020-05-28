@@ -7,6 +7,7 @@ import {
 
 import './index.scss';
 import navigation from '../../config/nav'
+import Modal from '../../components/modalWindow/index'
 
 class Home extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class Home extends React.Component {
       <AppSidebar fixed display="md">
         <Suspense>
           <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
+          {this.props.location.pathname !== '/' && <Modal {...this.props} isOpen={true} />}
         </Suspense>
       </AppSidebar>
     )
