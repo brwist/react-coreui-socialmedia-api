@@ -152,13 +152,8 @@ class Analytics extends Component {
                   <Input type="date" id="date-input" name="date-input" placeholder="date" />
                 </InputGroup>
                 <div className='d-flex'>
-                  <AppSidebarToggler
-                    className="d-md-none promote__wrapper-icon"
-                    mobile
-                  >
-                    <i
-                      className="fa fa-navicon promote__icon"
-                    />
+                  <AppSidebarToggler className="d-md-none promote__wrapper-icon" mobile>
+                    <i className="fa fa-navicon promote__icon" />
                   </AppSidebarToggler>
                 </div>
               </Col>

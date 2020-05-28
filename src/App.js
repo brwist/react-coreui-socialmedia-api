@@ -21,6 +21,7 @@ function App() {
     <Router history={history}>
       <Switch>
         <Route exact path={links.home} component={Home} />
+        <Route exact path={links.brand} component={Home} />
         <Route exact path={links.login} component={Link} />
         <Route exact path={links.promote} component={Promote} />
         <Route exact path={links.companyAnnoun} component={CompanyAnnouncement} />
@@ -28,7 +29,7 @@ function App() {
         <Route exact path={links.analytics} component={Analytics} />
         <Route exact path={links.setup} component={Setup} />
         <Route exact path={links.support} component={Support} />
-        <Route exact path={links.editor} component={Editor}/>
+        <Route exact path={links.editor} component={Editor} />
       </Switch>
     </Router>
   );

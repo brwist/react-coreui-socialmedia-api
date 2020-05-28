@@ -49,14 +49,9 @@ class Promote extends React.Component {
               <Row>
                 <Col className='d-flex justify-content-between promote__icon-block' col={12}>
                   <div className='d-flex'>
-                    <AppSidebarToggler
-                      className="d-md-none promote__wrapper-icon"
-                      mobile
-                    >
-                      <i
-                        className="fa fa-navicon promote__icon"
-                      />
-                    </AppSidebarToggler>
+                  <AppSidebarToggler className="d-md-none promote__wrapper-icon" mobile>
+                    <i className="fa fa-navicon promote__icon" />
+                  </AppSidebarToggler>
                     <div
                       onClick={() => this.handleChangeActiveLink('image')}
                       className={activeLink === 'image' ? 'promote__wrapper-icon-active' : 'promote__wrapper-icon'}

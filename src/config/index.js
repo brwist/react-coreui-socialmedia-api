@@ -7,6 +7,6 @@ export default {
   analytics: '/analytics',
   setup: '/setup',
   support: '/help',
-  editor: '/editor'
+  editor: '/editor',
+  brand: '/brand'
 }
-

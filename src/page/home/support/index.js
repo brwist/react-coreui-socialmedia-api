@@ -27,14 +27,11 @@ class Support extends React.Component {
     return (
       <Container className='support' fluid>
         <p className='title-page'>Support</p>
-        <AppSidebarToggler
-          className="d-md-none promote__wrapper-icon support__nav-icon"
-          mobile
-        >
-          <i
-            className="fa fa-navicon promote__icon"
-          />
-        </AppSidebarToggler>
+        <div className='support__nav-icon'>
+          <AppSidebarToggler className="d-md-none" mobile>
+            <i className="fa fa-navicon promote__icon" />
+          </AppSidebarToggler>
+        </div>
         <Row>
           <Col md={3} xl={2}>
             <AppSidebar fixed display="md">

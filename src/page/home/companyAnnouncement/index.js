@@ -65,14 +65,9 @@ class CompanyAnnouncement extends React.Component {
                 </Col>
                 <Col className='d-flex justify-content-center' xs={2}>
                   <div className='d-flex'>
-                    <AppSidebarToggler
-                      className="d-md-none promote__wrapper-icon"
-                      mobile
-                    >
-                      <i
-                        className="fa fa-navicon promote__icon"
-                      />
-                    </AppSidebarToggler>
+                  <AppSidebarToggler className="d-md-none promote__wrapper-icon" mobile>
+                    <i className="fa fa-navicon promote__icon" />
+                  </AppSidebarToggler>
                   </div>
                 </Col>
               </Row>

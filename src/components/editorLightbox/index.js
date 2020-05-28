@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Col, Container, Row } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem,  Button, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faDumpster, faEye} from '@fortawesome/free-solid-svg-icons';
 
 import './index.scss';
 
@@ -9,21 +11,68 @@ const EditorLightbox = (props) => {
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
-    <div className="light-box">
-      <Dropdown isOpen={dropdownOpen} toggle={toggle} >
-      <DropdownToggle caret className="drops">
-        Dropdown
+    <div className="light-box" color="white" fluid>
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} >
+      <Label className="stories">Live lightbox stories</Label>
+      <DropdownToggle caret className="drops" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="icons"/>
+           <span>Brand Stories</span>
+           <Button color="success" className="btn1"><p>Active</p></Button>{' '}
+           <Button color="danger" className="btn1"><p><FontAwesomeIcon icon = {faDumpster}></FontAwesomeIcon></p></Button>{' '}
+           <Button color="warning" className="btn1"><p>+200 <FontAwesomeIcon icon = {faEye}></FontAwesomeIcon> </p></Button>{' '}
         </DropdownToggle>
+
+        <DropdownToggle caret className="drops" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="icons"/>
+           <span>Best Sellers</span>
+           
+        </DropdownToggle>
+
+        <DropdownToggle caret className="drops" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="icons"/>
+           <span>New Arrivals</span>
+          
+        </DropdownToggle>
+
+        <DropdownToggle caret className="drops" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="icons"/>
+           <span>Find your Fit</span>
+          
+        </DropdownToggle>
+
+        <DropdownToggle caret className="drops" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="icons"/>
+           <span>Seasonal Looks</span>
+          
+        </DropdownToggle>
+        
       <DropdownMenu>
-      <DropdownToggle caret>
-        Dropdown
+      <DropdownItem className="dropItem">
+        <DropdownToggle caret  color="white" className="dropsIt">
+          <FontAwesomeIcon icon = {faArrowLeft} className="light-box__icon"/>
+           <span>Brand Stories</span>
+           
         </DropdownToggle>
-        <DropdownItem>Some Action</DropdownItem>
-        <DropdownItem disabled>Action (disabled)</DropdownItem>
-        <DropdownItem divider />
-        <DropdownItem>Foo Action</DropdownItem>
-        <DropdownItem>Bar Action</DropdownItem>
-        <DropdownItem>Quo Action</DropdownItem>
+      </DropdownItem>
+      <DropdownItem className="dropItem">
+        <DropdownToggle caret  color="white" className="dropsIt">
+          <FontAwesomeIcon icon = {faArrowLeft} className="light-box__icon"/>
+           <span>Brand Stories</span>
+           
+        </DropdownToggle>
+      </DropdownItem>  
+         
+      
+        {/* <DropdownToggle caret className="drops dropItem" color="white">
+          <FontAwesomeIcon icon = {faArrowLeft} className="light-box__icon"/>
+           <span>Brand Stories</span>
+           <Button color="success" className="btn1"><p>Active</p></Button>{' '}
+           <Button color="danger" className="btn1"><p><FontAwesomeIcon icon = {faDumpster}></FontAwesomeIcon></p></Button>{' '}
+           <Button color="warning" className="btn1"><p>+200 <FontAwesomeIcon icon = {faEye}></FontAwesomeIcon> </p></Button>{' '}
+       
+
+        </DropdownToggle> */}
+        
       </DropdownMenu>
     </Dropdown>
     </div>
