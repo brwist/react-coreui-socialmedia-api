@@ -9,8 +9,10 @@ import {
   AppSidebarForm,
 } from '@coreui/react';
 
+import StoryMenu from '../../../components/storyMenu/index'
 import './index.scss'
 import navigation from '../../../config/nav'
+import menuItem from '../../../config/dataMenu'
 
 const Publish = props => {
   return (
@@ -25,10 +27,15 @@ const Publish = props => {
             </Suspense>
           </AppSidebar>
         </Col>
-        {/* <Col md={9} xl={2}>
-          <h3>Setup Your First Story</h3>
-          <p>What would you like display on the Lightbox Panel?</p>
-        </Col> */}
+        <Col className='publish__main' md={9} xl={9}>
+          <Button className='publish__button' color='light'>Back</Button>
+          <div className='publish__block'>
+            <h3 className='publish__title'>Setup Your First Story</h3>
+            <p className='publish__text'>What would you like display on the Lightbox Panel?</p>
+            <StoryMenu menuItem={menuItem} />
+          </div>
+          <Button className='publish__button' color='warning'>Next</Button>
+        </Col>
       </Row>
     </Container>
   )
