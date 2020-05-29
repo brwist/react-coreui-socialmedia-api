@@ -37,7 +37,7 @@ const SetupProfile = props => {
               </Col>
             </form>
           </div>
-          <Button block color="warning" className='setup-profile__button'>Next</Button>
+          <Button onClick={() => props.setActiveLink('story')} block color="warning" className='setup-profile__button'>Next</Button>
         </div>
       </Col>
     </Row>
