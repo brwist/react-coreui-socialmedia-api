@@ -8,5 +8,6 @@ export default {
   setup: '/setup',
   support: '/help',
   editor: '/editor',
-  brand: '/brand'
+  brand: '/brand',
+  publish: '/publish'
 }
