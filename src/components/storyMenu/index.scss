@@ -11,12 +11,17 @@
 
 .story-menu {
   font-family: 'Lato', sans-serif;
+  display: flex;
+  justify-content: center;
+
+  & a {
+    text-decoration: none;
+  }
 
   &__icon {
     display: flex;
     align-items: center;
-    font-size: 43px;
-    margin-right: 24px;
+    font-size: 43px!important;
   }
 
   &__list {
@@ -27,6 +32,13 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    background-color: white;
+    margin-bottom: 10px !important;
+  }
+
+  &__icon-wrapepr {
+    width: 65px;
+    margin-right: 10px;
   }
 
   &__title {
@@ -40,7 +52,6 @@
   &__item {
     height: 30px;
     margin-right: 15px;
-    max-width: 250px;
     font-size: 12px;
     line-height: 14px;
     letter-spacing: 0.171429px;
@@ -50,8 +61,8 @@
     }
 
     &:active {
-      background-color: rgba(85, 94, 101, 0.553649) !important;
-      border: 1px solid rgba(85, 94, 101, 0.553649) !important;
+      background-color: #2f353a;
+      border: 1px solid white !important;
     }
   }
 
@@ -60,6 +71,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     height: 100px;
+    width: max-content;
   }
 
   &__wrapper {
@@ -79,45 +91,55 @@
   }
 }
 
-@media all and (max-width: 1140px) {
-  .story-menu {
+// @media all and (max-width: 1140px) {
+//   .story-menu {
+//     &__list {
+//       width: auto;
+//     }
+
+//     &__item-block {
+//       height: auto;
+//     }
+//   }
+// }
+
+
+@media all and (max-width: 800px) {
+  // .story-menu {
+  //   &__item {
+  //     height: auto;
+  //     max-width: 300px;
+  //     margin-right: 0;
+  //   }
+
+  //   &__list {
+  //     flex-direction: column;
+  //     align-items: center;
+  //     justify-content: center;
+  //   }
+
+  //   &__wrapper {
+  //     display: flex;
+  //     flex-direction: column;
+  //     align-items: center;
+  //   }
+
+  //   &__title {
+  //     text-align: center;
+  //   }
+
+  //   &__icon {
+  //     margin-right: 0;
+  //   }
+  // }
+
+    .story-menu {
     &__list {
       width: auto;
     }
 
     &__item-block {
       height: auto;
-    }
-  }
-}
-
-
-@media all and (max-width: 800px) {
-  .story-menu {
-    &__item {
-      height: auto;
-      max-width: 300px;
-      margin-right: 0;
-    }
-
-    &__list {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    &__wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__title {
-      text-align: center;
-    }
-
-    &__icon {
-      margin-right: 0;
     }
   }
 }

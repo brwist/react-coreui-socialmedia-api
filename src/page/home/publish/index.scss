@@ -1,11 +1,6 @@
 .publish {
   font-family: 'Lato', sans-serif;
-  
-  &__main {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-  }
+
 
   &__block {
     display: flex;
@@ -28,11 +23,6 @@
     text-align: center;
   }
 
-  // &__block {
-  //   display: flex;
-  //   align-items: flex-end;
-  // }
-
   &__button {
     font-family: 'Lato', sans-serif;
     min-width: 120px;
@@ -47,32 +37,30 @@
   &__menu {
      position: absolute;
      border: 2px solid #2F353A;
-     top: 48px;
-     left: 90%;
+     top: 10px;
+     text-align: center;
+     left: 50%;
+     transform: translate(-50%, 0);
      z-index: 5;
   }
 }
 
-@media all and (max-width: 1140px) {
+@media all and (min-width: 768px) {
   .publish {
-    &__button {
-      margin-right: 10px;
-    }
-
-    &__main {
-      justify-content: space-around;
+    &__menu {
+      display: none!important;
     }
   }
 }
 
-@media all and (max-width: 800px) {
-  .publish {
-    &__button {
-      min-width: 80px;
-      margin-left: 10px;
-    }
-  }
-}
+// @media all and (max-width: 800px) {
+//   .publish {
+//     &__button {
+//       min-width: 80px;
+//       margin-left: 10px;
+//     }
+//   }
+// }
 
 @media all and (max-width: 500px) {
   .publish {
