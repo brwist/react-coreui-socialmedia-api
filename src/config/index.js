@@ -9,5 +9,5 @@ export default {
   support: '/help',
   editor: '/editor',
   brand: '/brand',
-  publish: '/publish'
+  publish: '/publish',
 }

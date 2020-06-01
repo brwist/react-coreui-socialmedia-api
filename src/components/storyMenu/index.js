@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './index.scss'
 
 const StoryMenu = props => {
-  const [activeLink, setActiveLink] = useState('');
-
-  const onChangeActiveLink = link => setActiveLink(link);
-
   return (
     <div className='story-menu'>
       <ListGroup >
         {props.menuItem.map(menu => (
           <ListGroupItem
-            className={`story-menu__list ${activeLink === menu.title && 'story-menu__active'}`}
-            key={menu.title}
+            className='story-menu__list'
             action color="dark"
-            onClick={() => onChangeActiveLink(menu.title)}
+            onClick={() => props.changeClickedPanel(menu.title)}
+            key={menu.title}
           >
-            {menu.article === 'fa' ? <FontAwesomeIcon icon={menu.icon} className='story-menu__icon' /> :
-              <i className={`story-menu__icon ${menu.icon}`}></i>}
+            {menu.article === 'fa' ? <div className='story-menu__icon-wrapepr'>
+              <FontAwesomeIcon icon={menu.icon} className='story-menu__icon' />
+            </div> :
+              <div className='story-menu__icon-wrapepr'>
+                <i className={`story-menu__icon ${menu.icon}`}></i>
+              </div>
+            }
             <div className='story-menu__wrapper'>
               <ListGroupItemHeading className='story-menu__title'>{menu.title}</ListGroupItemHeading>
               <ListGroupItemText className='story-menu__item-block'>
