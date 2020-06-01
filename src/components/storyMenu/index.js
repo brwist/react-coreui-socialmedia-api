@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './index.scss'
 
 const StoryMenu = props => {
-  console.log(props.menuItem)
+  const [activeLink, setActiveLink] = useState('');
+
+  const onChangeActiveLink = link => setActiveLink(link);
+
   return (
     <div className='story-menu'>
       <ListGroup >
         {props.menuItem.map(menu => (
-          <ListGroupItem className='story-menu__list' key={menu.title} action color="dark">
+          <ListGroupItem
+            className={`story-menu__list ${activeLink === menu.title && 'story-menu__active'}`}
+            key={menu.title}
+            action color="dark"
+            onClick={() => onChangeActiveLink(menu.title)}
+          >
             {menu.article === 'fa' ? <FontAwesomeIcon icon={menu.icon} className='story-menu__icon' /> :
               <i className={`story-menu__icon ${menu.icon}`}></i>}
             <div className='story-menu__wrapper'>
