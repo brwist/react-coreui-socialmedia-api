@@ -1,4 +1,5 @@
-import { faVirus, faEdit, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faVirus, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faShopify } from "@fortawesome/free-brands-svg-icons"
 
 export default [
   {
@@ -10,7 +11,7 @@ export default [
   {
     title: 'Promote a Product (Shopify)',
     message: ['Visualize your products in store', 'Showcase a new collection', 'Highlight discounted Products'],
-    icon: faShoppingBag,
+    icon: faShopify,
     article: 'fa'
   },
   {

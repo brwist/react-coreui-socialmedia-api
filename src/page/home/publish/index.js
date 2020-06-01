@@ -18,6 +18,11 @@ const Publish = props => {
   return (
     <Container className='publish' fluid>
       <Row>
+        <div className='d-flex publish__menu'>
+          <AppSidebarToggler className="d-md-none" mobile>
+            <i className="fa fa-navicon promote__icon" />
+          </AppSidebarToggler>
+        </div>
         <Col md={3} xl={2}>
           <AppSidebar fixed display="md">
             <AppSidebarHeader />
@@ -27,7 +32,7 @@ const Publish = props => {
             </Suspense>
           </AppSidebar>
         </Col>
-        <Col className='publish__main' md={9} xl={9}>
+        <Col className='publish__main' lg={9}>
           <Button className='publish__button' color='light'>Back</Button>
           <div className='publish__block'>
             <h3 className='publish__title'>Setup Your First Story</h3>
