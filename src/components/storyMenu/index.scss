@@ -46,6 +46,7 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 19px;
+    font-family: 'Lato', sans-serif;
     letter-spacing: 0.228571px;
   }
 
@@ -91,48 +92,7 @@
   }
 }
 
-// @media all and (max-width: 1140px) {
-//   .story-menu {
-//     &__list {
-//       width: auto;
-//     }
-
-//     &__item-block {
-//       height: auto;
-//     }
-//   }
-// }
-
-
 @media all and (max-width: 800px) {
-  // .story-menu {
-  //   &__item {
-  //     height: auto;
-  //     max-width: 300px;
-  //     margin-right: 0;
-  //   }
-
-  //   &__list {
-  //     flex-direction: column;
-  //     align-items: center;
-  //     justify-content: center;
-  //   }
-
-  //   &__wrapper {
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: center;
-  //   }
-
-  //   &__title {
-  //     text-align: center;
-  //   }
-
-  //   &__icon {
-  //     margin-right: 0;
-  //   }
-  // }
-
     .story-menu {
     &__list {
       width: auto;

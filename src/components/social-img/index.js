@@ -2,24 +2,26 @@ import React from 'react';
 import { Col, Row, Button } from 'reactstrap';
 
 import './index.scss';
+import man from '../../assets/man.png'
 
-const img = ['../../assets/man.png', '../../assets/man.png', '../../assets/man.png',
-  '../../assets/man.png', '../../assets/man.png', '../../assets/man.png',
-  '../../assets/man.png', '../../assets/man.png', '../../assets/man.png',
-  '../../assets/man.png', '../../assets/man.png', '../../assets/man.png',
-  '../../assets/man.png']
+const img = [man, man, man, man, man, man, man, man, man];
 
-const SocialImg = props => (
-  <div className='social-side'>
-    {props.children}
-    <Row className='social-side__img-wrapper'>
-      {img.map(i => (
-        <Col className=' d-flex justify-content-center' col={3}>
-          <img className='social-side__img' src={require('../../assets/man.png')} alt='img' />
-        </Col>
-      ))}
-    </Row>
-  </div>
-)
+const SocialImg = props => {
+  const gallery = props.gallery || img;
+
+  return (
+    <div className='social-side'>
+      {props.children}
+      <Row className='social-side__img-wrapper'>
+        {gallery.map((i, index) => (
+          <Col key={index} className=' d-flex justify-content-center' col={3}>
+            <img className='social-side__img' src={i} alt='img' />
+          </Col>
+        ))}
+      </Row>
+      {props.isButton && <Button onClick={props.prevSteps} className='social-side__btn' variant='secondary'>Back</Button>}
+    </div>
+  )
+}
 
 export default SocialImg

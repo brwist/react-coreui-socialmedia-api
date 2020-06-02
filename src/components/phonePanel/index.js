@@ -1,27 +1,31 @@
 import React from 'react'
-import { faPlusSquare, faCaretSquareUp, faCaretSquareDown } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as far from "@fortawesome/free-regular-svg-icons";
 import { Button } from 'reactstrap'
-
 import './index.scss'
+
+library.add(far.faCaretSquareDown, far.faCaretSquareUp, far.faPlusSquare, far.faCopy);
 
 const PhonePanel = props => {
   return (
     <div className='story-right'>
       <h3 className='story-right__title'>{props.title}</h3>
       <div className='story-right__wrapper'>
-        <img className='story-right__img' alt="phone" src={require('../../assets/phone_panel.png')} />
-        <div className='story-right__nav-wrapper'>
-          <FontAwesomeIcon icon={faPlusSquare} />
-          <FontAwesomeIcon icon={faCaretSquareUp} />
-          <FontAwesomeIcon icon={faCaretSquareDown} />
+        <div className='story-right__img-nav-block'>
+          <img className='story-right__img' alt="phone" src={require('../../assets/phone_panel.png')} />
+          <div className='story-right__nav-wrapper'>
+            <FontAwesomeIcon icon={far.faPlusSquare} />
+            <FontAwesomeIcon icon={far.faCaretSquareUp} />
+            <FontAwesomeIcon icon={far.faCaretSquareDown} />
+          </div>
         </div>
         <div className='story-right__additional'>
-          <div>
-            <i class="fas fa-copy"></i>
+          <div className='story-right__additional-icons'>
+            <FontAwesomeIcon icon={far.faCopy} />
             <i className="fa fa-trash-o" />
           </div>
-          <Button color='warning'>Next</Button>
+          <Button onClick={props.nextSteps} color='warning'>Next</Button>
         </div>
       </div>
     </div>

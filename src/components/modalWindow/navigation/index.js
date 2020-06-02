@@ -9,19 +9,16 @@ const Navigation = props => {
       <nav className='panel-navigation__navigation'>
         <p
           className={`panel-navigation__link ${props.activeLink === 'brand' && 'active'}`}
-          onClick={() => props.setActiveLink('brand')}
         >
           Branding
           </p>
         <p
           className={`panel-navigation__link ${props.activeLink === 'story' && 'active'}`}
-          onClick={() => props.setActiveLink('story')}
         >
           Setup a Story
           </p>
         <p
-          className={`panel-navigation__link ${props.activeLink === 'push' && 'active'}`}
-          onClick={() => props.setActiveLink('push')}
+          className={`panel-navigation__link ${props.activeLink === 'live' && 'active'}`}
         >
           Push Live!
           </p>

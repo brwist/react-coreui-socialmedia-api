@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Modal, Row, Container, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Col, Row, FormGroup, Label, Input } from 'reactstrap';
 import TimezonePicker from 'react-bootstrap-timezone-picker';
 
 import './index.scss';
@@ -37,7 +37,10 @@ const SetupProfile = props => {
               </Col>
             </form>
           </div>
-          <Button onClick={() => props.setActiveLink('story')} block color="warning" className='setup-profile__button'>Next</Button>
+          <Button onClick={() => {
+            props.nextCovidSteps()
+            props.setActiveLink('story')
+          }} block color="warning" className='setup-profile__button'>Next</Button>
         </div>
       </Col>
     </Row>
