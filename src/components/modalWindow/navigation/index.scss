@@ -1,14 +1,12 @@
 .panel-navigation {
   font-family: 'Lato', sans-serif;
   background: #F0F3F5;
-  width: 170px;
   height: 96.9%;
   text-align: center;
   color: #708393;
-  font-weight: 900;
   font-size: 20px;
-  position: fixed;
   z-index: 100;
+  border-radius: 25px 0 0 25px;
 
   &__nav {
     width: 100%;
@@ -22,20 +20,24 @@
   }
 
   &__link {
-    cursor: pointer;
     padding: 8px 0;
     border-radius: -10px;
     margin-top: 0;
     margin-bottom: 0;
-    
-    &:hover {
-    color: #59646e;
-    }
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
 .active {
   background-color: #fff;
+  font-weight: 900;
+}
+
+@media all and (max-width: 992px) {
+  .panel-navigation {
+    position: fixed;
+  }
 }
 
 @media all and (max-width: 768px) {
@@ -47,7 +49,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-
+    border-radius: 25px 25px 0 0;
     & nav {
       display: flex;
       width: 70%;
@@ -62,6 +64,10 @@
       align-items: center;
       padding: 0 5px;
       font-size: 18px;
+    }
+
+    &__navigation {
+      margin-right: 10px;
     }
   }
 }

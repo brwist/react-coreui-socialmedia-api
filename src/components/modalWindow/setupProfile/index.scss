@@ -14,10 +14,14 @@
   }
 
   &__button {
+    font-family: 'Lato', sans-serif;
     width: 146px;
     height: 44px;
     margin-top: 150px;
     float: right;
+    color: #2F353A;
+    font-weight: 500;
+    font-size: 18px;
   }
 
   &__label {
