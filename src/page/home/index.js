@@ -11,7 +11,6 @@ import Modal from '../../components/modalWindow/index'
 
 class Home extends React.Component {
   render() {
-    console.log(this.props.location.pathname)
     return (
       <AppSidebar fixed display="md">
         <Suspense>

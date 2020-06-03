@@ -79,26 +79,31 @@
   }
 }
 
-@media all and (max-width: 992px) {
+@media all and (max-width: 1160px) {
   .story-right {
-    margin-top: 20px;
-
     &__wrapper {
       flex-direction: column;
       align-items: center;
     }
 
     &__additional {
-     align-items: center;
-    }
+      align-items: center;
+     }
 
-    &__additional-icons {
+     &__additional-icons {
       margin-bottom: 15px;
     }
 
     & button {
       margin-right: 10px;
+      margin-bottom: 10px;
     }
+  }
+}
+
+@media all and (max-width: 992px) {
+  .story-right {
+    margin-top: 20px;
   }
 }
 

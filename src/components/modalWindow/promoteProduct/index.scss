@@ -1,0 +1,23 @@
+.promote-product {
+  &__btn {
+    margin-bottom: 12px;
+    margin-right: 3px;
+    margin-left: 3px;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.214286px;
+    font-weight: bold;
+    font-size: 15px;
+    width: 123px;
+    height: 35px;
+ 
+    & svg, i {
+      margin-right: 7px;
+    }
+  }
+
+  &__wrapper-btn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

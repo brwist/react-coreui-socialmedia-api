@@ -1,0 +1,72 @@
+.setup-profile {
+    font-family: 'Lato', sans-serif;
+  
+    &__title {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 41px;
+    }
+
+    h6 {
+      text-align: center;
+      margin-bottom: 41px;
+      color: #868E96;
+      letter-spacing: 0.3px;
+  }
+  
+    &__btn {
+      width: 146px;
+      height: 44px;
+      margin-top: 328px;
+      margin-left: auto;
+      margin-right: 50%;
+      color: #2F353A;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  
+    &__label {
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      color: #2F353A;
+    }
+  
+    &__form-group {
+      margin-bottom: 17px;
+    }
+  
+    &__input {
+  
+    }
+
+    .btnSetupAStory {
+       margin-top: 5%;
+       margin-left: auto;
+       margin-right: auto;
+        
+        height: 3rem;
+        width: 80%;
+        background-color: #fff;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        .icons {
+           height: 1rem;
+           width: 1rem;
+           position: relative;
+           right: .5rem;
+        }
+    }
+
+    .btnSetupAStory:hover {
+        background-color: #2F353A;
+        color: #FFF;
+    }
+  }
+  
+  .timezone-picker-list {
+    height: 100px;
+    overflow-y: scroll;
+  }
