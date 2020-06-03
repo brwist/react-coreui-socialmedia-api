@@ -37,10 +37,16 @@ const SetupProfile = props => {
               </Col>
             </form>
           </div>
-          <Button onClick={() => {
-            props.nextCovidSteps()
-            props.setActiveLink('story')
-          }} block color="warning" className='setup-profile__button'>Next</Button>
+          <Button
+            onClick={() => {
+              props.nextSteps(props.currentTab)
+              props.setActiveLink('story')
+              return;
+            }}
+            block
+            color="warning"
+            className='setup-profile__button'
+          >Next</Button>
         </div>
       </Col>
     </Row>

@@ -5,8 +5,9 @@ import PhonePanel from '../../phonePanel/index'
 import SocialImg from '../../social-img/index'
 import './index.scss';
 import Cov from '../../../assets/cov.png'
+import phonePanel from '../../../assets/phone_panel.png'
 
-const Covid = ({ setActiveLink, currentCovidStep, setCurrentCovidSteps, prevCovidSteps, nextCovidSteps }) => {
+const Covid = ({ setActiveLink, currentCovidStep, currentTab, setCurrentCovidSteps, prevCovidSteps, nextCovidSteps, marTop }) => {
   const img = [Cov, Cov, Cov, Cov, Cov, Cov, Cov, Cov, Cov, Cov]
 
   useEffect(() => {
@@ -20,8 +21,8 @@ const Covid = ({ setActiveLink, currentCovidStep, setCurrentCovidSteps, prevCovi
   return (
     <>
       {currentCovidStep === 1 && <>
-        <Col md={9} lg={3} >
-          <SocialImg prevSteps={prevCovidSteps} isButton={true} gallery={img}>
+        <Col md={9} lg={3}>
+          <SocialImg marTop={marTop} currentTab={currentTab} prevSteps={prevCovidSteps} isButton={true} gallery={img}>
             <h3 className='covid__template-title'>Select a Template</h3>
             <FormGroup className='covid__input'>
               <InputGroup>
@@ -36,7 +37,7 @@ const Covid = ({ setActiveLink, currentCovidStep, setCurrentCovidSteps, prevCovi
           </SocialImg>
         </Col>
         <Col className='offset-md-3 offset-lg-0' md={9} lg={7}>
-          <PhonePanel nextSteps={nextCovidSteps} title={'Template Editor'} />
+          <PhonePanel currentTab={currentTab} img={phonePanel} nextSteps={nextCovidSteps} title={'Template Editor'} />
         </Col>
       </>}
     </>

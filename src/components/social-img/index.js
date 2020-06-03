@@ -12,14 +12,14 @@ const SocialImg = props => {
   return (
     <div className='social-side'>
       {props.children}
-      <Row className='social-side__img-wrapper'>
+      <Row style={{ height: `calc(100vh - ${props.marTop}px)` }} className='social-side__img-wrapper'>
         {gallery.map((i, index) => (
           <Col key={index} className=' d-flex justify-content-center' col={3}>
             <img className='social-side__img' src={i} alt='img' />
           </Col>
         ))}
       </Row>
-      {props.isButton && <Button onClick={props.prevSteps} className='social-side__btn' variant='secondary'>Back</Button>}
+      {props.isButton && <Button onClick={() => props.prevSteps(props.currentTab)} className='social-side__btn' variant='secondary'>Back</Button>}
     </div>
   )
 }

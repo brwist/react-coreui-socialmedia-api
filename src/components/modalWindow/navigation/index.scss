@@ -1,7 +1,7 @@
 .panel-navigation {
   font-family: 'Lato', sans-serif;
   background: #F0F3F5;
-  height: 96.9%;
+  height: 100%;
   text-align: center;
   color: #708393;
   font-size: 20px;
@@ -37,6 +37,7 @@
 @media all and (max-width: 992px) {
   .panel-navigation {
     position: fixed;
+    height: 96.6%;
   }
 }
 

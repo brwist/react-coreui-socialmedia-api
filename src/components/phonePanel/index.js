@@ -3,6 +3,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as far from "@fortawesome/free-regular-svg-icons";
 import { Button } from 'reactstrap'
+
 import './index.scss'
 
 library.add(far.faCaretSquareDown, far.faCaretSquareUp, far.faPlusSquare, far.faCopy);
@@ -13,7 +14,7 @@ const PhonePanel = props => {
       <h3 className='story-right__title'>{props.title}</h3>
       <div className='story-right__wrapper'>
         <div className='story-right__img-nav-block'>
-          <img className='story-right__img' alt="phone" src={require('../../assets/phone_panel.png')} />
+          <img className='story-right__img' alt="phone" src={props.img} />
           <div className='story-right__nav-wrapper'>
             <FontAwesomeIcon icon={far.faPlusSquare} />
             <FontAwesomeIcon icon={far.faCaretSquareUp} />
@@ -25,7 +26,7 @@ const PhonePanel = props => {
             <FontAwesomeIcon icon={far.faCopy} />
             <i className="fa fa-trash-o" />
           </div>
-          <Button onClick={props.nextSteps} color='warning'>Next</Button>
+          <Button onClick={() => props.nextSteps(props.currentTab)} color='warning'>Next</Button>
         </div>
       </div>
     </div>
