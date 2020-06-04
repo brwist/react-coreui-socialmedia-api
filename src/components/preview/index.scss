@@ -1,5 +1,25 @@
+.panel-preview {
+  &__block {
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+
+
 @media all and (max-width: 992px) {
   .panel-preview {
+    
+    &__block {
+      height: auto;
+    }
+
+    &__title {
+     padding-top: 39px;
+   }
+
     &__img {
       padding-bottom: 15px;
     }

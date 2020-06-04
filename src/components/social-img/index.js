@@ -12,7 +12,7 @@ const SocialImg = props => {
   return (
     <div className='social-side'>
       {props.children}
-      <Row style={{ height: `calc(100vh - ${props.marTop}px)` }} className='social-side__img-wrapper'>
+      <Row className='social-side__img-wrapper'>
         {gallery.map((i, index) => (
           <Col key={index} className=' d-flex justify-content-center' col={3}>
             <img className='social-side__img' src={i} alt='img' />

@@ -1,9 +1,20 @@
+.row-setup-profile {
+  height: 100%;
+  width: 100%;
+
+  & .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .setup-profile {
   font-family: 'Lato', sans-serif;
-
-  &__block {
-    margin-top: 48px;
-  }
+  height: 630px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &__title {
     text-transform: uppercase;
@@ -42,4 +53,16 @@
 .timezone-picker-list {
   height: 100px;
   overflow-y: scroll;
+}
+
+@media all and (max-width: 992px) {
+  .setup-profile {
+    padding-top: 39px;
+    justify-content: center;
+    height: auto !important;
+
+    &__btn {
+      margin-bottom: 30px;
+    }
+  }
 }

@@ -34,15 +34,15 @@ const PromoteProduct = ({ prevPromoteSteps, nextPromoteSteps, setActiveLink, cur
           <Col className='modal-window__left' xs={12} md={9} lg={4}>
             <SetupAStory currentTab={currentTab} prevPromoteSteps={prevPromoteSteps} setActiveLink={setActiveLink} />
           </Col>
-          <Col className=' offset-md-3 offset-lg-0 phoneSetup' xs={12} md={9} lg={6}>
+          <Col className='offset-md-2 offset-lg-0 phoneSetup' xs={12} md={10} lg={6}>
             {/* <PhoneSetupAStory /> */}
-            <PhonePanel currentTab={currentTab} img={phonePanel} nextSteps={nextPromoteSteps} title={'Template Editor'} />
+            <PhonePanel currentTab={currentTab} img={phonePanel} prevSteps={prevPromoteSteps} nextSteps={nextPromoteSteps} title={'Template Editor'} />
           </Col>
         </>
       )}
       {currentPromoteStep === 2 && (
         <>
-          <Col md={9} lg={3}>
+          <Col className='product-wrapper' md={9} lg={3}>
             <SocialImg marTop={marTop} currentTab={currentTab} prevSteps={prevPromoteSteps} isButton={true} gallery={img}>
               <h3 className='covid__template-title'>Select a Product or collection</h3>
               <div className='promote-product__wrapper-btn'>
@@ -68,8 +68,8 @@ const PromoteProduct = ({ prevPromoteSteps, nextPromoteSteps, setActiveLink, cur
               </div>
             </SocialImg>
           </Col>
-          <Col>
-            <PhonePanel currentTab={currentTab} img={storyPreview} nextSteps={nextPromoteSteps} title={'Story Preview'} />
+          <Col className='offset-md-2 offset-lg-0 phoneSetup' xs={12} md={10} lg={7}>
+            <PhonePanel currentTab={currentTab} img={storyPreview} prevSteps={prevPromoteSteps} nextSteps={nextPromoteSteps} title={'Story Preview'} />
           </Col>
         </>
       )}

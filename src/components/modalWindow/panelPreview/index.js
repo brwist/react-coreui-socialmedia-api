@@ -3,7 +3,7 @@ import { Col, Button } from 'reactstrap'
 
 const PanelPreview = props => {
   return (
-    <Col className='push-live' md={9} lg={10}>
+    <Col className='push-live' xs={12} md={10} lg={10}>
       <h3 className='push-live__title'>Panel Preview</h3>
       <div className='push-live__page-wrapper'>
         <Button
@@ -31,7 +31,7 @@ const PanelPreview = props => {
             className='push-live__btn'
           >
             Back
-                    </Button>
+          </Button>
           <Button color='warning' className='push-live__btn'>Push Live</Button>
         </div>
       </div>

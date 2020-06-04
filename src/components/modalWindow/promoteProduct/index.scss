@@ -21,3 +21,22 @@
     flex-wrap: wrap;
   }
 }
+
+.phoneSetup {
+  background: #F0F3F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media all and (max-width: 820px) {
+  .product-wrapper {
+    margin-left: 10px;
+  }
+}

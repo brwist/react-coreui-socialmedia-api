@@ -8,24 +8,22 @@ import './index.scss';
 const SetupAStory = props => {
   return (
     <>
-      <Row>
+      <Row style={{ width: '100%' }}>
         <Col>
           <div className='setup-profile'>
             <div className='setup-profile__block'>
               <h3 className='setup-profile__title'>Connect Shopify & IG</h3>
               <h6>Marketing Message</h6>
-              <div className='setup-profile__form'>
-                <Col xs={12}>
+              <div className='setup-profile__buttons-block'>
+                <Col style={{ padding: '0' }} xs={12}>
                   <Button block className="btnSetupAStory">
                     <i className="fa fa-instagram icons" />
-               Instagram Connect
-
-            </Button>
+                     Instagram Connect
+                  </Button>
                   <Button block className="btnSetupAStory">
                     <FontAwesomeIcon icon={faShopify} className="icons" />
-               Shopify Connect
-
-            </Button>
+                    Shopify Connect
+                  </Button>
                 </Col>
               </div>
             </div>
@@ -35,7 +33,8 @@ const SetupAStory = props => {
               block
               className='setup-profile__btn'
             >
-              Back</Button>
+              Back
+            </Button>
           </div>
         </Col>
       </Row>

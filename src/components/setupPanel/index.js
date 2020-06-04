@@ -3,6 +3,7 @@ import { Col, Row,  Button, Form, FormGroup, Label, Input, FormText, ButtonToggl
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag , faBoxTissue} from '@fortawesome/free-solid-svg-icons';
 
+
 import './index.scss';
 
 const Panel = () => (
@@ -17,23 +18,25 @@ const Panel = () => (
       <FormGroup className="form2">
       
            <h2>Media Connectors</h2>
+           
            <Button block className="panelSetup__btnSetup btn-square btns">
            <span><i className="fa fa-instagram"/>  
               Instagram Connect
               </span>
            </Button>
-           <Button block className="panelSetup__btnSetup btn-square btns ">
-           <span><FontAwesomeIcon icon={faBoxTissue} />  
+           
+           <Button block className="panelSetup__btnSetup btn-square btns">
+           <span><i class="fab fa-google-drive"></i>
+           {/* <FontAwesomeIcon icon={faBoxTissue} />   */}
                Google Drive Connect
                </span>
            </Button>
+           
            <Button block className="panelSetup__btnSetup btn-square btns">
            <span><FontAwesomeIcon icon={faShoppingBag} /> </span>
                <span>Shopify Connect</span>
-           </Button>
-
-           {/* <ButtonToggle className="panelSetup__btnSetup btn-square btns"><p>primary</p></ButtonToggle>{' '} */}
-     
+           </Button>  
+             
       </FormGroup>
 </Form>        
 </div>

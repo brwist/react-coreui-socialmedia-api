@@ -1,4 +1,4 @@
-import logo from '../assets/logo.png';
+import logo from '../assets/white_logo.png';
 import links from '../config/index';
 import './nav.scss';
 

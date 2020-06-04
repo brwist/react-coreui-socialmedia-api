@@ -1,9 +1,9 @@
 .container-fluid{
-    // overflow: hidden;
+    //overflow: hidden;
     padding: 0;
   }
   
-  .promote {
+  .setupPage {
     font-family: 'Lato', sans-serif;
   
     &__wrapper-icon {
@@ -59,32 +59,38 @@
     height: 100%;
   }
   
-  @media (min-width: 768px) and (max-width: 880px) {
-    .promote {
-      &__button {
-        margin-bottom: 20px;
-      }
-  
-    .promote__icon-block {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    }
+  .panelSetup {
+    width: 50%;
+    margin-left: auto;
+    margin-right: 0;  
   }
+
+  // @media (min-width: 768px) and (max-width: 880px) {
+  //   .promote {
+  //     &__button {
+  //       margin-bottom: 20px;
+  //     }
   
-  @media (min-width: 1200px) and (max-width: 1240px) {
-    .promote {
-      &__button {
-        margin-bottom: 20px;
-      }
+  //   .promote__icon-block {
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+  //   }
+  //   }
+  // }
   
-    .promote__icon-block {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    }
-  }
+  // @media (min-width: 1200px) and (max-width: 1240px) {
+  //   .promote {
+  //     &__button {
+  //       margin-bottom: 20px;
+  //     }
+  
+  //   .promote__icon-block {
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+  //   }
+  //   }
+  // }
   
   

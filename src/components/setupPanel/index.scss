@@ -3,6 +3,19 @@
     margin-left: auto;
     margin-right: 0;
     margin-top: 7rem;
+    width: 50%;
+    background-color: #F0F3F5;
+
+    .form2 {
+      margin-left: auto;
+      margin-right: 15%;
+      text-align: center;
+    }
+
+    .form2 div:hover {
+      color: #fff;
+      background-color: #2f353a;
+    }
        
    h2{
        text-align: right;
@@ -49,10 +62,15 @@
       font-weight: bold;
       font-size: 18px;
     }
+
+    &__btnSetup:hover {
+      background-color: #2F353A;
+      color: #fff;
+    }
   
     &__btnSetup:active {
         color: #fff;
-        background: #2f353a;
+        background-color: #2f353a;
     }
 
     &__icon {
@@ -78,16 +96,23 @@
     transition: background 9999999s;
 }
 
+.btns:hover {
+  background-color: #2f353a;
+  color: #fff;
+  // transition: background 0s;
+}
+
 .btns:active {
     span {
       color: #fff;
     }
-    color: #fff;
-    background: #2f353a;
+    // color: #fff;
+    background-color: #2f353a;
     transition: background 0s;
 }
 
-.promote {
+
+.panelSetup {
     font-family: 'Lato', sans-serif;
    
 
@@ -103,31 +128,40 @@
 
     }     
 
-@media (min-width: 900px) and (max-width: 1199px){
+@media all and (max-width: 1199px){
   .panelSetup {
-    &__accountSetup {
-      margin-left: -50%;
-      span {
-        position: relative;
-        top: 15%;
-        margin-left: auto;
-        margin-right: 4%;
-        
-      }
-    }
+    position: absolute;
+    top:36%;
+    left: 0;
+    min-width: 100%; 
+    min-height: 100%; 
     
-  }
-}  
+    &__accountSetup {
+        display: none; 
+      }
 
-@media all and (max-width: 1101px){
-  .panelSetup {
-            .form2 {
-             position: relative;
-             top: 25rem;
-             left: -25rem;  
-            }
-          }
-
-          
-
+      .form2 {
+        margin-top: 50px;
+      }   
+   }
 }
+
+@media all and (max-width: 767px){
+ .panelSetup {
+   margin-top: 230px;
+ }
+}
+
+@media (min-width: 768px) and (max-width: 890px){
+  .panelSetup {
+    margin-top: 230px;
+  }
+ }
+
+ @media (min-width: 881px) and (max-width: 1100px){
+  .panelSetup {
+    margin-top: 180px;
+  }
+ }
+
+ 

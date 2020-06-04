@@ -12,7 +12,7 @@ import {
 import { Col, Container, Row } from 'reactstrap';
 
 import Panel from '../../../components/setupPanel/index';
-import SocialImg from '../../../components/overview/index';
+import Overview from '../../../components/overview/index';
 import './index.scss';
 import navigation from '../../../config/nav'
 
@@ -32,7 +32,7 @@ class Setup extends React.Component {
     const { activeLink } = this.state;
 
     return (
-      <Container className='promote' fluid>
+      <Container className='setupPage' fluid>
         <Row>
           <Col md={3} xl={2}>
             <AppSidebar fixed display="md">
@@ -44,7 +44,7 @@ class Setup extends React.Component {
             </AppSidebar>
           </Col>
           <Col style={{ paddingLeft: '30px' }} stlye={{ marginLeft: '100px' }} md={4} xl={3}>
-            <SocialImg>
+            <Overview>
               <Row>
                 <Col className='d-flex justify-content-between promote__icon-block' col={12}>
                   <div className='d-flex'>
@@ -91,11 +91,11 @@ class Setup extends React.Component {
                 
                 </Col>
               </Row>
-            </SocialImg>
+            </Overview>
           </Col>
-          <Col md={5} lg={5} xl={7}>
-            <Panel />
-          </Col>
+          {/* <Col md={5} lg={5} xl={6}> */}
+            <Panel /> 
+          {/* </Col> */}
         </Row>
       </Container >
     )
