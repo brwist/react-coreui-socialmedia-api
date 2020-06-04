@@ -1,5 +1,9 @@
 .social-side {
   margin-right: 30px;
+  height: 610px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &__img {
     width: 121px;
@@ -8,7 +12,7 @@
   }
 
   &__img-wrapper {
-    height: calc(100vh - 310px);
+    height: 437px;
     overflow-y: scroll;
   }
 
@@ -19,7 +23,8 @@
     color: #2F353A;
     font-weight: 500;
     font-size: 18px;
-    margin-top: 25px;
+    margin-top: 17px;
+    
   }
 }
 
@@ -27,13 +32,18 @@
 @media all and (max-width: 992px) {
   .social-side{
     margin-top: 20px;
+    height: auto;
 
     & button {
-      margin-left: 10px;
+      display: none;
     }
 
     &__img {
       margin-left: 10px;
+    }
+
+    &__img-wrapper {
+      margin-bottom: 30px;
     }
   }
 }

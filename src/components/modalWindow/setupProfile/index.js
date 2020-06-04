@@ -6,7 +6,7 @@ import './index.scss';
 
 const SetupProfile = props => {
   return (
-    <Row>
+    <Row className='row-setup-profile'>
       <Col>
         <div className='setup-profile'>
           <div className='setup-profile__block'>

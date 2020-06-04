@@ -21,7 +21,7 @@ const Covid = ({ setActiveLink, currentCovidStep, currentTab, setCurrentCovidSte
   return (
     <>
       {currentCovidStep === 1 && <>
-        <Col md={9} lg={3}>
+        <Col className='covid-wrapper' md={9} lg={3}>
           <SocialImg marTop={marTop} currentTab={currentTab} prevSteps={prevCovidSteps} isButton={true} gallery={img}>
             <h3 className='covid__template-title'>Select a Template</h3>
             <FormGroup className='covid__input'>
@@ -36,8 +36,8 @@ const Covid = ({ setActiveLink, currentCovidStep, currentTab, setCurrentCovidSte
             </FormGroup>
           </SocialImg>
         </Col>
-        <Col className='offset-md-3 offset-lg-0' md={9} lg={7}>
-          <PhonePanel currentTab={currentTab} img={phonePanel} nextSteps={nextCovidSteps} title={'Template Editor'} />
+        <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={7}>
+          <PhonePanel currentTab={currentTab} img={phonePanel} prevSteps={prevCovidSteps} nextSteps={nextCovidSteps} title={'Template Editor'} />
         </Col>
       </>}
     </>

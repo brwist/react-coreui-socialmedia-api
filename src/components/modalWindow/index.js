@@ -62,7 +62,7 @@ const ModalWindow = props => {
         <Col xs={11}>
           <Modal isOpen={props.isOpen} toggle={props.handleChangeOpen}>
             <Row className='modal-window__main-row'>
-              <Col className='navigation-wrapper' xs={12} md={3} lg={2}>
+              <Col className='navigation-wrapper' xs={12} md={2}>
                 <Navigation activeLink={activeLink} />
               </Col>
               {props.story === 'COVID Message' && activeLink === 'story' && (
@@ -108,7 +108,7 @@ const ModalWindow = props => {
                   <Col className='modal-window__left' xs={12} md={9} lg={5}>
                     <SetupProfile currentTab={props.story} nextSteps={nextSteps} setActiveLink={setActiveLink} />
                   </Col>
-                  <Col className='modal-window__right offset-md-3 offset-lg-0' xs={12} md={9} lg={5}>
+                  <Col className='modal-window__right offset-md-2 offset-lg-0' xs={12} md={10} lg={5}>
                     <Preview />
                   </Col>
                 </>

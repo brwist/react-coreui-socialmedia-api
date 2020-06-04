@@ -1,5 +1,12 @@
 .setup-profile {
     font-family: 'Lato', sans-serif;
+    height: 610px;
+    width: 80%;
+    margin: auto;
+
+    &__buttons-block {
+      width: auto;
+    }
   
     &__title {
       text-transform: uppercase;
@@ -19,9 +26,6 @@
     &__btn {
       width: 146px;
       height: 44px;
-      margin-top: 328px;
-      margin-left: auto;
-      margin-right: 50%;
       color: #2F353A;
       font-weight: 500;
       font-size: 18px;
@@ -42,12 +46,11 @@
     }
 
     .btnSetupAStory {
-       margin-top: 5%;
-       margin-left: auto;
-       margin-right: auto;
-        
+        margin-top: 5%;
+        margin: auto;
+        margin-bottom: 16px;
+        width: 100%;
         height: 3rem;
-        width: 80%;
         background-color: #fff;
         padding-left: 15px;
         padding-right: 15px;
@@ -69,4 +72,16 @@
   .timezone-picker-list {
     height: 100px;
     overflow-y: scroll;
+  }
+
+  @media all and (max-width: 996px) {
+    .setup-profile {
+      &__btn {
+        display: none;
+      }
+    }
+  }
+
+  @media (min-width: 111px)  and (max-width: 767px) {
+
   }

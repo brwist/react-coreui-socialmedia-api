@@ -26,7 +26,10 @@ const PhonePanel = props => {
             <FontAwesomeIcon icon={far.faCopy} />
             <i className="fa fa-trash-o" />
           </div>
-          <Button onClick={() => props.nextSteps(props.currentTab)} color='warning'>Next</Button>
+          <div className='story-right__buttons-wrapper'>
+            <Button className='story-right__back' onClick={() => props.prevSteps(props.currentTab)} variant='secondary'>Back</Button>
+            <Button onClick={() => props.nextSteps(props.currentTab)} color='warning'>Next</Button>
+          </div>
         </div>
       </div>
     </div>
