@@ -25,7 +25,7 @@ const PromoteProduct = ({ prevPromoteSteps, nextPromoteSteps, setActiveLink, cur
     } else if (currentPromoteStep === 3) {
       return setActiveLink('live')
     }
-  }, [currentPromoteStep]);
+  }, [currentPromoteStep, setActiveLink]);
 
   return (
     <>
@@ -42,7 +42,7 @@ const PromoteProduct = ({ prevPromoteSteps, nextPromoteSteps, setActiveLink, cur
       )}
       {currentPromoteStep === 2 && (
         <>
-          <Col className='product-wrapper' md={9} lg={3}>
+          <Col className='product-wrapper' md={9} lg={4}>
             <SocialImg marTop={marTop} currentTab={currentTab} prevSteps={prevPromoteSteps} isButton={true} gallery={img}>
               <h3 className='covid__template-title'>Select a Product or collection</h3>
               <div className='promote-product__wrapper-btn'>
@@ -68,7 +68,7 @@ const PromoteProduct = ({ prevPromoteSteps, nextPromoteSteps, setActiveLink, cur
               </div>
             </SocialImg>
           </Col>
-          <Col className='offset-md-2 offset-lg-0 phoneSetup' xs={12} md={10} lg={7}>
+          <Col className='offset-md-2 offset-lg-0 phoneSetup' xs={12} md={10} lg={6}>
             <PhonePanel currentTab={currentTab} img={storyPreview} prevSteps={prevPromoteSteps} nextSteps={nextPromoteSteps} title={'Story Preview'} />
           </Col>
         </>

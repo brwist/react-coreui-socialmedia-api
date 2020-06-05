@@ -11,8 +11,6 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'; 
 import { Col, Container, Row, FormGroup, Input, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
 import * as router from 'react-router-dom';
 
-import Panel from '../../../components/panel/index';
-import SocialImg from '../../../components/social-img/index'
 import './index.scss';
 import navigation from '../../../config/nav'
 

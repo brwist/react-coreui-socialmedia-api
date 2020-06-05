@@ -33,6 +33,10 @@
     color: #2F353A;
     font-weight: 500;
     font-size: 18px;
+    position: relative;
+    left: 100%;
+    transform: translate(-108%, 0);
+    bottom: 8px;
   }
 
   &__label {

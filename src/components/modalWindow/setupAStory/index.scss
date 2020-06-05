@@ -1,7 +1,9 @@
-.setup-profile {
+.setup-story {
     font-family: 'Lato', sans-serif;
     height: 610px;
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: auto;
 
     &__buttons-block {
@@ -81,6 +83,20 @@
       }
     }
   }
+
+  @media all and (max-width: 992px) {
+    .setup-story {
+      height: auto;
+
+      &__title {
+        padding-top: 30px;
+      }
+
+      &__btn {
+        display: none;
+      }
+    }
+   }
 
   @media (min-width: 111px)  and (max-width: 767px) {
 

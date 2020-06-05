@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Col, Modal, Row, Container } from 'reactstrap';
+import { Col, Modal, Row, Container } from 'reactstrap';
 
 import Navigation from './navigation/index'
 import Preview from '../preview/index'

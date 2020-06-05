@@ -3,7 +3,6 @@ import * as router from 'react-router-dom';
 import {
   AppSidebar,
   AppSidebarNav2 as AppSidebarNav,
-  AppSidebarToggler,
   AppSidebarHeader,
   AppSidebarForm,
 } from '@coreui/react';
@@ -27,10 +26,9 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { activeLink } = this.state;
-
     return (
       <Container className='promote' fluid>
+        <p block className="title-page">My lightbox</p>
         <Row>
           <Col md={3} xl={2}>
             <AppSidebar fixed display="md">
@@ -41,12 +39,10 @@ class Editor extends React.Component {
               </Suspense>
             </AppSidebar>
           </Col>
-          <Col style={{ paddingLeft: '30px' }}  md={4} xl={3}>
-            <EditorLightbox className="editor-light-box">
-            </EditorLightbox>
+          <Col className='d-flex justify-content-center' md={4}>
+            <EditorLightbox className="editor-light-box" />
           </Col>
-          <Col md={5} lg={5} xl={6} style={{ marginLeft: '100px' }}>
-          
+          <Col style={{ marginTop: '30px' }} md={5} lg={5} xl={6}>
             <Panel />
           </Col>
         </Row>

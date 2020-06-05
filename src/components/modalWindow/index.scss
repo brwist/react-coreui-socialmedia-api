@@ -83,7 +83,7 @@
 
   &__page-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-end;
   }
 
@@ -93,6 +93,8 @@
     color: #2F353A;
     font-weight: 500;
     font-size: 18px;
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
   &__page-wrapper-small {
@@ -114,6 +116,13 @@
         margin-top: 30px;
         margin-right: 14px;
       }
+    }
+  }
+
+  .push-live {
+    &__btn {
+      margin-left: 20px!important;
+      margin-right: 20px!important;
     }
   }
 }

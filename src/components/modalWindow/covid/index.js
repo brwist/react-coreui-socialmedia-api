@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Col, FormGroup, InputGroup, Input, InputGroupAddon, InputGroupText } from 'reactstrap'
 
 import PhonePanel from '../../phonePanel/index'
@@ -16,12 +16,12 @@ const Covid = ({ setActiveLink, currentCovidStep, currentTab, setCurrentCovidSte
     } else if (currentCovidStep === 2) {
       return setActiveLink('live')
     }
-  }, [currentCovidStep]);
+  }, [currentCovidStep, setActiveLink]);
 
   return (
     <>
       {currentCovidStep === 1 && <>
-        <Col className='covid-wrapper' md={9} lg={3}>
+        <Col className='covid-wrapper' md={9} lg={4}>
           <SocialImg marTop={marTop} currentTab={currentTab} prevSteps={prevCovidSteps} isButton={true} gallery={img}>
             <h3 className='covid__template-title'>Select a Template</h3>
             <FormGroup className='covid__input'>
@@ -36,7 +36,7 @@ const Covid = ({ setActiveLink, currentCovidStep, currentTab, setCurrentCovidSte
             </FormGroup>
           </SocialImg>
         </Col>
-        <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={7}>
+        <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={6}>
           <PhonePanel currentTab={currentTab} img={phonePanel} prevSteps={prevCovidSteps} nextSteps={nextCovidSteps} title={'Template Editor'} />
         </Col>
       </>}

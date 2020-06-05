@@ -6,8 +6,6 @@ import {
   AppSidebarToggler,
   AppSidebarHeader,
   AppSidebarForm,
-  AppSidebarFooter,
-  AppSidebarMinimizer
 } from '@coreui/react';
 import { Col, Container, Row, Button } from 'reactstrap';
 

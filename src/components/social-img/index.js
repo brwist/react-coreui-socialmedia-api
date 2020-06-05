@@ -14,7 +14,7 @@ const SocialImg = props => {
       {props.children}
       <Row className='social-side__img-wrapper'>
         {gallery.map((i, index) => (
-          <Col key={index} className=' d-flex justify-content-center' col={3}>
+          <Col key={index} className='d-flex social-side__img-block' col={3}>
             <img className='social-side__img' src={i} alt='img' />
           </Col>
         ))}

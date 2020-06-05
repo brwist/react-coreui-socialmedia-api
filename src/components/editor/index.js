@@ -1,26 +1,28 @@
 import React from 'react'
-import { Col, Row, Button, Label } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as far from "@fortawesome/free-regular-svg-icons";
 
 import './index.scss';
+
+library.add(far.faCaretSquareDown, far.faCaretSquareUp, far.faPlusSquare, far.faCopy);
 
 const Panel = () => (
   <div className='panelEditor'>
     <Row>
-      <Col className="d-flex justify-content-left" col={2}>
-        <Label block className="panelEditor__my-lightbox">My lightbox</Label>
-      </Col>
-    </Row>
-    <Row>
       <Col className='panelEditor__bg-img' col={12}>
         <Col className="d-flex justify-content-center" col={6}>
-          <i className="fa fa-plus-square-o panelEditor__icon" />
-          <i className="fa fa-arrow-circle-up panelEditor__icon" />
-          <i className="fa fa-arrow-circle-down panelEditor__icon" />
-          <i style={{ marginLeft: '30px' }} className="fa fa-bars panelEditor__icon" />
+          <div style={{ marginRight: '50px' }}>
+            <FontAwesomeIcon style={{ marginRight: '20px' }} className='panelEditor__icon' icon={far.faPlusSquare} />
+            <FontAwesomeIcon className='panelEditor__icon' icon={far.faCaretSquareUp} />
+            <FontAwesomeIcon className='panelEditor__icon' icon={far.faCaretSquareDown} />
+          </div>
+          <FontAwesomeIcon className='panelEditor__icon' icon={far.faCopy} />
           <i className="fa fa-trash-o panelEditor__icon" />
         </Col>
         <Col className="d-flex justify-content-center" col={6}>
-          <img alt='panelEditor' src={require('../../assets/panel.png')} />
+          <img className='panelEditor__phone-img' alt='panelEditor' src={require('../../assets/panel.png')} />
         </Col>
       </Col>
     </Row>
