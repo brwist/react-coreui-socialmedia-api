@@ -3,9 +3,9 @@
      top: 25%;   
      display: flex;
      flex-direction: column;
-     width: 100%;
      flex-basis: auto;
      text-align: center;
+     width: 90%;
      
      .stories {
         text-transform: uppercase;
@@ -54,26 +54,216 @@
         text-align: center;
         padding: 1%;
         
-
-        p{
+        p {
           text-align: center;
           width: 100%;
           margin-top: -5%;
           margin-bottom: auto;
           color: #fff;
-
         }
-     }
+     }  
 
-     
+     .dropbtn {
+      background-color: #fff;
+      color: #000;
+      padding: 8px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border: #F0F3F5;
+      display: flex;
+      flex-direction: row;
+      height: 4rem;
+      box-shadow: 0 0 3px  rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      
+      &-active {
+        background-color: #fff;
+        color: #000;
+        padding: 8px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border: #F0F3F5;
+        display: flex;
+        flex-direction: row;
+        height: 4rem;
+        box-shadow: 0 0 3px  rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #F0F3F5;
+
+        & i {
+          margin-left: 10px;
+          color: #C1C6CB;
+
+       &:hover {
+          color: #708393;
+      }
+        }
+      }
+    }
+    
+    .dropbtn:hover {
+      background-color: #F0F3F5;
+
+      i {
+        color: #708393;
+      }
+    
+      .block-circle {
+        background-color: #fff;
+      }
+    
+      .little-block-circle {
+        background-color: #fff;
+      }
+    
+      span {
+        font-weight: bold;
+      }
+    }
+    
+    .dropbtn1 {
+      box-shadow: 
+          0 0 3px  rgba(0,0,0,0.2); 
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      left: 10px;
+    }
+    
+    .dropdown1 {
+        position: relative;
+        top: 0; 
+    }
+    
+    .block-circle {
+      display: block;
+      background-color: #F0F3F5;
+      border-radius: 50%;
+      border-color: #708393;
+      border-style: solid;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-top: -.5rem;
+      border-width: 1px;
+      // margin-bottom: auto;
+    }
+    
+    .little-block-circle {
+      height: 1.3rem;
+      width: 1.3rem;
+      background-color: #F0F3F5;
+      border-color: #708393;
+      border: 1px dashed #708393;
+      border-radius: 50%;
+      margin-top: 25%;
+      margin-left: 26%;
+      margin-right: auto;
+      margin-bottom: auto;
+    }
 }
 
-  
-  
+.box-wrapper {
+  width: 90%;
+  margin: auto;
+}
+
+.fa-chevron-right {
+  color: #C1C6CB;
+
+  &:hover {
+    color: #708393;
+  }
+}
+
+.box {
+  font-family: 'Lato', sans-serif;
+  border: 1px solid #C8CED3;
+  border-radius: 7px;
+  height: 365px;
+  width: 90%;
+  margin: auto;
+
+  &__title-block {
+    background: #F0F3F5;
+    height: 51px;
+    position: relative;
+
+    & i {
+      left: 25px;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      color: #C1C6CB;
+    
+      &:hover {
+        color: #708393;
+      }
+    }
+  }
+
+  &__title {
+    letter-spacing: 0.214286px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 0;
+    align-self: center;
+    line-height: 51px;
+  }
+
+  &__wrapper-buttons {
+    height: calc(100% - 61px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  &__block-up-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__up-buttons {
+    margin-top: 10px;
+    height: 35px;
+    color: #2F353A;
+    letter-spacing: 0.214286px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  &__block-down-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__down-buttons {
+    height: 35px;
+    width: 123px;
+    color: #2F353A;
+    letter-spacing: 0.214286px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
   @media all and (max-width: 768px) {
     .light-box {
       margin-top: 30px;
     }
   }
-  
   

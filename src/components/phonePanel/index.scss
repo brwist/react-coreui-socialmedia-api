@@ -18,7 +18,7 @@
 
   &__wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   &__img-nav-block {
@@ -55,6 +55,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    margin-right: 50px;
 
     &__svg {
       margin-bottom: 3px;

@@ -6,8 +6,6 @@ import {
   AppSidebarToggler,
   AppSidebarHeader,
   AppSidebarForm,
-  AppSidebarFooter,
-  AppSidebarMinimizer
 } from '@coreui/react';
 import { Col, Container, Row } from 'reactstrap';
 
@@ -83,19 +81,17 @@ class Setup extends React.Component {
                     </div>
                   </div>
                   <button className='promote__button'>
-                  <i
-                        className={activeLink === 'instagram' ? "fa fa-instagram promote__icon-active" : "fa fa-instagram promote__icon"}
-                  />
+                    <i
+                      className={activeLink === 'instagram' ? "fa fa-instagram promote__icon-active" : "fa fa-instagram promote__icon"}
+                    />
                     Connect IG
                   </button>
-                
+
                 </Col>
               </Row>
             </Overview>
           </Col>
-          {/* <Col md={5} lg={5} xl={6}> */}
-            <Panel /> 
-          {/* </Col> */}
+          <Panel />
         </Row>
       </Container >
     )

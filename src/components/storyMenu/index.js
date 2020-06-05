@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './index.scss'

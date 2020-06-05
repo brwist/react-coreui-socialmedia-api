@@ -1,6 +1,8 @@
 import React from 'react'
 import { Col, Button } from 'reactstrap'
 
+import './index.scss';
+
 const PanelPreview = props => {
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
