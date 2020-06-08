@@ -30,7 +30,7 @@ class Editor extends React.Component {
       <Container className='promote' fluid>
         <p block className="title-page">My lightbox</p>
         <Row>
-          <Col md={3} xl={2}>
+          <Col md={3} lg={2}>
             <AppSidebar fixed display="md">
               <AppSidebarHeader />
               <AppSidebarForm />
@@ -39,10 +39,10 @@ class Editor extends React.Component {
               </Suspense>
             </AppSidebar>
           </Col>
-          <Col className='d-flex justify-content-center' md={4}>
+          <Col className='d-flex justify-content-center' md={4} lg={5}>
             <EditorLightbox className="editor-light-box" />
           </Col>
-          <Col style={{ marginTop: '30px' }} md={5} lg={5} xl={6}>
+          <Col className='promote__wrapper-panel' style={{ marginTop: '30px' }} md={5} lg={5}>
             <Panel />
           </Col>
         </Row>
