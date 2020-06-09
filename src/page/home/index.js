@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { connect } from "react-redux";
 import * as router from 'react-router-dom';
 import {
   AppSidebar,
@@ -10,6 +11,10 @@ import navigation from '../../config/nav'
 import Modal from '../../components/modalWindow/index'
 
 class Home extends React.Component {
+  // componentDidMount() {
+  //   this.props.test();
+  // }
+
   render() {
     return (
       <AppSidebar fixed display="md">
@@ -22,4 +27,8 @@ class Home extends React.Component {
   }
 }
 
-export default Home; 
+const mapDispatchToProps = dispatch => ({
+  test: () => dispatch({ type: 'TEST' })
+})
+
+export default connect(null, mapDispatchToProps)(Home); 

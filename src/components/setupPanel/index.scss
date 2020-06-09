@@ -24,9 +24,6 @@
        text-transform: uppercase;
        color: #2e2e2e;
        font-weight: bold;
-      //  margin-left: auto;
-      //  margin-right: 20%;
-      //  margin-top: 10%;
        font-size: 1.5rem;
        margin-bottom: 11%;
    }
@@ -91,7 +88,6 @@
 
     .buttons-three {
       width: 18rem;
-      background-color: #F0F3F5;
       height: 44px;
     }
 
@@ -100,45 +96,7 @@
       width: 1rem;
       margin-right: .5rem;
     }
-
-    .buttons-three:hover {
-      background-color: #2F353A;
-      color: #fff;
-
-      .icons-three {
-        color: #fff;
-      }
-    }
-
   }
- 
-.btns{
-    margin-left: auto;
-    margin-right: 10%;
-    background-color: #e4e5e6;
-    border-color: #2f353a;
-    color: #2f353a;
-    cursor: pointer;
-    user-select: none;
-    outline: none;
-    transition: background 9999999s;
-}
-
-.btns:hover {
-  background-color: #2f353a;
-  color: #fff;
-  // transition: background 0s;
-}
-
-.btns:active {
-    span {
-      color: #fff;
-    }
-    // color: #fff;
-    background-color: #2f353a;
-    transition: background 0s;
-}
-
 
 .panelSetup {
     font-family: 'Lato', sans-serif;

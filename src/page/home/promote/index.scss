@@ -5,6 +5,12 @@
 
 .promote {
   font-family: 'Lato', sans-serif;
+ 
+  &__icon-block {
+    margin-top: 89px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &__wrapper-icon {
     width: 35px;
@@ -63,15 +69,23 @@ html:not([dir="rtl"]) .sidebar {
   .promote__icon-block {
     padding-top: 30px;
   }
-}
 
-@media (min-width: 767px) and (max-width: 880px) {
   .promote {
     &__button {
-      margin-bottom: 20px;
+      position: relative;
+      right: 10px;
     }
 
-  .promote__icon-block {
+    &__wrapper-icon, &__wrapper-icon-active {
+      margin-bottom: 0!important;
+      margin-top: 0;
+    }
+  }
+}
+// 880
+@media (min-width: 767px) and (max-width: 992px) {
+  .promote {
+  &__icon-block {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -92,5 +106,4 @@ html:not([dir="rtl"]) .sidebar {
   }
   }
 }
-
 

@@ -1,42 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Col, Row, Button, Form, FormGroup, Label, } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShopify } from "@fortawesome/free-brands-svg-icons"
 
 import './index.scss';
 
-const Panel = () => (
-  <div className='panelSetup'>
+const Panel = () => {
+  const [connectLink, setConnectLink] = useState('');
 
-    <Form>
-      <Row>
-        <Col className="d-flex justify-content-center" col={2}>
-          <Label className="panelSetup__accountSetup"><span>Account Setup</span></Label>
-        </Col>
-      </Row>
-      <FormGroup className="form2">
+  return (
+    <div className='panelSetup'>
 
-        <h2>Media Connectors</h2>
+      <Form>
+        <Row>
+          <Col className="d-flex justify-content-center" col={2}>
+            <Label className="panelSetup__accountSetup"><span>Account Setup</span></Label>
+          </Col>
+        </Row>
+        <FormGroup className="form2">
 
-        <Button block className="buttons-three">
-          <span><i className="fa fa-instagram icons-three" />
-              Instagram Connect
-              </span>
-        </Button>
-        <Button block className="buttons-three">
-          <span><i className="fab fa-google-drive icons-three"></i>
-               Google Drive Connect
-               </span>
-        </Button>
+          <h2>Media Connectors</h2>
 
-        <Button block className="buttons-three">
-          <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-          <span>Shopify Connect</span>
-        </Button>
+          <Button active={connectLink === 'Instagram'} outline block color='dark' className="buttons-three" onClick={() => setConnectLink('Instagram')}>
+            <span><i className="fa fa-instagram icons-three" />
+              {connectLink === 'Instagram' ? 'Connected' : 'Instagram Connect'}
+            </span>
+          </Button>
+          <Button active={connectLink === 'Google'} outline block color='dark' className="buttons-three" onClick={() => setConnectLink('Google')}>
+            <span><i className="fab fa-google-drive icons-three"></i>
+              {connectLink === 'Google' ? 'Connected' : 'Google Drive Connect'}
+            </span>
+          </Button>
 
-      </FormGroup>
-    </Form>
-  </div>
-)
+          <Button active={connectLink === 'Shopify'} block outline color='dark' className="buttons-three" onClick={() => setConnectLink('Shopify')}>
+            <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
+            <span>{connectLink === 'Shopify' ? 'Connected' : 'Shopify Connect'}</span>
+          </Button>
+
+        </FormGroup>
+      </Form>
+    </div>
+  )
+}
 
 export default Panel
