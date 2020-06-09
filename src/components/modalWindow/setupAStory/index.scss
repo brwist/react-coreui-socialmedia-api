@@ -1,3 +1,12 @@
+.setup-story-wrapper {
+  width: 100%;
+}
+
+.setup-story-block {
+  padding: 0;
+  margin-left: 50px;
+}
+
 .setup-story {
     font-family: 'Lato', sans-serif;
     height: 610px;
@@ -53,7 +62,6 @@
         margin-bottom: 16px;
         width: 100%;
         height: 3rem;
-        background-color: #fff;
         padding-left: 15px;
         padding-right: 15px;
 
@@ -63,11 +71,6 @@
            position: relative;
            right: .5rem;
         }
-    }
-
-    .btnSetupAStory:hover {
-        background-color: #2F353A;
-        color: #FFF;
     }
   }
   
@@ -85,6 +88,14 @@
   }
 
   @media all and (max-width: 992px) {
+    .setup-story-wrapper {
+      width: 80%;
+    }
+
+    .setup-story-block {
+      margin-left: 0;
+    }
+
     .setup-story {
       height: auto;
 

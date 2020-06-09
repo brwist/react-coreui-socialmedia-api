@@ -27,7 +27,9 @@ class DeprtmentAnnouncement extends React.Component {
 
     return (
       <Container className='department' fluid>
-        <p className='title-page'>department Announcement</p>
+        <div className="department-title">
+          <p className='title-page'>Department Announcement</p>
+        </div>
         <Row>
           <Col md={3} xl={2}>
             <AppSidebar fixed display="md">
