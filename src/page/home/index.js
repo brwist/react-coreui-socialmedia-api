@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { connect } from "react-redux";
 import * as router from 'react-router-dom';
+import * as types from '../../store/types/account'
 import {
   AppSidebar,
   AppSidebarNav2 as AppSidebarNav,
@@ -11,9 +12,9 @@ import navigation from '../../config/nav'
 import Modal from '../../components/modalWindow/index'
 
 class Home extends React.Component {
-  // componentDidMount() {
-  //   this.props.test();
-  // }
+  componentDidMount() {
+    this.props.getUser();
+  }
 
   render() {
     return (
@@ -27,8 +28,12 @@ class Home extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  test: () => dispatch({ type: 'TEST' })
+const mapStateToProps = state => ({
+  user: state.account.user,
 })
 
-export default connect(null, mapDispatchToProps)(Home); 
+const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch({ type: types.GET_USER })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home); 

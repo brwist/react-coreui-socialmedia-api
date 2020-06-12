@@ -30,15 +30,18 @@ class Login extends Component {
                     <Row className="justify-content-center">
                       <Col xs="9">
                         <InputGroup>
-                          <Input className="login__input" type="text" id="username2" name="username2" placeholder="Username" autoComplete="name" />
+                          <Input className="login__input" type="email" id="username2" name="username2" placeholder="Email" autoComplete="name" />
+
                           <InputGroupAddon addonType="append">
-                            <InputGroupText className='login__input-img'><i className="fa fa-user"></i></InputGroupText>
+                            <InputGroupText className='login__input-img'><i className="fa fa-envelope"></i></InputGroupText>
                           </InputGroupAddon>
                         </InputGroup>
                         <InputGroup style={{ marginTop: '10px' }}>
-                          <Input className="login__input" type="email" id="email2" name="email2" placeholder="Email" autoComplete="username" />
+                          <Input className="login__input" type="password" id="email2" name="email2" placeholder="Password" autoComplete="username" />
                           <InputGroupAddon addonType="append">
-                            <InputGroupText className='login__input-img'><i className="fa fa-envelope"></i></InputGroupText>
+                            <InputGroupText className='login__input-img'>
+                              <img className='password-icon' alt='password' src={require('../../assets/lock.svg')} />
+                            </InputGroupText>
                           </InputGroupAddon>
                         </InputGroup>
                         <Button className='login__button' color="dark" size="lg" block>Login</Button>
