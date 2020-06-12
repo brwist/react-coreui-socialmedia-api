@@ -11,7 +11,7 @@ const EditorLightbox = (props) => {
   useEffect(() => {
     if (activeItem) {
       const filteredData = data.filter(item => item.title === activeItem);
-      console.log(filteredData)
+
       return setFilterItem(filteredData[0].children)
     }
   }, [activeItem]);

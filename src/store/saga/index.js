@@ -1,9 +1,9 @@
 import { all, fork } from "redux-saga/effects";
 
-import connection from './connection';
+import account from './account';
 
 export default function* rootSaga() {
   yield all([
-    fork(connection),
+    fork(account),
   ])
 }
