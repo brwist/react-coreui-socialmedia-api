@@ -13,7 +13,8 @@ import Modal from '../../components/modalWindow/index'
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.getUser();
+    //this.props.getUser();
+    this.props.loginUser();
   }
 
   render() {
@@ -33,7 +34,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch({ type: types.GET_USER })
+  getUser: () => dispatch({ type: types.GET_USER }),
+  loginUser: () => dispatch({ type: types.LOGIN_USER })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home); 
