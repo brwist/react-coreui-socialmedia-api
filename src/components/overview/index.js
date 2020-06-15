@@ -98,12 +98,20 @@ class Overview extends React.Component {
             />
           </FormGroup>
 
-          <FormGroup>
+          {/* <FormGroup>
             <Label for="exampleEmail">Reset Password</Label>
             <Input onChange={this.onChange} value={email} type="email" name="email" id="exampleEmail" placeholder="Enter your email address" />
-          </FormGroup>
+          </FormGroup> */}
 
-          <Button type='Submit' className="btn_overview">Save</Button>
+          <div className='overview__wrapper-btn'>
+            <Button
+              onClick={() => window.location.href = 'https://lightboxlive.auth.us-west-2.amazoncognito.com/forgotPassword?response_type=code&client_id=5nbhcblr12745g4c9lmrg4nhr3&redirect_uri=https://api-dev.lightboxlive.com/aws/auth/login'}
+              className="btn_overview btn-reset"
+            >
+              Reset Password
+            </Button>
+            <Button type='Submit' className="btn_overview">Save</Button>
+          </div>
           {isSend &&
             <Alert style={{ marginTop: '70px', textAlign: 'center' }} color="success">
               Accofunt Overview is a success update!

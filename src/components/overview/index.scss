@@ -6,6 +6,23 @@
     margin-right: auto;
     margin-left: auto;
     padding-bottom: 100%;
+
+    &__wrapper-btn {
+      display: flex;
+      justify-content: space-between;
+      height: 35px;
+
+      & button {
+        background-color: #fff;
+        border-color: #2e2e2e;
+        margin-bottom: 20px;
+        height: 100%;
+      }
+    }
+  }
+
+ .btn-reset {
+    width: 135px!important;
   }
   
 .overview h2{
@@ -22,7 +39,6 @@ form {
 }
 
 .btn_overview {
-    float: right;
     background-color: #fff;
     border-color: #2e2e2e;
     width: 6rem;
