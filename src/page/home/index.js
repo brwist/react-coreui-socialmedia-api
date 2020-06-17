@@ -1,40 +1,62 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { connect } from "react-redux";
 import * as router from 'react-router-dom';
 import * as types from '../../store/types/account'
+import { GET_USER_INFO } from '../../store/types/user'
 import {
   AppSidebar,
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
+import { Spinner } from 'reactstrap';
 
 import './index.scss';
 import navigation from '../../config/nav'
-import Modal from '../../components/modalWindow/index'
+import ModalWindow from '../../components/modalWindow/index'
 
-class Home extends React.Component {
-  componentDidMount() {
-    //this.props.getUser();
-    this.props.loginUser();
-  }
+function Home (props) {
+  const {
+    userInfo: {
+      locations
+    },
+    userInfoIsLoading,
+    loginUser,
+    getUserInfo
+  } = props
 
-  render() {
-    return (
-      <AppSidebar fixed display="md">
-        <Suspense>
-          <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
-          {this.props.location.pathname !== '/' && <Modal {...this.props} isOpen={true} />}
-        </Suspense>
-      </AppSidebar>
-    )
-  }
+  useEffect(() => {
+    loginUser();
+  }, [loginUser])
+
+  useEffect(() => {
+    getUserInfo();
+  }, [getUserInfo])
+
+
+  console.log(props.userInfo, userInfoIsLoading)
+
+  if (!locations || userInfoIsLoading) return <Spinner className='setup__spinner' color="dark" />
+
+  const locationWithUncompletedOnboarding = locations.find(location => location.locnConfig.onboardingComplete === false)
+  const onboardingWF = locationWithUncompletedOnboarding && locationWithUncompletedOnboarding.locnConfig.onboardingWF
+  return (
+    <AppSidebar fixed display="md">
+      <Suspense>
+        <AppSidebarNav navConfig={navigation} {...props} router={router} />
+        <ModalWindow activeLink="story"  isOpen={onboardingWF} />
+      </Suspense>
+    </AppSidebar>
+  )
 }
 
 const mapStateToProps = state => ({
   user: state.account.user,
+  userInfo: state.user.userInfo,
+  userInfoIsLoading: state.user.isLoading,
 })
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch({ type: types.GET_USER }),
+  getUserInfo: () => dispatch({ type: GET_USER_INFO }),
   loginUser: () => dispatch({ type: types.LOGIN_USER })
 })
 
