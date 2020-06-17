@@ -71,7 +71,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { name, tz, email, isSend } = this.state;
+    const { name, tz, isSend } = this.state;
 
 
     return (

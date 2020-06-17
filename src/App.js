@@ -7,6 +7,7 @@ import createSagaMiddleware from "redux-saga";
 
 import './index.scss';
 import links from './config/index'
+import axiosConfig from './config/axios'
 import Link from './page/login/index'
 import Home from './page/home/index'
 import Promote from './page/home/promote/index'
@@ -27,6 +28,8 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
+
+axiosConfig(store);
 
 function App() {
   return (
