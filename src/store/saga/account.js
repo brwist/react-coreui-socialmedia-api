@@ -5,7 +5,7 @@ import * as types from '../types/account'
 
 export function* loginUser() {
   try {
-    yield axios.get('admin/test/auth')
+    yield axios.get('test/auth')
       .then(res => console.log(res))
     console.log('login')
   } catch (e) {
@@ -15,7 +15,7 @@ export function* loginUser() {
 
 export function* getUser() {
   try {
-    const data = yield axios.get('admin/account/config')
+    const data = yield axios.get('/account/config')
       .then(res => res)
     console.log('config')
     yield put(actions.setUser(data.data))
@@ -28,7 +28,7 @@ export function* getUser() {
 
 export function* changeUser({ user }) {
   try {
-    yield axios.post('admin/account/config', user)
+    yield axios.post('account/config', user)
       .then(res => res)
   } catch (e) {
     console.log(e)

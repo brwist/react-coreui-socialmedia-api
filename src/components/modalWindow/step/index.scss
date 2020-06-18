@@ -1,0 +1,37 @@
+.covid-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.covid {
+  font-family: 'Lato', sans-serif;
+  
+  &__template-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 17px;
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .covid {
+    margin-top: 20px;
+
+    &__input {
+      margin-left: 10px;
+    }
+
+    &__template-title {
+      padding-top: 10px;
+    }
+  }
+}
+
+@media all and (max-width: 820px) {
+  .covid-wrapper {
+    margin-left: 10px;
+  }
+}

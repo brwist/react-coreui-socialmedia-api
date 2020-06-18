@@ -1,0 +1,3 @@
+export const GET_WORKFLOW = "GET_WORKFLOW";
+export const SET_WORKFLOW = "SET_WORKFLOW";
+export const WORKFLOW_ERROR = "WORKFLOW_ERROR";

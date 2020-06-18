@@ -31,7 +31,6 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    cursor: pointer;
     background-color: white;
     margin-bottom: 10px !important;
   }
@@ -69,7 +68,6 @@
 
   &__item-block {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     height: 100px;
     width: max-content;
