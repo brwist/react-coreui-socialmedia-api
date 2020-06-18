@@ -5,7 +5,7 @@ import * as types from '../types/user'
 
 export function* getUserInfo() {
   try {
-    const data = yield axios.get('admin/user/info')
+    const data = yield axios.get('user/info')
       .then(res => {
         return res.data
       })
@@ -18,6 +18,6 @@ export function* getUserInfo() {
 }
 
 
-export default function* test() {
+export default function* () {
   yield takeLatest(types.GET_USER_INFO, () => getUserInfo())
 }

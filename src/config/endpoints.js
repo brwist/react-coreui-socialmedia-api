@@ -1,6 +1,6 @@
 const envConfig = {
   development: {
-    apiURL: 'https://cors-anywhere.herokuapp.com/https://api-dev.lightboxlive.com/v0/'
+    apiURL: 'https://cors-anywhere.herokuapp.com/https://api-dev.lightboxlive.com/v0/admin/'
   },
   qa: {
     apiURL: ''

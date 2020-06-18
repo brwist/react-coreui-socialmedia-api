@@ -1,32 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './index.scss'
 
 const StoryMenu = props => {
+  const {locations} = props
+  const [locationWorkflows, setLocationWorkflow] = useState([])
+
+  useEffect(() => {
+    let locationsArray = []
+    for (let location of locations) {
+      let workflowPromises = location.locnConfig.workflows.map(workflow => axios.get('workflow/'+workflow))
+      Promise.all(workflowPromises).then((values) => {
+        locationsArray.push({
+            id: location.id,
+            name: location.name,
+            workflows: values.map(value => ({id: value.data.id, title: value.data.title}))
+          })
+        setLocationWorkflow([
+          ...locationsArray,
+        ])
+      });
+
+    }
+  }, [locations, setLocationWorkflow])
+
+
   return (
     <div className='story-menu'>
       <ListGroup >
-        {props.menuItem.map(menu => (
+        {locationWorkflows.map(location => (
           <ListGroupItem
             className='story-menu__list'
-            action color="dark"
-            onClick={() => props.changeClickedPanel(menu.title)}
-            key={menu.title}
+            key={location.name}
           >
-            {menu.article === 'fa' ? <div className='story-menu__icon-wrapepr'>
-              <FontAwesomeIcon icon={menu.icon} className='story-menu__icon' />
-            </div> :
-              <div className='story-menu__icon-wrapepr'>
-                <i className={`story-menu__icon ${menu.icon}`}></i>
-              </div>
-            }
             <div className='story-menu__wrapper'>
-              <ListGroupItemHeading className='story-menu__title'>{menu.title}</ListGroupItemHeading>
+              <ListGroupItemHeading className='story-menu__title'>{location.name}</ListGroupItemHeading>
               <ListGroupItemText className='story-menu__item-block'>
-                {menu.message.map(text => (
-                  <Button className='story-menu__item' outline color='dark' key={text}>{text}</Button>
+                {location.workflows.map(workflow => (
+                  <Button className='story-menu__item' outline color='dark' onClick={props.changeClickedPanel(workflow.id, location.id)} key={workflow.id}>{workflow.title}</Button>
                 ))}
               </ListGroupItemText>
             </div>

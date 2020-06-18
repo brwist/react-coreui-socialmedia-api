@@ -1,60 +1,65 @@
 import React, { useState, useEffect } from 'react'
 import { Col, Modal, Row, Container } from 'reactstrap';
 
+import { connect } from "react-redux";
+
+import { Spinner } from 'reactstrap';
+
 import Navigation from './navigation/index'
 import Preview from '../preview/index'
 import SetupProfile from './setupProfile/index'
-import Covid from './covid/index'
-import PromoteProduct from './promoteProduct/index'
+import Step from './step/index'
 import PanelPreview from './panelPreview/index'
 import './index.scss';
 import covPhone from '../../assets/phone_panel.png'
-import manPhone from '../../assets/story-preview.png'
+
+import { GET_WORKFLOW } from '../../store/types/workflow'
+
 
 const ModalWindow = props => {
   const [activeLink, setActiveLink] = useState(props.activeLink);
-  const [currentCovidStep, setCurrentCovidSteps] = useState(1);
-  const [currentPromoteStep, setCurrentPromoteStep] = useState(1);
+  const [currentStoryStep, setStorySteps] = useState(1);
+  const [storyStep, setStoryStep] = useState(0);
+
+  const {
+    workflowId,
+    getWorkflowById,
+    workflow,
+    workflowIsLoading,
+    locationId
+  } = props
 
   useEffect(() => {
     if (!props.isOpen) {
-      setCurrentCovidSteps(1);
-      setCurrentPromoteStep(1);
       setActiveLink('story');
     }
   }, [props.isOpen])
+
+  useEffect(() => {
+    getWorkflowById(workflowId);
+  }, [getWorkflowById, workflowId])
 
   const prevSteps = link => {
     if (!link) {
       return
     }
-
-    switch (link) {
-      case 'COVID Message':
-        return setCurrentCovidSteps(prev => prev - 1);
-      case 'Promote a Product (Shopify)':
-        return setCurrentPromoteStep(prev => prev - 1);
-
-      default:
-        return;
-    }
+    return setStorySteps(prev => prev - 1);
   };
 
   const nextSteps = link => {
     if (!link) {
       return;
     }
-
-    switch (link) {
-      case 'COVID Message':
-        return setCurrentCovidSteps(prev => prev + 1);
-      case 'Promote a Product (Shopify)':
-        return setCurrentPromoteStep(prev => prev + 1);
-
-      default:
-        return;
-    }
+    return setStorySteps(prev => prev + 1);
   }
+
+  if (!workflow.steps || workflowIsLoading) return props.isOpen && <Spinner className='setup__spinner' color="dark" />
+
+  const handleStoryStep = (move) => (tab) => {
+    setStoryStep(storyStep+move)
+  }
+
+  const stepsLength = workflow.steps.length
 
   return (
     <Container fluid>
@@ -65,41 +70,31 @@ const ModalWindow = props => {
               <Col className='navigation-wrapper' xs={12} md={2}>
                 <Navigation activeLink={activeLink} />
               </Col>
-              {props.story === 'COVID Message' && activeLink === 'story' && (
-                <Covid
+
+              {props.story === 'storySteps' && activeLink === 'story' && workflow.steps.map((step, index) => {
+                return storyStep === index && <Step
                   setActiveLink={setActiveLink}
-                  currentCovidStep={currentCovidStep}
-                  prevCovidSteps={prevSteps}
-                  nextCovidSteps={nextSteps}
+                  currentStoryStep={currentStoryStep}
+                  step={step}
+                  index={index}
+                  workflowId={workflow.id}
+                  locationId={locationId}
+                  stepsLength={stepsLength}
+                  prevModalSteps={prevSteps}
+                  nextModalSteps={nextSteps}
+                  handleStoryStep={handleStoryStep}
                   currentTab={props.story}
                   marTop={305}
                 />
-              )}
-              {activeLink === 'live' && props.story === 'COVID Message' && (
+              })}
+
+
+              {activeLink === 'live' && props.story === 'storySteps' && (
                 <PanelPreview
                   setActiveLink={setActiveLink}
                   currentTab={props.story}
                   prevSteps={prevSteps}
                   img={covPhone}
-                />
-              )}
-              {props.story === 'Promote a Product (Shopify)' && activeLink === 'story' && (
-                <PromoteProduct
-                  setActiveLink={setActiveLink}
-                  prevPromoteSteps={prevSteps}
-                  nextPromoteSteps={nextSteps}
-                  currentTab={props.story}
-                  currentPromoteStep={currentPromoteStep}
-                  marTop={328}
-                />
-              )
-              }
-              {props.story === 'Promote a Product (Shopify)' && activeLink === 'live' && (
-                <PanelPreview
-                  setActiveLink={setActiveLink}
-                  currentTab={props.story}
-                  prevSteps={prevSteps}
-                  img={manPhone}
                 />
               )}
 
@@ -112,8 +107,7 @@ const ModalWindow = props => {
                     <Preview />
                   </Col>
                 </>
-              )
-              }
+              )}
             </Row>
           </Modal>
         </Col>
@@ -122,4 +116,13 @@ const ModalWindow = props => {
   )
 }
 
-export default ModalWindow
+const mapStateToProps = state => ({
+  workflow: state.workflow.workflow,
+  workflowIsLoading: state.workflow.isLoading,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getWorkflowById: (workflowId) => dispatch({ type: GET_WORKFLOW , payload: { workflowId }}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalWindow);

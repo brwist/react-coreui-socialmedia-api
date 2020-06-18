@@ -20,7 +20,7 @@ function Home (props) {
     },
     userInfoIsLoading,
     loginUser,
-    getUserInfo
+    getUserInfo,
   } = props
 
   useEffect(() => {
@@ -31,18 +31,17 @@ function Home (props) {
     getUserInfo();
   }, [getUserInfo])
 
-
-  console.log(props.userInfo, userInfoIsLoading)
-
   if (!locations || userInfoIsLoading) return <Spinner className='setup__spinner' color="dark" />
 
   const locationWithUncompletedOnboarding = locations.find(location => location.locnConfig.onboardingComplete === false)
   const onboardingWF = locationWithUncompletedOnboarding && locationWithUncompletedOnboarding.locnConfig.onboardingWF
+
+
   return (
     <AppSidebar fixed display="md">
       <Suspense>
         <AppSidebarNav navConfig={navigation} {...props} router={router} />
-        <ModalWindow activeLink="story"  isOpen={onboardingWF} />
+        <ModalWindow story="storySteps" workflowId={onboardingWF} locationId={locationWithUncompletedOnboarding.id} activeLink="story" isOpen={onboardingWF} />
       </Suspense>
     </AppSidebar>
   )
