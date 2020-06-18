@@ -9,16 +9,17 @@ const StoryMenu = props => {
   const [locationWorkflows, setLocationWorkflow] = useState([])
 
   useEffect(() => {
+    let locationsArray = []
     for (let location of locations) {
       let workflowPromises = location.locnConfig.workflows.map(workflow => axios.get('workflow/'+workflow))
       Promise.all(workflowPromises).then((values) => {
-        setLocationWorkflow([
-          ...locationWorkflows,
-          {
+        locationsArray.push({
             id: location.id,
             name: location.name,
             workflows: values.map(value => ({id: value.data.id, title: value.data.title}))
-          }
+          })
+        setLocationWorkflow([
+          ...locationsArray,
         ])
       });
 
