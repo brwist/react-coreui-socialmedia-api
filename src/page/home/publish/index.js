@@ -53,7 +53,7 @@ const Publish = props => {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-              <AppSidebarNav navConfig={navigation} {...props} router={router} />
+              <AppSidebarNav navConfig={navigation} router={router} />
             </Suspense>
           </AppSidebar>
         </Col>
