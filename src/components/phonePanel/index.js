@@ -29,7 +29,7 @@ const PhonePanel = props => {
             </div>
             <div className='story-right__buttons-wrapper'>
               <Button className='story-right__back' onClick={() => props.prevSteps(props.currentTab)} variant='secondary'>Back</Button>
-              <Button onClick={() => props.nextSteps(props.currentTab)} color='warning'>Next</Button>
+              <Button onClick={() => props.nextSteps(props.currentTab)} disabled={props.disableNext} color='warning'>Next</Button>
             </div>
           </div>
         </div>

@@ -39,7 +39,13 @@ const StoryMenu = props => {
               <ListGroupItemHeading className='story-menu__title'>{location.name}</ListGroupItemHeading>
               <ListGroupItemText className='story-menu__item-block'>
                 {location.workflows.map(workflow => (
-                  <Button className='story-menu__item' outline color='dark' onClick={props.changeClickedPanel(workflow.id, location.id)} key={workflow.id}>{workflow.title}</Button>
+                  <Button
+                    className='story-menu__item'
+                    outline color='dark'
+                    onClick={props.changeClickedPanel(workflow.id, location.id)}
+                    key={workflow.id}>
+                    {workflow.title}
+                  </Button>
                 ))}
               </ListGroupItemText>
             </div>

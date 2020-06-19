@@ -9,7 +9,7 @@ import phonePanel from '../../../assets/phone_panel.png'
 import StoryInput from '../../inputs/index'
 
 
-const Step = ({ step, setActiveLink, currentStoryStep, currentTab, prevModalSteps, nextModalSteps, handleStoryStep, index, stepsLength, workflowId, locationId }) => {
+const Step = ({ step, setActiveLink, currentStoryStep, currentTab, prevModalSteps, nextModalSteps, setStateId, workflowStateID, handleStoryStep, index, stepsLength, workflowId, locationId }) => {
   const [params, setParams] = useState({})
 
   useEffect(() => {
@@ -29,15 +29,25 @@ const Step = ({ step, setActiveLink, currentStoryStep, currentTab, prevModalStep
 
   const submitStep = (tab) => {
     axios.post(`locn/${locationId}/workflow/${workflowId}/step/${step.stepID}`, {
-      workflowStateID: workflowId,
       stepOp: step.stepOp,
+      workflowStateID: workflowStateID,
       params: params
     }). then(response => {
+      setStateId(response.data.workflowStateID)
       return index+1 === stepsLength ? nextModalSteps(tab) : handleStoryStep(+1)()
     }, error => {
       console.log(error)
     })
 
+  }
+
+  let stepIsInvalid = false
+
+  for (let workflowInput of step.workflowInputs) {
+    if (!workflowInput.optinal && !params[workflowInput.name]) {
+      stepIsInvalid = true
+      continue
+    }
   }
 
   const nextMethod = submitStep
@@ -53,7 +63,7 @@ const Step = ({ step, setActiveLink, currentStoryStep, currentTab, prevModalStep
             <div dangerouslySetInnerHTML={{__html: step.html}}></div>
             <div>
               {step.workflowInputs.map(input => {
-                return <StoryInput {...input} handleParamsChange={handleParamsChange}/>
+                return <StoryInput {...input} locationId={locationId} handleParamsChange={handleParamsChange}/>
               })}
             </div>
           </div>
@@ -62,7 +72,7 @@ const Step = ({ step, setActiveLink, currentStoryStep, currentTab, prevModalStep
 
       </Col>
       <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={6}>
-        <PhonePanel currentTab={currentTab} img={phonePanel} prevSteps={prevMethod} nextSteps={nextMethod} title={'Template Editor'} />
+        <PhonePanel currentTab={currentTab} img={phonePanel} disableNext={stepIsInvalid} prevSteps={prevMethod} nextSteps={nextMethod} title={'Template Editor'} />
       </Col>
     </>
   )

@@ -19,7 +19,7 @@ const PanelPreview = props => {
           Back
         </Button>
         <img className='push-live__img' alt='phone' src={props.img} />
-        <Button color='warning' className='push-live__btn'>Push Live</Button>
+        <Button color='warning'  onClick={props.closeModal} className='push-live__btn'>Push Live</Button>
       </div>
       <div className='push-live__page-wrapper-small'>
         <img className='push-live__img' alt='phone' src={props.img} />
@@ -34,7 +34,7 @@ const PanelPreview = props => {
           >
             Back
           </Button>
-          <Button color='warning' className='push-live__btn'>Push Live</Button>
+          <Button color='warning' onClick={props.closeModal} className='push-live__btn'>Push Live</Button>
         </div>
       </div>
     </Col>

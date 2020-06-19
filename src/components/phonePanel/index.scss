@@ -89,6 +89,10 @@
   }
 }
 
+button[disabled]{
+  cursor: not-allowed;
+}
+
 @media all and (max-width: 1160px) {
   .story-right {
     height: auto;
