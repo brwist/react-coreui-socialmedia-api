@@ -44,7 +44,7 @@ class Setup extends React.Component {
               <AppSidebarHeader />
               <AppSidebarForm />
               <Suspense>
-                <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
+                <AppSidebarNav navConfig={navigation} router={router} />
               </Suspense>
             </AppSidebar>
           </Col>
