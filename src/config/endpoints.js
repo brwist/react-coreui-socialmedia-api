@@ -1,6 +1,7 @@
 const envConfig = {
   development: {
-    apiURL: 'https://cors-anywhere.herokuapp.com/https://api-dev.lightboxlive.com/v0/admin/'
+    apiURL: 'https://cors-anywhere.herokuapp.com/https://api-dev.lightboxlive.com/v0/admin/',
+    cdnURL: 'https://d3le8hkzzdixl5.cloudfront.net/'
   },
   qa: {
     apiURL: ''
@@ -15,6 +16,7 @@ const envConfig = {
 
 const currentEnv = envConfig[process.env.REACT_APP_ENV] ? process.env.REACT_APP_ENV : 'development'
 
-const apiURL = envConfig[currentEnv].apiURL
+const { apiURL } = envConfig[currentEnv]
+const { cdnURL } = envConfig[currentEnv]
 
-export { apiURL }
+export { apiURL, cdnURL }

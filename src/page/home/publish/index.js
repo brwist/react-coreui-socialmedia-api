@@ -61,7 +61,7 @@ const Publish = props => {
           <div className='publish__block'>
             <h3 className='publish__title'>Setup Your First Story</h3>
             <p className='publish__text'>What would you like display on the Lightbox Panel?</p>
-            <StoryMenu locations={userInfo.locations} changeClickedPanel={changeClickedPanel} />
+            <StoryMenu locations={userInfo.locations} changeIsOpen={changeIsOpen} changeClickedPanel={changeClickedPanel} />
           </div>
         </Col>
       </Row>
