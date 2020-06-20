@@ -1,6 +1,10 @@
 .covid-wrapper {
   display: flex;
   align-items: center;
+  .social-side {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .covid {

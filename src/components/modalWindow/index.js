@@ -18,9 +18,10 @@ import { GET_WORKFLOW } from '../../store/types/workflow'
 
 const ModalWindow = props => {
   const [activeLink, setActiveLink] = useState(props.activeLink);
-  const [currentStoryStep, setStorySteps] = useState(1);
+  const [currentStoryStep, setStorySteps] = useState(0);
   const [workflowStateID, setStateId] = useState('');
   const [storyStep, setStoryStep] = useState(0);
+  const [previewImage, setPreviewImage] = useState('');
 
   const {
     workflowId,
@@ -77,6 +78,7 @@ const ModalWindow = props => {
                   setActiveLink={setActiveLink}
                   currentStoryStep={currentStoryStep}
                   step={step}
+                  key={step.stepID}
                   index={index}
                   workflowId={workflow.id}
                   workflowStateID={workflowStateID}
@@ -86,6 +88,8 @@ const ModalWindow = props => {
                   nextModalSteps={nextSteps}
                   handleStoryStep={handleStoryStep}
                   setStateId={setStateId}
+                  setPreviewImage={setPreviewImage}
+                  previewImage={previewImage}
                   currentTab={props.story}
                   marTop={305}
                 />
@@ -99,6 +103,7 @@ const ModalWindow = props => {
                   prevSteps={prevSteps}
                   closeModal={props.handleChangeOpen}
                   img={covPhone}
+                  previewImage={previewImage}
                 />
               )}
 

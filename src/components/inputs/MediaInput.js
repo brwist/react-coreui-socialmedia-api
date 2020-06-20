@@ -15,6 +15,7 @@ const TextInput = ({inputSetUp}) => {
     axios.put(`location/${inputSetUp.locationId}/media`, data).then(response => {
       inputSetUp.handleParamsChange(name, `["${cdnURL+response.data.media}"]`)
       setFileUpload(false)
+      inputSetUp.setPreviewImage(cdnURL+response.data.media)
     }, error => setFileUpload(false))
 
   }
