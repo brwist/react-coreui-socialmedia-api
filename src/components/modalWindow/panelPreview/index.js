@@ -18,7 +18,10 @@ const PanelPreview = props => {
         >
           Back
         </Button>
-        <img className='push-live__img' alt='phone' src={props.img} />
+        <div className="image-holder">
+          <img className='story-right__img' alt="phone" src={props.img} />
+          {props.previewImage && <img className='image-preview' alt="phone" src={props.previewImage} />}
+        </div>
         <Button color='warning'  onClick={props.closeModal} className='push-live__btn'>Push Live</Button>
       </div>
       <div className='push-live__page-wrapper-small'>

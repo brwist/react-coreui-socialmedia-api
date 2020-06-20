@@ -1,3 +1,19 @@
+.image-holder {
+  position: relative;
+  margin-right: 59px;
+  margin-left: 50px;
+  .image-preview {
+    position: absolute;
+    height: 460px;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    top: 17px;
+    border-radius: 4px;
+  }
+}
+
+
 @media all and (max-width: 768px) {
   .push-live__btn {
     margin-left: 20px;
