@@ -37,7 +37,7 @@ const StoryMenu = props => {
           >
             <div className='story-menu__wrapper'>
               <ListGroupItemHeading className='story-menu__title'>{location.name}</ListGroupItemHeading>
-              <ListGroupItemText className='story-menu__item-block'>
+              <ListGroupItemText className='story-menu__'>
                 {location.workflows.map(workflow => (
                   <Button
                     className='story-menu__item'
