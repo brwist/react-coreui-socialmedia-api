@@ -17,7 +17,7 @@ export function* getUser() {
   try {
     const data = yield axios.get('/account/config')
       .then(res => res)
-    console.log('config')
+    console.log(data)
     yield put(actions.setUser(data.data))
     yield put(actions.isLoading(true))
   } catch (e) {

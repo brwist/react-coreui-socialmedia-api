@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Col, Spinner } from 'reactstrap'
 
 import PhonePanel from '../../phonePanel/index'
 import './index.scss';
 import phonePanel from '../../../assets/phone.png'
+import PanelPreview from '../panelPreview/index'
 
 import StoryInput from '../../inputs/index'
 
@@ -25,9 +26,11 @@ const Step = ({
   workflowId,
   previewImage,
   setPreviewImage,
+  closeModal,
   locationId }) => {
   const [params, setParams] = useState({})
   const [stepIsSubmitting, setStepSubmit] = useState(false)
+  const [previewStep, setPreviewStep] = useState(false)
 
   useEffect(() => {
     if (currentStoryStep === 0) {
@@ -44,6 +47,8 @@ const Step = ({
     })
   }
 
+  const isLastStep = index+1 === stepsLength
+
   const submitStep = (tab) => {
     setStepSubmit(true)
     axios.post(`locn/${locationId}/workflow/${workflowId}/step/${step.stepID}`, {
@@ -53,13 +58,18 @@ const Step = ({
     }). then(response => {
       setStateId(response.data.workflowStateID)
       setStepSubmit(false)
-      return index+1 === stepsLength ? nextModalSteps(tab) : handleStoryStep(+1)()
+      isLastStep && closeModal()
+      return handleStoryStep(+1)()
     }, error => {
       console.log(error)
       setStepSubmit(false)
     })
-
   }
+
+  const handlePreviewStep = useCallback((e) => {
+    setPreviewStep(!previewStep)
+    isLastStep && setActiveLink(!previewStep ? 'live' : 'story')
+  }, [isLastStep, setPreviewStep, setActiveLink, previewStep ])
 
   let stepIsInvalid = false
 
@@ -70,8 +80,21 @@ const Step = ({
     }
   }
 
-  const nextMethod = submitStep
-  const prevMethod = index === 0 ? prevModalSteps : handleStoryStep(-1)
+  const mediaInput = step.workflowInputs.find(input => input.implType === "MediaInput")
+
+  const nextMethod = mediaInput ? handlePreviewStep : submitStep
+
+  if (previewStep) {
+    return <PanelPreview
+      setActiveLink={setActiveLink}
+      img={phonePanel}
+      previewImage={previewImage}
+      isLastStep={isLastStep}
+      handlePreviewStep={handlePreviewStep}
+      nextStep={submitStep}
+      closeModal={closeModal}
+    />
+  }
 
   return (
     !stepIsSubmitting ? <>
@@ -90,7 +113,7 @@ const Step = ({
 
       </Col>
       <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={6}>
-        <PhonePanel previewImage={previewImage} currentTab={currentTab} img={phonePanel} disableNext={stepIsInvalid} prevSteps={prevMethod} nextSteps={nextMethod} title={'Template Editor'} />
+        <PhonePanel previewImage={previewImage} currentTab={currentTab} img={phonePanel} disableNext={stepIsInvalid} nextSteps={nextMethod} title={'Template Editor'} />
       </Col>
     </> : <Spinner className='setup__spinner' color="dark" />
   )

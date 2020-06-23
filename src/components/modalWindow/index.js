@@ -9,9 +9,7 @@ import Navigation from './navigation/index'
 import Preview from '../preview/index'
 import SetupProfile from './setupProfile/index'
 import Step from './step/index'
-import PanelPreview from './panelPreview/index'
 import './index.scss';
-import covPhone from '../../assets/phone_panel.png'
 
 import { GET_WORKFLOW } from '../../store/types/workflow'
 
@@ -73,7 +71,7 @@ const ModalWindow = props => {
                 <Navigation activeLink={activeLink} />
               </Col>
 
-              {props.story === 'storySteps' && activeLink === 'story' && workflow.steps.map((step, index) => {
+              {props.story === 'storySteps' && (activeLink === 'story' || activeLink === 'live') && workflow.steps.map((step, index) => {
                 return storyStep === index && <Step
                   setActiveLink={setActiveLink}
                   currentStoryStep={currentStoryStep}
@@ -92,20 +90,9 @@ const ModalWindow = props => {
                   previewImage={previewImage}
                   currentTab={props.story}
                   marTop={305}
+                  closeModal={props.handleChangeOpen}
                 />
               })}
-
-
-              {activeLink === 'live' && props.story === 'storySteps' && (
-                <PanelPreview
-                  setActiveLink={setActiveLink}
-                  currentTab={props.story}
-                  prevSteps={prevSteps}
-                  closeModal={props.handleChangeOpen}
-                  img={covPhone}
-                  previewImage={previewImage}
-                />
-              )}
 
               {activeLink === 'brand' && (
                 <>
