@@ -1,14 +1,20 @@
 import React  from 'react';
 import TextInput from './TextInput'
 import MediaInput from './MediaInput'
+import MediaInputInstagram from './MediaInputInstagram'
 
 
 export default function StoryInput (inputSetUp) {
   switch (inputSetUp.implType) {
     case 'TextInput':
-      return <TextInput inputSetUp={inputSetUp}/>;
+      return <TextInput inputSetUp={inputSetUp}/>
     case 'MediaInput':
-      return <MediaInput inputSetUp={inputSetUp}/>;
+      switch (inputSetUp.connectors[0].implType) {
+        case 'InstagramConnector':
+          return <MediaInputInstagram inputSetUp={inputSetUp}/>
+        default:
+          return <MediaInput inputSetUp={inputSetUp}/>
+      }
 
     default:
       return;
