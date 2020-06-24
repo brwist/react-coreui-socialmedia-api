@@ -13,11 +13,17 @@
     width: 121px;
     height: 172px;
     margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__img-wrapper {
     height: 437px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-right: 1px;
   }
 
