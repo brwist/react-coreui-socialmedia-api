@@ -15,6 +15,34 @@
     margin-bottom: 20px;
     cursor: pointer;
     position: relative;
+    &:hover:after {
+      position: absolute;
+      content: '⊕';
+      background-color: rgba(0, 0, 0, 0.7);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 36px;
+    }
+    &.selected:after {
+      position: absolute;
+      content: '✔';
+      background-color: rgba(0, 0, 0, 0.7);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 36px;
+    }
     img {
       width: 100%;
       height: auto;
