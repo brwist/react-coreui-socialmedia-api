@@ -17,9 +17,7 @@ export function* getUser() {
   try {
     const data = yield axios.get('/account/config')
       .then(res => res)
-    console.log(data)
     yield put(actions.setUser(data.data))
-    yield put(actions.isLoading(true))
   } catch (e) {
     // window.location.href = 'https://lightboxlive.auth.us-west-2.amazoncognito.com/login?response_type=code&client_id=5nbhcblr12745g4c9lmrg4nhr3&redirect_uri=https://api-dev.lightboxlive.com/aws/auth/login'
     console.log(e)

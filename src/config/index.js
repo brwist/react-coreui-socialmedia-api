@@ -9,4 +9,5 @@ export default {
   support: '/help',
   editor: '/editor',
   publish: '/publish',
+  connectionStatus: '/connection-status',
 }

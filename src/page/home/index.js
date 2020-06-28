@@ -48,13 +48,11 @@ function Home (props) {
 }
 
 const mapStateToProps = state => ({
-  user: state.account.user,
   userInfo: state.user.userInfo,
   userInfoIsLoading: state.user.isLoading,
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch({ type: types.GET_USER }),
   getUserInfo: () => dispatch({ type: GET_USER_INFO }),
   loginUser: () => dispatch({ type: types.LOGIN_USER })
 })

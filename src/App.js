@@ -18,6 +18,7 @@ import Setup from './page/home/setup/index'
 import Support from './page/home/support/index'
 import Editor from './page/home/editor/index'
 import Publish from './page/home/publish/index'
+import ConnectionStatus from './page/ConnectionStatus/index'
 import rootReducer from './store/reducers/index'
 import rootSaga from './store/saga/index'
 
@@ -46,6 +47,7 @@ function App() {
           <Route exact path={links.support} component={Support} />
           <Route exact path={links.editor} component={Editor} />
           <Route exact path={links.publish} component={Publish} />
+          <Route exact path={links.connectionStatus} component={ConnectionStatus} />
         </Switch>
       </Router>
     </Provider>

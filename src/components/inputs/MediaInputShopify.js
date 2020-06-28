@@ -21,20 +21,62 @@ const MediaInputShopify = (props) => {
   const { locationId } = inputSetUp
 
   const [ activeMedia, setMedia ] = useState('')
+  const [ shopifyConnectionStatus, setShopifyStatus ] = useState(false)
+
+  useEffect(() => {
+    window.localStorage.setItem('s', false)
+  }, [])
+
+  const localStorageUpdated = () => {
+    if (!localStorage.getItem('s')) {
+      setShopifyStatus(false)
+    } else {
+      setShopifyStatus(true)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('storage', localStorageUpdated)
+  }, [])
 
   useEffect(() => {
     getShopifyData(locationId);
-  }, [getShopifyData, locationId])
+  }, [getShopifyData, locationId, user])
 
   useEffect(() => {
     getUser()
-  }, [getUser])
+  }, [getUser, shopifyConnectionStatus])
 
   const handleClick = url => (e) => {
     inputSetUp.handleParamsChange(inputSetUp.name, `["${url}"]`)
     inputSetUp.setPreviewImage(url)
     setMedia(url)
   }
+
+  const openShopifyConnect = () => {
+    const [authLink, encodedState] = user.auth.SHOPIFY.split('state=')
+    const stateParams = JSON.parse(decodeURIComponent(encodedState))
+    stateParams['r'] = window.location.origin+'/connection-status'
+    window.open(authLink+'state='+encodeURI(JSON.stringify(stateParams)),
+       'instagramConnect',
+       'width=600,height=650');
+  }
+
+  const inputTitle = () => (
+    <div>
+      <h4>{inputSetUp.title}</h4>
+      <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
+    </div>
+  )
+  const shopifyConnected = user.conf && user.conf.mediaConnectors.find(connector => connector.type === "SHOPIFY").authorized
+
+  if (!shopifyConnected && user.auth) return <div>
+    {inputTitle}
+    {user.auth.SHOPIFY && <Button outline block color='dark' className="buttons-three" onClick={openShopifyConnect}>
+      <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
+          <span>Shopify</span>
+    </Button>}
+  </div>
 
   if (!shopifyData.length || isLoading) return <Spinner className='setup__spinner' color="dark" />
 
@@ -43,20 +85,11 @@ const MediaInputShopify = (props) => {
     return [...mediaList, ...product.items.map(item => item.url)]
   }, [])
 
-  const shopifyConnected = user.conf.mediaConnectors.find(connector => connector.type === "SHOPIFY").authorized
+
 
   return <>
-    <h4>{inputSetUp.title}</h4>
-    <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
-    { shopifyConnected
-      ? <SocialImg activeMedia={activeMedia} gallery={mediaList} handleClick={handleClick} />
-      : <a href={user.auth.SHOPIFY} target="_blank" rel="noopener noreferrer">
-        <Button outline block color='dark' className="buttons-three">
-          <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-          <span>Shopify</span>
-        </Button>
-      </a>
-    }
+    {inputTitle}
+    <SocialImg activeMedia={activeMedia} gallery={mediaList} handleClick={handleClick} />
   </>
 }
 
