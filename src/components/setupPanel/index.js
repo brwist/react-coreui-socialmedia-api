@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Row, Button, Form, FormGroup, Label, Spinner } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Spinner, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShopify } from "@fortawesome/free-brands-svg-icons"
 import { connect } from "react-redux";
+import axios from 'axios';
 
 import { GET_USER } from '../../store/types/account'
 
@@ -10,6 +11,7 @@ import './index.scss';
 
 const Panel = (props) => {
   const [status, setStatus] = useState('');
+  const [shopName, setShopName] = useState('');
   const {
     user,
     getUser
@@ -23,6 +25,12 @@ const Panel = (props) => {
     window.localStorage.setItem('s', false)
   }, [])
 
+  useEffect(() => {
+    if (user.auth.SHOPIFY && !user.conf.mediaConnectors[0].authorized) {
+      openConnect('SHOPIFY')()
+    }
+  }, [user])
+
   const localStorageUpdated = () => {
     if (!localStorage.getItem('s')) {
       setStatus(false)
@@ -35,6 +43,27 @@ const Panel = (props) => {
     window.addEventListener('storage', localStorageUpdated)
   }, [])
 
+  const handleShopName = e => {
+    const { value } = e.target
+    setShopName(value)
+  }
+
+  const setAccountName = e => {
+    axios.post('account/config', {
+      ...user.conf,
+      mediaConnectors: [
+        {
+          ...user.conf.mediaConnectors[0],
+          account: shopName,
+        },
+        user.conf.mediaConnectors[1]
+
+      ]
+    }).then(resp => {
+      getUser()
+    })
+  }
+
   const openConnect = account => e => {
     const [authLink, encodedState] = user.auth[account].split('state=')
     const stateParams = JSON.parse(decodeURIComponent(encodedState))
@@ -46,8 +75,6 @@ const Panel = (props) => {
   if (!user.conf) return <Spinner className='setup__spinner' color="dark" />
 
   const [shopify, instagram] = user.conf.mediaConnectors
-
-
 
   return (
     <div className='panelSetup'>
@@ -68,10 +95,11 @@ const Panel = (props) => {
             </span>
           </Button>}
 
-          {user.auth.SHOPIFY && <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={openConnect('SHOPIFY')} disabled={shopify.authorized}>
+          {!user.auth.SHOPIFY && <Input className="shop-input" placeholder="Enter Shopify Shop Name" value={shopName} onChange={handleShopName} />}
+          <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={shopify.authorized || !shopName}>
             <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-            {instagram.authorized ? 'Connected' : 'Shopify Connect'}
-          </Button>}
+            {shopify.authorized ? 'Connected' : 'Shopify Connect'}
+          </Button>
 
         </FormGroup>
       </Form>

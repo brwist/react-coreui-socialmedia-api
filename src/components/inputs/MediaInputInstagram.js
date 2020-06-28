@@ -93,12 +93,10 @@ const MediaInputInstagram = (props) => {
     })
   }
 
-  const inputTitle = () => (
-    <div>
-      <h4>{inputSetUp.title}</h4>
-      <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
-    </div>
-  )
+  const inputTitle = <div>
+    <h4>{inputSetUp.title}</h4>
+    <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
+  </div>
 
   const openIntagramConnect = () => {
     const [authLink, encodedState] = user.auth.INSTAGRAM.split('state=')

@@ -1,6 +1,7 @@
 import React, {useEffect, useState}  from 'react';
-import { Spinner, Button } from 'reactstrap';
+import { Spinner, Button, Input } from 'reactstrap';
 import { connect } from "react-redux";
+import axios from "axios";
 
 import SocialImg from '../social-img/index';
 import { GET_SHOPIFY_DATA } from '../../store/types/shopifyData'
@@ -22,6 +23,7 @@ const MediaInputShopify = (props) => {
 
   const [ activeMedia, setMedia ] = useState('')
   const [ shopifyConnectionStatus, setShopifyStatus ] = useState(false)
+  const [shopName, setShopName] = useState('')
 
   useEffect(() => {
     window.localStorage.setItem('s', false)
@@ -40,6 +42,8 @@ const MediaInputShopify = (props) => {
   }, [])
 
   useEffect(() => {
+    const shopify = user.conf && user.conf.mediaConnectors[0]
+    if(shopify && shopify.authorized && shopify.account)
     getShopifyData(locationId);
   }, [getShopifyData, locationId, user])
 
@@ -53,6 +57,33 @@ const MediaInputShopify = (props) => {
     setMedia(url)
   }
 
+  useEffect(() => {
+    if (user.auth && user.auth.SHOPIFY && !user.conf.mediaConnectors[0].authorized) {
+      openShopifyConnect('SHOPIFY')
+    }
+  }, [user])
+
+  const setAccountName = e => {
+    axios.post('account/config', {
+      ...user.conf,
+      mediaConnectors: [
+        {
+          ...user.conf.mediaConnectors[0],
+          account: shopName,
+        },
+        user.conf.mediaConnectors[1]
+
+      ]
+    }).then(resp => {
+      getUser()
+    })
+  }
+
+  const handleShopName = e => {
+    const { value } = e.target
+    setShopName(value)
+  }
+
   const openShopifyConnect = () => {
     const [authLink, encodedState] = user.auth.SHOPIFY.split('state=')
     const stateParams = JSON.parse(decodeURIComponent(encodedState))
@@ -62,20 +93,20 @@ const MediaInputShopify = (props) => {
        'width=600,height=650');
   }
 
-  const inputTitle = () => (
-    <div>
-      <h4>{inputSetUp.title}</h4>
-      <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
-    </div>
-  )
+  const inputTitle = <div>
+    <h4>{inputSetUp.title}</h4>
+    <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
+  </div>
+
   const shopifyConnected = user.conf && user.conf.mediaConnectors.find(connector => connector.type === "SHOPIFY").authorized
 
   if (!shopifyConnected && user.auth) return <div>
     {inputTitle}
-    {user.auth.SHOPIFY && <Button outline block color='dark' className="buttons-three" onClick={openShopifyConnect}>
+    {!user.auth.SHOPIFY && <p><Input className="shop-input" placeholder="Enter Shopify Shop Name" value={shopName} onChange={handleShopName} /></p>}
+    <Button active={shopifyConnected} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={shopifyConnected || !shopName}>
       <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-          <span>Shopify</span>
-    </Button>}
+      Shopify Connect
+    </Button>
   </div>
 
   if (!shopifyData.length || isLoading) return <Spinner className='setup__spinner' color="dark" />
