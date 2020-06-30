@@ -11,11 +11,14 @@ import './index.scss';
 
 const Panel = (props) => {
   const [status, setStatus] = useState('');
-  const [shopName, setShopName] = useState('');
+  const [shopName, setShopName] = useState(props.user.conf ? props.user.conf.mediaConnectors[0].account : '');
   const {
     user,
     getUser
     } = props
+
+  const shopifyShopName = props.user.conf && props.user.conf.mediaConnectors[0].account
+  const isNewShopName = shopName !== shopifyShopName
 
   useEffect(() => {
     getUser()
@@ -89,16 +92,16 @@ const Panel = (props) => {
 
           <h2>Media Connectors</h2>
 
-          {user.auth.INSTAGRAM && <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')} disabled={instagram.authorized}>
+          {user.auth.INSTAGRAM && <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')}>
             <span><i className="fa fa-instagram icons-three" />
               {instagram.authorized ? 'Connected' : 'Instagram Connect'}
             </span>
           </Button>}
 
-          {!user.auth.SHOPIFY && <Input className="shop-input" placeholder="Enter Shopify Shop Name" value={shopName} onChange={handleShopName} />}
-          <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={shopify.authorized || !shopName}>
+          <Input className="shop-input" placeholder="Enter Shopify Shop Name" value={shopName} onChange={handleShopName} />
+          <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={!shopName}>
             <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-            {shopify.authorized ? 'Connected' : 'Shopify Connect'}
+            {shopify.authorized && !isNewShopName ? 'Connected' : 'Shopify Connect'}
           </Button>
 
         </FormGroup>

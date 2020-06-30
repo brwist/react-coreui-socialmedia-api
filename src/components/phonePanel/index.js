@@ -9,6 +9,7 @@ import './index.scss'
 library.add(far.faCaretSquareDown, far.faCaretSquareUp, far.faPlusSquare, far.faCopy);
 
 const PhonePanel = props => {
+  const videoLink = props.previewImage.indexOf('.mp4') !== -1
   return (
     <div style={{height: '100%', display: 'flex', justifyContent: 'center'}} className='story-right'>
       <div className='story-right'>
@@ -17,7 +18,13 @@ const PhonePanel = props => {
           <div className='story-right__img-nav-block'>
             <div className="image-holder">
               <img className='story-right__img' alt="phone" src={props.img} />
-              {props.previewImage && <img className='image-preview' alt="phone" src={props.previewImage} />}
+              { props.previewImage && (!videoLink
+                ? <img className='image-preview' src={props.previewImage} alt='phone'/>
+                : <video className='image-preview'>
+                  <source src={props.previewImage} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+              )}
             </div>
 
             <div className='story-right__nav-wrapper'>

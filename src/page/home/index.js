@@ -41,7 +41,7 @@ function Home (props) {
     <AppSidebar fixed display="md">
       <Suspense>
         <AppSidebarNav navConfig={navigation} router={router} />
-        {locationWithUncompletedOnboarding && <ModalWindow story="storySteps" workflowId={onboardingWF} locationId={locationWithUncompletedOnboarding.id} activeLink="story" isOpen={onboardingWF} />}
+        {locationWithUncompletedOnboarding && <ModalWindow story="storySteps" onBoarding="true" workflowId={onboardingWF} locationId={locationWithUncompletedOnboarding.id} activeLink="story" isOpen={onboardingWF} />}
       </Suspense>
     </AppSidebar>
   )

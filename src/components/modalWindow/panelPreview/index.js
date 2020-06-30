@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Button } from 'reactstrap'
+import { Col, Button, Spinner } from 'reactstrap'
 
 import './index.scss';
 
@@ -7,13 +7,18 @@ const PanelPreview = props => {
   const {
     handlePreviewStep,
     nextStep,
+    lastSubmitted,
+    closeModal,
+    stepIsSubmitting,
     isLastStep
   } =props
+  const videoLink = props.previewImage.indexOf('.mp4') !== -1
+
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
-      <h3 className='push-live__title'>Panel Preview</h3>
+      <h3 className='push-live__title'>{!lastSubmitted ? 'Panel Preview' : 'Done!'}</h3>
       <div className='push-live__page-wrapper'>
-        <Button
+        {!lastSubmitted ? <Button
           color='secondary'
           onClick={() => {
             handlePreviewStep()
@@ -21,12 +26,26 @@ const PanelPreview = props => {
           className='push-live__btn'
         >
           Back
-        </Button>
-        <div className="image-holder">
-          <img className='story-right__img' alt="phone" src={props.img} />
-          {props.previewImage && <img className='image-preview' alt="phone" src={props.previewImage} />}
-        </div>
-        <Button color='warning'  onClick={nextStep} className='push-live__btn'>{isLastStep ? 'Push Live' : 'Next'}</Button>
+        </Button> : <div />}
+        {stepIsSubmitting
+          ? <Spinner className='setup__spinner' color="dark" />
+          :<div className="image-holder">
+          {!lastSubmitted && <div>
+              <img className='story-right__img' alt="phone" src={props.img} />
+              { props.previewImage && (!videoLink
+                ? <img className='image-preview' src={props.previewImage} alt='phone'/>
+                : <video className='image-preview'>
+                  <source src={props.previewImage} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+              )}
+              </div>
+            }
+
+          </div>
+        }
+
+        <Button color='warning'  onClick={!lastSubmitted ? nextStep : closeModal} className='push-live__btn'>{lastSubmitted ? 'Close' : isLastStep ? 'Push Live' : 'Next'}</Button>
       </div>
       <div className='push-live__page-wrapper-small'>
         <img className='push-live__img' alt='phone' src={props.img} />
@@ -38,7 +57,7 @@ const PanelPreview = props => {
           >
             Back
           </Button>
-          <Button color='warning' onClick={nextStep} className='push-live__btn'>{isLastStep ? 'Push Live' : 'Next'}</Button>
+          <Button color='warning' onClick={!lastSubmitted ? nextStep : closeModal} className='push-live__btn'>{isLastStep ? 'Push Live' : 'Next'}</Button>
         </div>
       </div>
     </Col>

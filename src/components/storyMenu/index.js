@@ -16,7 +16,12 @@ const StoryMenu = props => {
         locationsArray.push({
             id: location.id,
             name: location.name,
-            workflows: values.map(value => ({id: value.data.id, title: value.data.title}))
+            workflows: values.map(value => ({
+              id: value.data.id,
+              title: value.data.title,
+              icon: value.data.icon,
+              labels: value.data.labels
+            }))
           })
         setLocationWorkflow([
           ...locationsArray,
@@ -26,25 +31,35 @@ const StoryMenu = props => {
     }
   }, [locations, setLocationWorkflow])
 
+  const workflowsGroup = locationWorkflows.reduce((allWorkflows, currentLocation) => {
+    return [...allWorkflows, ...currentLocation.workflows.map(workflow => ({...workflow, locationId: currentLocation.id }))]
+  }, [])
+
 
   return (
     <div className='story-menu'>
       <ListGroup >
-        {locationWorkflows.map(location => (
+        {workflowsGroup.map(workflow => (
           <ListGroupItem
             className='story-menu__list'
-            key={location.name}
+            key={workflow.id}
+            action color="dark"
+            onClick={props.changeClickedPanel(workflow.id, workflow.locationId)}
           >
+            {workflow.icon &&
+              <div className='story-menu__icon-wrapepr'>
+                <i className={`story-menu__icon ${workflow.icon}`}></i>
+              </div>
+            }
             <div className='story-menu__wrapper'>
-              <ListGroupItemHeading className='story-menu__title'>{location.name}</ListGroupItemHeading>
+              <ListGroupItemHeading className='story-menu__title'>{workflow.title}</ListGroupItemHeading>
               <ListGroupItemText className='story-menu__'>
-                {location.workflows.map(workflow => (
+                {workflow.labels.map(label => (
                   <Button
                     className='story-menu__item'
                     outline color='dark'
-                    onClick={props.changeClickedPanel(workflow.id, location.id)}
-                    key={workflow.id}>
-                    {workflow.title}
+                    key={label}>
+                    {label}
                   </Button>
                 ))}
               </ListGroupItemText>

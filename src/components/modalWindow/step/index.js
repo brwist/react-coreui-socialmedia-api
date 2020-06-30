@@ -16,8 +16,7 @@ const Step = ({
   setActiveLink,
   currentStoryStep,
   currentTab,
-  prevModalSteps,
-  nextModalSteps,
+  onBoarding,
   setStateId,
   workflowStateID,
   handleStoryStep,
@@ -31,14 +30,15 @@ const Step = ({
   const [params, setParams] = useState({})
   const [stepIsSubmitting, setStepSubmit] = useState(false)
   const [previewStep, setPreviewStep] = useState(false)
+  const [lastSubmitted, setLastSubmitted] = useState(false)
 
   useEffect(() => {
     if (currentStoryStep === 0) {
-      return setActiveLink('brand')
+      return setActiveLink(onBoarding ? 'brand' : 'story')
     } else if (currentStoryStep === 2) {
       return setActiveLink('live')
     }
-  }, [currentStoryStep, setActiveLink]);
+  }, [currentStoryStep, setActiveLink, onBoarding]);
 
   const handleParamsChange = (name, value) => {
     setParams({
@@ -58,8 +58,8 @@ const Step = ({
     }). then(response => {
       setStateId(response.data.workflowStateID)
       setStepSubmit(false)
-      isLastStep && closeModal()
-      return handleStoryStep(+1)()
+      isLastStep && setLastSubmitted(true)
+      return !isLastStep && handleStoryStep(+1)()
     }, error => {
       console.log(error)
       setStepSubmit(false)
@@ -67,9 +67,9 @@ const Step = ({
   }
 
   const handlePreviewStep = useCallback((e) => {
-    setPreviewStep(!previewStep)
+    !lastSubmitted && setPreviewStep(!previewStep)
     isLastStep && setActiveLink(!previewStep ? 'live' : 'story')
-  }, [isLastStep, setPreviewStep, setActiveLink, previewStep ])
+  }, [isLastStep, setPreviewStep, setActiveLink, previewStep, lastSubmitted ])
 
   let stepIsInvalid = false
 
@@ -82,11 +82,13 @@ const Step = ({
 
   const mediaInput = step.workflowInputs.find(input => input.implType === "MediaInput")
 
-  const nextMethod = mediaInput ? handlePreviewStep : submitStep
+  const nextMethod = mediaInput || lastSubmitted ? handlePreviewStep : submitStep
 
-  if (previewStep) {
+  if (previewStep || lastSubmitted) {
     return <PanelPreview
       setActiveLink={setActiveLink}
+      stepIsSubmitting={stepIsSubmitting}
+      lastSubmitted={lastSubmitted}
       img={phonePanel}
       previewImage={previewImage}
       isLastStep={isLastStep}

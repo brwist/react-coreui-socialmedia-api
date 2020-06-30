@@ -7,11 +7,11 @@ const Navigation = props => {
     <div className='panel-navigation'>
       <img className='panel-navigation__logo' src={require('../../../assets/Logo_2.png')} alt='logo' />
       <nav className='panel-navigation__navigation'>
-        <p
+        {props.onBoarding && <p
           className={`panel-navigation__link ${props.activeLink === 'brand' && 'active'}`}
         >
           Branding
-          </p>
+          </p>}
         <p
           className={`panel-navigation__link ${props.activeLink === 'story' && 'active'}`}
         >

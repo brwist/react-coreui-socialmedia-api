@@ -26,14 +26,15 @@ const ModalWindow = props => {
     getWorkflowById,
     workflow,
     workflowIsLoading,
+    onBoarding,
     locationId
   } = props
 
   useEffect(() => {
-    if (!props.isOpen) {
+    if (!onBoarding) {
       setActiveLink('story');
     }
-  }, [props.isOpen])
+  }, [props.isOpen, onBoarding])
 
   useEffect(() => {
     getWorkflowById(workflowId);
@@ -68,7 +69,7 @@ const ModalWindow = props => {
           <Modal isOpen={props.isOpen} toggle={props.handleChangeOpen}>
             <Row className='modal-window__main-row'>
               <Col className='navigation-wrapper' xs={12} md={2}>
-                <Navigation activeLink={activeLink} />
+                <Navigation activeLink={activeLink} onBoarding={onBoarding} />
               </Col>
 
               {props.story === 'storySteps' && (activeLink === 'story' || activeLink === 'live') && workflow.steps.map((step, index) => {
@@ -91,10 +92,11 @@ const ModalWindow = props => {
                   currentTab={props.story}
                   marTop={305}
                   closeModal={props.handleChangeOpen}
+                  onBoarding={onBoarding}
                 />
               })}
 
-              {activeLink === 'brand' && (
+              {activeLink === 'brand' && onBoarding && (
                 <>
                   <Col className='modal-window__left' xs={12} md={9} lg={5}>
                     <SetupProfile currentTab={props.story} nextSteps={nextSteps} setActiveLink={setActiveLink} />
