@@ -1,5 +1,6 @@
 .publish {
   font-family: 'Lato', sans-serif;
+  position: relative;
 
 
   &__block {
@@ -42,6 +43,10 @@
      left: 50%;
      transform: translate(-50%, 0);
      z-index: 5;
+  }
+  .corner-info {
+    position: absolute;
+    right: 0;
   }
 }
 

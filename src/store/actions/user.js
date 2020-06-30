@@ -11,3 +11,10 @@ export const setUserInfoError = error => {
     error
   })
 }
+export const setUserLocation = userLocation => {
+  window.localStorage.setItem('locationId', userLocation && userLocation.id)
+  return ({
+    type: types.SET_USER_LOCATION,
+    userLocation
+  })
+}

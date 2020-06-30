@@ -3,10 +3,11 @@ import * as types from '../types/user';
 const initState = {
   userInfo: {},
   isLoading: false,
+  userLocation: {},
   error: {}
 }
 
-export default (state = initState, { type, userInfo, error }) => {
+export default (state = initState, { type, userInfo, error, userLocation }) => {
   switch (type) {
 
     case types.GET_USER_INFO:
@@ -20,6 +21,12 @@ export default (state = initState, { type, userInfo, error }) => {
         ...state,
         userInfo,
         isLoading: false,
+      }
+
+    case types.SET_USER_LOCATION:
+      return {
+        ...state,
+        userLocation
       }
 
     case types.USER_INFO_ERROR:

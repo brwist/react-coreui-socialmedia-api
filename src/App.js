@@ -14,10 +14,12 @@ import Promote from './page/home/promote/index'
 import CompanyAnnouncement from './page/home/companyAnnouncement/index'
 import DeprtmentAnnouncement from './page/home/departmentAnnouncement/index'
 import Analytics from './page/home/analytics/index'
+import Locations from './page/home/locations/index'
 import Setup from './page/home/setup/index'
 import Support from './page/home/support/index'
 import Editor from './page/home/editor/index'
 import Publish from './page/home/publish/index'
+import UserParser from './UserParser'
 import ConnectionStatus from './page/ConnectionStatus/index'
 import rootReducer from './store/reducers/index'
 import rootSaga from './store/saga/index'
@@ -36,19 +38,22 @@ function App() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Switch>
-          <Route exact path={links.home} component={Home} />
-          <Route exact path={links.login} component={Link} />
-          <Route exact path={links.promote} component={Promote} />
-          <Route exact path={links.companyAnnoun} component={CompanyAnnouncement} />
-          <Route exact path={links.departmentAnnoun} component={DeprtmentAnnouncement} />
-          <Route exact path={links.analytics} component={Analytics} />
-          <Route exact path={links.setup} component={Setup} />
-          <Route exact path={links.support} component={Support} />
-          <Route exact path={links.editor} component={Editor} />
-          <Route exact path={links.publish} component={Publish} />
-          <Route exact path={links.connectionStatus} component={ConnectionStatus} />
-        </Switch>
+        <UserParser>
+          <Switch>
+            <Route exact path={links.home} component={Home} />
+            <Route exact path={links.login} component={Link} />
+            <Route exact path={links.promote} component={Promote} />
+            <Route exact path={links.companyAnnoun} component={CompanyAnnouncement} />
+            <Route exact path={links.departmentAnnoun} component={DeprtmentAnnouncement} />
+            <Route exact path={links.analytics} component={Analytics} />
+            <Route exact path={links.locations} component={Locations} />
+            <Route exact path={links.setup} component={Setup} />
+            <Route exact path={links.support} component={Support} />
+            <Route exact path={links.editor} component={Editor} />
+            <Route exact path={links.publish} component={Publish} />
+            <Route exact path={links.connectionStatus} component={ConnectionStatus} />
+          </Switch>
+        </UserParser>
       </Router>
     </Provider>
   );

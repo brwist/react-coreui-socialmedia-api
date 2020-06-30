@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState } from 'react'
 import { connect } from "react-redux";
 
 import { Col, Row, Container } from 'reactstrap';
@@ -17,15 +17,13 @@ import './index.scss'
 import navigation from '../../../config/nav'
 import ModalWindow from '../../../components/modalWindow/index'
 
-import { GET_USER_INFO } from '../../../store/types/user'
-
 
 const Publish = props => {
   const [workflowId, setWorkflowId] = useState('');
   const [locationId, setLocationId] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const { getUserInfo, userInfo } =props
+  const { userInfo, userLocation } =props
 
   const changeClickedPanel = (workflowId, locationId) => e => {
     setIsOpen(true);
@@ -33,11 +31,9 @@ const Publish = props => {
     setLocationId(locationId);
   };
 
-  useEffect(() => {
-    getUserInfo();
-  }, [getUserInfo])
-
   const changeIsOpen = () => setIsOpen(!isOpen);
+
+  console.log(userLocation)
 
   return (
     userInfo.locations ? <Container className='publish' fluid>
@@ -61,10 +57,13 @@ const Publish = props => {
           <div className='publish__block'>
             <h3 className='publish__title'>Setup Your First Story</h3>
             <p className='publish__text'>What would you like display on the Lightbox Panel?</p>
-            <StoryMenu locations={userInfo.locations} changeIsOpen={changeIsOpen} changeClickedPanel={changeClickedPanel} />
+            {userLocation.id && <StoryMenu location={userLocation} changeIsOpen={changeIsOpen} changeClickedPanel={changeClickedPanel} />}
           </div>
         </Col>
       </Row>
+      <div className="corner-info">
+        <strong>Location:</strong> {userLocation.name}
+      </div>
     </Container> : <Spinner className='setup__spinner' color="dark" />
   )
 }
@@ -72,10 +71,8 @@ const Publish = props => {
 
 const mapStateToProps = state => ({
   userInfo: state.user.userInfo,
+  userLocation: state.user.userLocation,
 })
 
-const mapDispatchToProps = dispatch => ({
-  getUserInfo: () => dispatch({ type: GET_USER_INFO }),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Publish);
+export default connect(mapStateToProps)(Publish);

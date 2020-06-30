@@ -5,31 +5,29 @@ import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Butt
 import './index.scss'
 
 const StoryMenu = props => {
-  const {locations} = props
+  const {location} = props
   const [locationWorkflows, setLocationWorkflow] = useState([])
 
   useEffect(() => {
     let locationsArray = []
-    for (let location of locations) {
-      let workflowPromises = location.locnConfig.workflows.map(workflow => axios.get('workflow/'+workflow))
-      Promise.all(workflowPromises).then((values) => {
-        locationsArray.push({
-            id: location.id,
-            name: location.name,
-            workflows: values.map(value => ({
-              id: value.data.id,
-              title: value.data.title,
-              icon: value.data.icon,
-              labels: value.data.labels
-            }))
-          })
-        setLocationWorkflow([
-          ...locationsArray,
-        ])
-      });
+    let workflowPromises = location.locnConfig.workflows.map(workflow => axios.get('workflow/'+workflow))
+    Promise.all(workflowPromises).then((values) => {
+      locationsArray.push({
+          id: location.id,
+          name: location.name,
+          workflows: values.map(value => ({
+            id: value.data.id,
+            title: value.data.title,
+            icon: value.data.icon,
+            labels: value.data.labels
+          }))
+        })
+      setLocationWorkflow([
+        ...locationsArray,
+      ])
+    });
 
-    }
-  }, [locations, setLocationWorkflow])
+  }, [location, setLocationWorkflow])
 
   const workflowsGroup = locationWorkflows.reduce((allWorkflows, currentLocation) => {
     return [...allWorkflows, ...currentLocation.workflows.map(workflow => ({...workflow, locationId: currentLocation.id }))]

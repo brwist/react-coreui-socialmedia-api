@@ -2,7 +2,6 @@ import React, { Suspense, useEffect } from 'react';
 import { connect } from "react-redux";
 import * as router from 'react-router-dom';
 import * as types from '../../store/types/account'
-import { GET_USER_INFO } from '../../store/types/user'
 import {
   AppSidebar,
   AppSidebarNav2 as AppSidebarNav,
@@ -20,16 +19,11 @@ function Home (props) {
     },
     userInfoIsLoading,
     loginUser,
-    getUserInfo,
   } = props
 
   useEffect(() => {
     loginUser();
   }, [loginUser])
-
-  useEffect(() => {
-    getUserInfo();
-  }, [getUserInfo])
 
   if (!locations || userInfoIsLoading) return <Spinner className='setup__spinner' color="dark" />
 
@@ -53,7 +47,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUserInfo: () => dispatch({ type: GET_USER_INFO }),
   loginUser: () => dispatch({ type: types.LOGIN_USER })
 })
 
