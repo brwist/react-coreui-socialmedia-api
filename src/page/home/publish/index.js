@@ -33,8 +33,6 @@ const Publish = props => {
 
   const changeIsOpen = () => setIsOpen(!isOpen);
 
-  console.log(userLocation)
-
   return (
     userInfo.locations ? <Container className='publish' fluid>
       {isOpen && <ModalWindow story="storySteps" workflowId={workflowId} locationId={locationId} activeLink="story" handleChangeOpen={changeIsOpen} isOpen={isOpen} />}
