@@ -15,11 +15,6 @@
       } 
     }
 
-    .form2 div:hover {
-      color: #fff;
-      background-color: #2f353a;
-    }
-       
    h2{
        text-transform: uppercase;
        color: #2e2e2e;
@@ -27,6 +22,22 @@
        font-size: 1.5rem;
        margin-bottom: 11%;
    }
+
+  .shopify-form {
+    display: flex;
+    align-items: flex-end;
+    .form-group {
+      margin-bottom: 0;
+    }
+    input {
+      margin-right: 1em;
+      margin-right: 1em;
+    }
+    input, button {
+      width: 12em;
+      margin-bottom: 1em;
+    }
+  }
 
    &__accountSetup {
     position: absolute;
@@ -87,7 +98,7 @@
     }
 
     .buttons-three, .shop-input {
-      width: 18rem;
+      width: 22rem;
       height: 44px;
       margin-bottom: 12px;
     }

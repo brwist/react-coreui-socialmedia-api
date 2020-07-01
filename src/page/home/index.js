@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import * as router from 'react-router-dom';
 import * as types from '../../store/types/account'
@@ -21,21 +21,26 @@ function Home (props) {
     loginUser,
   } = props
 
+  const locationWithUncompletedOnboarding = locations.find(location => location.locnConfig.onboardingComplete === false)
+  const onboardingWF = locationWithUncompletedOnboarding && locationWithUncompletedOnboarding.locnConfig.onboardingWF
+
+
+  const [isOpen, setIsOpen] = useState(!!onboardingWF);
+
   useEffect(() => {
     loginUser();
   }, [loginUser])
 
   if (!locations || userInfoIsLoading) return <Spinner className='setup__spinner' color="dark" />
 
-  const locationWithUncompletedOnboarding = locations.find(location => location.locnConfig.onboardingComplete === false)
-  const onboardingWF = locationWithUncompletedOnboarding && locationWithUncompletedOnboarding.locnConfig.onboardingWF
 
+  const changeIsOpen = () =>  setIsOpen(!isOpen)
 
   return (
     <AppSidebar fixed display="md">
       <Suspense>
         <AppSidebarNav navConfig={navigation} router={router} />
-        {locationWithUncompletedOnboarding && <ModalWindow story="storySteps" onBoarding="true" workflowId={onboardingWF} locationId={locationWithUncompletedOnboarding.id} activeLink="story" isOpen={onboardingWF} />}
+        {locationWithUncompletedOnboarding && <ModalWindow story="storySteps" handleChangeOpen={changeIsOpen} isOpen={isOpen} onBoarding="true" workflowId={onboardingWF} locationId={locationWithUncompletedOnboarding.id} activeLink="story" />}
       </Suspense>
     </AppSidebar>
   )

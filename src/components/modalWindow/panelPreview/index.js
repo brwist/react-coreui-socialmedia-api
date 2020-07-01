@@ -14,9 +14,13 @@ const PanelPreview = props => {
   } =props
   const videoLink = props.previewImage.indexOf('.mp4') !== -1
 
+  if (lastSubmitted) {
+    console.log(closeModal)
+  }
+
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
-      <h3 className='push-live__title'>{!lastSubmitted ? 'Panel Preview' : 'Done!'}</h3>
+      {!stepIsSubmitting && <h3 className='push-live__title'>{!lastSubmitted ? 'Panel Preview' : 'Done!'}</h3>}
       <div className='push-live__page-wrapper'>
         {!lastSubmitted ? <Button
           color='secondary'

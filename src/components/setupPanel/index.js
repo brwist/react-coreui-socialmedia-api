@@ -20,6 +20,8 @@ const Panel = (props) => {
   const shopifyShopName = props.user.conf && props.user.conf.mediaConnectors[0].account
   const isNewShopName = shopName !== shopifyShopName
 
+  const shopifyAuth = user.auth.SHOPIFY
+
   useEffect(() => {
     getUser()
   }, [getUser, status])
@@ -27,12 +29,6 @@ const Panel = (props) => {
   useEffect(() => {
     window.localStorage.setItem('s', false)
   }, [])
-
-  useEffect(() => {
-    if (user.auth.SHOPIFY && !user.conf.mediaConnectors[0].authorized) {
-      openConnect('SHOPIFY')()
-    }
-  }, [user])
 
   const localStorageUpdated = () => {
     if (!localStorage.getItem('s')) {
@@ -63,12 +59,15 @@ const Panel = (props) => {
 
       ]
     }).then(resp => {
-      getUser()
+      axios.get('account/config').then(resp => {
+        openConnect('SHOPIFY', resp.data.auth.SHOPIFY)()
+      })
     })
   }
 
-  const openConnect = account => e => {
-    const [authLink, encodedState] = user.auth[account].split('state=')
+  const openConnect = (account, link='') => e => {
+    const authorizationLink = link || user.auth[account]
+    const [authLink, encodedState] = authorizationLink.split('state=')
     const stateParams = JSON.parse(decodeURIComponent(encodedState))
     stateParams['r'] = window.location.origin+'/connection-status'
     window.open(authLink+'state='+encodeURI(JSON.stringify(stateParams)),
@@ -98,11 +97,16 @@ const Panel = (props) => {
             </span>
           </Button>}
 
-          <Input className="shop-input" placeholder="Enter Shopify Shop Name" value={shopName} onChange={handleShopName} />
-          <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={!shopName}>
-            <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
-            {shopify.authorized && !isNewShopName ? 'Connected' : 'Shopify Connect'}
-          </Button>
+          <div class="shopify-form ">
+            <FormGroup>
+              <Label for="shop-name">Shop Name</Label>
+              <Input className="shop-input" placeholder="Shop Name" value={shopName} onChange={handleShopName} name="shop-name" id="shop-name" />
+            </FormGroup>
+            <Button active={shopify.authorized} block outline color='dark' className="buttons-three" onClick={setAccountName} disabled={!shopName}>
+              <span><FontAwesomeIcon icon={faShopify} className="icons-three" /> </span>
+              {shopify.authorized && !isNewShopName ? 'Connected' : 'Shopify Connect'}
+            </Button>
+          </div>
 
         </FormGroup>
       </Form>
