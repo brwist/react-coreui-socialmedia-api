@@ -19,7 +19,7 @@ const SocialImg = props => {
         </Col>
       </Row>
       <Row className='social-side__img-wrapper'>
-        {gallery.map((i, index) => {
+        {gallery && gallery.map((i, index) => {
           const videoLink = i.indexOf('.mp4') !== -1
 
           return <Col key={index} className='d-flex social-side__img-block' col={3}>
