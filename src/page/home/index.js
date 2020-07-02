@@ -18,10 +18,11 @@ function Home (props) {
       locations
     },
     userInfoIsLoading,
+    userLocation,
     loginUser,
   } = props
 
-  const locationWithUncompletedOnboarding = locations.find(location => location.locnConfig.onboardingComplete === false)
+  const locationWithUncompletedOnboarding = locations.find(location => location.id === userLocation.id && location.locnConfig.onboardingComplete === false)
   const onboardingWF = locationWithUncompletedOnboarding && locationWithUncompletedOnboarding.locnConfig.onboardingWF
 
 
@@ -30,6 +31,10 @@ function Home (props) {
   useEffect(() => {
     loginUser();
   }, [loginUser])
+
+  useEffect(() => {
+    setIsOpen(!!onboardingWF);
+  }, [userLocation, setIsOpen, onboardingWF])
 
   if (!locations || userInfoIsLoading) return <Spinner className='setup__spinner' color="dark" />
 
@@ -48,6 +53,7 @@ function Home (props) {
 
 const mapStateToProps = state => ({
   userInfo: state.user.userInfo,
+  userLocation: state.user.userLocation,
   userInfoIsLoading: state.user.isLoading,
 })
 

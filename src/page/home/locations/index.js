@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState, useCallback, useEffect } from 'react'
 import { connect } from "react-redux";
 
-import { Col, Row, FormGroup, Input } from 'reactstrap';
+import { Col, Row, FormGroup, Input, Button } from 'reactstrap';
 import * as router from 'react-router-dom';
 import {
   AppSidebar,
@@ -24,9 +24,22 @@ const Locations = props => {
     userLocation,
   } = props
 
-  const handleLocationSelect = e => {
+  const [location, setLocation] = useState('')
+  const [save, setSave] = useState(false)
+
+  useEffect(() => {
+    setLocation(userLocation.id)
+  }, [userLocation, setLocation])
+
+  const handleLocationSelect =e => {
     const { value } = e.target
-    setUserLocation(userInfo.locations.find(({ id }) => id === value))
+    setLocation(value)
+    setSave(false)
+  }
+
+  const handleLocationSave = e => {
+    setUserLocation(userInfo.locations.find(({ id }) => id === location))
+    setSave(true)
   }
 
   return (
@@ -49,12 +62,16 @@ const Locations = props => {
         <div className='publish__block'>
           <h3 className='publish__title'>Select Location</h3>
           <FormGroup>
-            <Input type="select" name="location" id="location" value={userLocation.id} className="location-select" onChange={handleLocationSelect}>
+            <Input type="select" name="location" id="location" value={location} className="location-select" onChange={handleLocationSelect}>
+              <option key="choose" value='' disabled>Choose Location</option>
               {userInfo.locations.map(({id, name}) => {
                 return <option key={id} value={id}>{name}</option>
               })}
             </Input>
           </FormGroup>
+          <div className="location-select" style={{textAlign: 'right'}}>
+            {save && <span>Location is Saved</span>} <Button onClick={handleLocationSave} color='warning'>Save</Button>
+          </div>
         </div>
       </Col>
       </Row>

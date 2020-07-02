@@ -20,8 +20,6 @@ const Panel = (props) => {
   const shopifyShopName = props.user.conf && props.user.conf.mediaConnectors[0].account
   const isNewShopName = shopName !== shopifyShopName
 
-  const shopifyAuth = user.auth.SHOPIFY
-
   useEffect(() => {
     getUser()
   }, [getUser, status])
