@@ -42,6 +42,22 @@
        font-size: 20px;
        font-family: 'Lato', sans-serif;
     }
+    .image-holder {
+      position: relative;
+      margin-right: 59px;
+      margin-left: 50px;
+      .image-preview {
+        position: absolute;
+        width: 93.5%;
+        height: auto;
+        left: 0;
+        margin: auto;
+        right: 0;
+        top: 0;
+        bottom: 94px;
+        border-radius: 4px;
+      }
+    }
   }
   
   @media all and (max-width: 768px) {

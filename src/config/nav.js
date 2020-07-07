@@ -25,7 +25,7 @@ export default {
     },
     {
       name: 'Explorer',
-      url: '/explorer',
+      url: '/editor',
       icon: 'fa fa-wpexplorer',
     },
     {

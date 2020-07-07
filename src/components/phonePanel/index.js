@@ -20,7 +20,7 @@ const PhonePanel = props => {
               <img className='story-right__img' alt="phone" src={props.img} />
               { props.previewImage && (!videoLink
                 ? <img className='image-preview' src={props.previewImage} alt='phone'/>
-                : <video className='image-preview'>
+                : <video className='image-preview' autoplay>
                   <source src={props.previewImage} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import * as router from 'react-router-dom';
 import {
   AppSidebar,
@@ -13,42 +13,62 @@ import EditorLightbox from '../../../components/editorLightbox/index'
 import './index.scss';
 import navigation from '../../../config/nav'
 
+import { connect } from "react-redux";
 
-class Editor extends React.Component {
-  state = {
-    activeLink: 'image',
-  }
 
-  handleChangeActiveLink = (name) => {
-    this.setState({
-      activeLink: name,
-    })
-  }
+import { GET_STORIES } from '../../../store/types/stories'
 
-  render() {
-    return (
-      <Container className='promote' fluid>
-        <p block className="title-page">My lightbox</p>
-        <Row>
-          <Col md={3} lg={2}>
-            <AppSidebar fixed display="md">
-              <AppSidebarHeader />
-              <AppSidebarForm />
-              <Suspense>
-                <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
-              </Suspense>
-            </AppSidebar>
-          </Col>
-          <Col className='d-flex justify-content-center' md={4} lg={5}>
-            <EditorLightbox className="editor-light-box" />
-          </Col>
-          <Col className='promote__wrapper-panel' style={{ marginTop: '30px' }} md={5} lg={5}>
-            <Panel />
-          </Col>
-        </Row>
-      </Container >
-    )
-  }
+
+
+function Editor(props) {
+
+  const {
+    getStories,
+    stories,
+    userLocation: {
+      id
+    }
+  } = props
+
+  const [previewImage, setPreviewImage] = useState('');
+
+  useEffect(() => {
+    if(id) {
+      getStories(id)
+    }
+  }, [id, getStories])
+
+  return (
+    <Container className='promote' fluid>
+      <p block className="title-page">My lightbox</p>
+      <Row>
+        <Col md={3} lg={2}>
+          <AppSidebar fixed display="md">
+            <AppSidebarHeader />
+            <AppSidebarForm />
+            <Suspense>
+              <AppSidebarNav navConfig={navigation} {...props} router={router} />
+            </Suspense>
+          </AppSidebar>
+        </Col>
+        <Col className='d-flex justify-content-center' md={4} lg={5}>
+          {stories.startMenu && <EditorLightbox className="editor-light-box" stories={stories.startMenu} setPreviewImage={setPreviewImage} />}
+        </Col>
+        <Col className='promote__wrapper-panel' style={{ marginTop: '30px' }} md={5} lg={5}>
+          <Panel  previewImage={previewImage}/>
+        </Col>
+      </Row>
+    </Container >
+  )
 }
 
-export default Editor 
+const mapStateToProps = state => ({
+  stories: state.stories.stories,
+  userLocation: state.user.userLocation,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getStories: (locationId) => dispatch({ type: GET_STORIES , payload: { locationId }}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);

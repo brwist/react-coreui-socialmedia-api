@@ -5,6 +5,7 @@ import workflow from './workflow'
 import instagram from './instagramData'
 import shopify from './shopifyData'
 import instagramAccounts from './instagramAccounts'
+import stories from './stories'
 
 export default combineReducers({
   account,
@@ -13,4 +14,5 @@ export default combineReducers({
   instagram,
   shopify,
   instagramAccounts,
+  stories,
 })

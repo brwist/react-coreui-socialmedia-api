@@ -6,6 +6,7 @@ import workflow from './workflow';
 import instagramData from './instagramData';
 import shopifyData from './shopifyData';
 import instagramAccounts from './instagramAccounts';
+import stories from './stories';
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     fork(instagramData),
     fork(shopifyData),
     fork(instagramAccounts),
+    fork(stories),
   ])
 }
