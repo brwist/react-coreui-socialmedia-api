@@ -47,9 +47,9 @@ function App() {
             <Route exact path={links.departmentAnnoun} component={DeprtmentAnnouncement} />
             <Route exact path={links.analytics} component={Analytics} />
             <Route exact path={links.locations} component={Locations} />
-            <Route exact path={links.setup} component={Setup} />
+            <Route exact path={links.settings} component={Setup} />
             <Route exact path={links.support} component={Support} />
-            <Route exact path={links.editor} component={Editor} />
+            <Route exact path={links.explorer} component={Editor} />
             <Route exact path={links.publish} component={Publish} />
             <Route exact path={links.connectionStatus} component={ConnectionStatus} />
           </Switch>

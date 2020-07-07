@@ -37,10 +37,8 @@ const EditorLightbox = (props) => {
     setEditView(true)
   }
 
-
-
   return (
-    <div className="light-box" color="white" fluid>
+    <div className="light-box" color="white">
       <h3 className='light-box__title'>Live lightbox stories</h3>
       {!editView ? <MenuCart
         menu={currentMenu}
@@ -49,6 +47,8 @@ const EditorLightbox = (props) => {
         handleBack={handleBack}
         handleStorySelect={handleStorySelect}
         setEditView={setEditView}
+        historyList={historyList}
+        setHistoryList={setHistoryList}
       /> : <UpdateMenu
         menu={currentMenu}
         handleBack={handleBack}

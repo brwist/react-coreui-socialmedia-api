@@ -11,38 +11,41 @@ export default function MenuCard(props) {
       subList,
       items
     },
+    historyList,
     allowBack,
     setMenu,
+    setHistoryList,
     setEditView
   } = props
 
   const handleEdit = e => {
     setEditView(true)
+    setHistoryList([...historyList, null])
   }
 
 
   return <div className='box-wrapper'>
-    <subList class="dropdown">
-      <div class="dropbtn-active">
-        {allowBack ? <i class="fas fa-chevron-left" onClick={handleBack} ></i> : <span/>}
+    <div className="dropdown">
+      <div className="dropbtn-active">
+        {allowBack ? <i className="fas fa-chevron-left" onClick={handleBack} ></i> : <span/>}
         <span>{label}</span>
-        <i class="fas fa-pen" onClick={handleEdit}></i>
+        <i className="fas fa-pen" onClick={handleEdit}></i>
       </div>
-    </subList>
+    </div>
     {subList.length ? subList.map(item => (
-      <div key={item.label} class="dropdown">
-        <div class="dropbtn"  onClick={setMenu(item)}>
+      <div key={item.label} className="dropdown">
+        <div className="dropbtn"  onClick={setMenu(item)}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}
           <span>{item.label}</span>
-          <i class="fas fa-chevron-right"></i>
+          <i className="fas fa-chevron-right"></i>
         </div>
       </div>
     )) :
     items.map(item => (
-      <div key={item.label} class="dropdown">
-        <div class="dropbtn"  onClick={handleStorySelect(item, cdnURL+item.mediaList[0].media)}>
+      <div key={item.label} className="dropdown">
+        <div className="dropbtn"  onClick={handleStorySelect(item, cdnURL+item.mediaList[0].media)}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}

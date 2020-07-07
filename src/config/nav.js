@@ -25,7 +25,7 @@ export default {
     },
     {
       name: 'Explorer',
-      url: '/editor',
+      url: links.explorer,
       icon: 'fa fa-wpexplorer',
     },
     {
@@ -35,7 +35,7 @@ export default {
     },
     {
       name: 'Settings',
-      url: links.setup,
+      url: links.settings,
       icon: 'icon-note',
     },
     // {

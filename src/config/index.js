@@ -6,9 +6,9 @@ export default {
   departmentAnnoun: '/department-announcement',
   analytics: '/analytics',
   locations: '/locations',
-  setup: '/setup',
+  settings: '/settings',
   support: '/help',
-  editor: '/editor',
+  explorer: '/explorer',
   publish: '/publish',
   connectionStatus: '/connection-status',
 }

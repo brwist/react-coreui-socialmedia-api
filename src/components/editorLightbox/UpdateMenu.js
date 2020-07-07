@@ -67,13 +67,13 @@ function UpdateMenu(props) {
 
   return <Col>
     <div className='box'>
-      <subList class="">
-        <div class="dropbtn-active">
-          <i class="fas fa-chevron-left" onClick={handleBack} ></i>
+      <div>
+        <div className="dropbtn-active">
+          <i className="fas fa-chevron-left" onClick={handleBack} ></i>
           <span>{label || name}</span>
-          <i class="fas fa-trash" onClick={handleDelete}></i>
+          <i className="fas fa-trash" onClick={handleDelete}></i>
         </div>
-      </subList>
+      </div>
       <div className='box__wrapper-buttons'>
         <div className='box__block-up-buttons'>
           <p></p>
