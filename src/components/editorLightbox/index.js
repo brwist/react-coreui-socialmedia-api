@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './index.scss';
 import MenuCart from './MenuCard';
@@ -16,6 +16,42 @@ const EditorLightbox = (props) => {
 
   const previousMenuIndex = historyList.length-2
   const allowBack = historyList.length > 1
+
+  useEffect(() => {
+    if (allowBack) {
+      const currentHistory = [...historyList]
+      currentHistory[0] = stories
+      const replaceHistory = (obj) => {
+        if (obj.subList.length) {
+          for (let item of obj.subList) {
+            const indexInHistory = currentHistory.findIndex(historyState => historyState && historyState.id === item.id)
+            if (currentMenu.id === item.id) {
+              setCurrentMenu(item)
+            }
+            if (indexInHistory !== -1) {
+              currentHistory[indexInHistory] = item
+            }
+            replaceHistory(item)
+
+          }
+        } else {
+          for (let item of obj.items) {
+            const indexInHistory = currentHistory.findIndex(historyState => historyState && historyState.id === item.id)
+            if (indexInHistory !== -1) {
+              currentHistory[indexInHistory] = item
+            }
+            if (currentMenu.id === item.id) {
+              setCurrentMenu(item)
+            }
+          }
+        }
+      }
+      replaceHistory(stories)
+      setHistoryList([...currentHistory])
+
+
+    }
+  }, [stories])
 
   const setMenu = menu => e => {
     setCurrentMenu(menu)
@@ -36,6 +72,7 @@ const EditorLightbox = (props) => {
     setHistoryList([...historyList, null])
     setEditView(true)
   }
+
 
   return (
     <div className="light-box" color="white">

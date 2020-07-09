@@ -33,7 +33,7 @@ export default function MenuCard(props) {
       </div>
     </div>
     {subList.length ? subList.map(item => (
-      <div key={item.label} className="dropdown">
+      <div key={item.id} className="dropdown">
         <div className="dropbtn"  onClick={setMenu(item)}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
@@ -44,7 +44,7 @@ export default function MenuCard(props) {
       </div>
     )) :
     items.map(item => (
-      <div key={item.label} className="dropdown">
+      <div key={item.id} className="dropdown">
         <div className="dropbtn"  onClick={handleStorySelect(item, cdnURL+item.mediaList[0].media)}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />

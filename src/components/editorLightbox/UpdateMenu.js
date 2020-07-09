@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
+import qs from 'query-string'
 
 import axios  from 'axios';
-import { Button, Col, FormGroup, Input } from 'reactstrap';
+import { Button, Col, FormGroup, Input, Spinner } from 'reactstrap';
 
 import { GET_STORIES } from '../../store/types/stories'
 
@@ -23,7 +24,12 @@ function UpdateMenu(props) {
     },
   } = props
   const [title, setTitle] = useState(label || name)
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState('')
+  const [fileUploading, setFileUpload] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [updated, setUpdated] = useState(false)
+  const [deleted, setDeleted] = useState(false)
+  const [error, setError] = useState('')
 
   const linkType = label ? 'menu' : 'story'
 
@@ -32,35 +38,69 @@ function UpdateMenu(props) {
   }
 
   const handleFileChange = e => {
-    setFile(e.target.files[0])
+    setFileUpload(true)
+    const data = new FormData()
+    data.append('file', e.target.files[0])
+    data.append('thumbnail', true)
+    axios.put(`location/${id}/media`, data).then(response => {
+      setFileUpload(false)
+      setFile(response.data.id)
+    }, error => setFileUpload(false))
   }
 
 
   const disableClick = e => {
-    const data = new FormData()
-    data.append('enabled', !enabled)
-    axios.post('locn/'+id+'/'+linkType+'/'+menuId, data).then(resp => {
+    setLoading(true)
+    const data = {}
+    data.enabled = !enabled
+    axios.post('locn/'+id+'/'+linkType+'/'+menuId, qs.stringify(data), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(resp => {
+      setLoading(false)
       getStories(id)
+      setUpdated(true)
+    }, error => {
+      setLoading(false)
+      setError(error.response.data.msg)
     })
   }
 
   const handleUpdate = e => {
-    const data = new FormData()
+    setLoading(true)
+    let data = {}
+    data.enabled = enabled
     if (title) {
-      data.append('title', title)
+      data.label = title
     }
     if (file) {
-      data.append('thumbnail', file)
+      data.thumbnail = file
     }
 
-    axios.post('locn/'+id+'/'+linkType+'/'+menuId, data).then(resp => {
+    axios.post('locn/'+id+'/'+linkType+'/'+menuId, qs.stringify(data), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(resp => {
       getStories(id)
+      setLoading(false)
+      setUpdated(true)
+    }, error => {
+      setLoading(false)
+      setError(error.response.data.msg)
     })
   }
 
   const handleDelete = e => {
+    setLoading(true)
     axios.delete(linkType+'/'+menuId).then(resp => {
       getStories(id)
+      setLoading(false)
+      setDeleted(true)
+    }, error => {
+      setLoading(false)
+      setError(error.response.data.msg)
     })
   }
 
@@ -71,26 +111,29 @@ function UpdateMenu(props) {
         <div className="dropbtn-active">
           <i className="fas fa-chevron-left" onClick={handleBack} ></i>
           <span>{label || name}</span>
-          <i className="fas fa-trash" onClick={handleDelete}></i>
+          <span>{deleted && <span>Deleted </span>}<i className="fas fa-trash" onClick={handleDelete}></i></span>
         </div>
       </div>
-      <div className='box__wrapper-buttons'>
+
+      { !loading ? <div className='box__wrapper-buttons'>
         <div className='box__block-up-buttons'>
           <p></p>
+          {error && <p style={{color: 'red'}}>{error}</p>}
           <FormGroup className='setup-profile__form-group'>
             <Input className='setup-profile__input' type="text" value={title} id="title" onChange={handleTitleChange} name="title" />
           </FormGroup>
-          <FormGroup className='setup-profile__form-group'>
-            <Input className='setup-profile__file' type="file" id="thumbnail" name="thumbnail" onChange={handleFileChange} />
+          <FormGroup className='thumbnail-form-group'>
+            <span>Upload Thumbnail: </span>
+            <Input className='thumbnail' type="file" id="thumbnail" name="thumbnail" onChange={handleFileChange} />
+            {fileUploading && <span>Uploading...</span>}
           </FormGroup>
         </div>
         <div className='box__block-down-buttons'>
-          <div>
-            <Button onClick={disableClick} className='box__down-buttons' color={enabled ? 'secondary' : 'warning'}>{enabled ? 'Disable' : 'Enable'}</Button>
-          </div>
-          <Button className='box__down-buttons' color='warning' onClick={handleUpdate}>Update</Button>
+          <Button onClick={disableClick} className='box__down-buttons' color={enabled ? 'secondary' : 'warning'}>{enabled ? 'Disable' : 'Enable'}</Button>
+          {updated && <div style={{color: 'green'}}>Update Successful!</div>}
+          <Button className='box__down-buttons' color='warning' disabled={fileUploading} onClick={handleUpdate}>Update</Button>
         </div>
-      </div>
+      </div>: <Spinner className='setup__spinner' color="dark" />}
     </div>
   </Col>
 }
