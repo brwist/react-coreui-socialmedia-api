@@ -1,0 +1,3 @@
+export const GET_ANALYTICS = "GET_ANALYTICS";
+export const SET_ANALYTICS = "SET_ANALYTICS";
+export const ANALYTICS_ERROR = "ANALYTICS_ERROR";

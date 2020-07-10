@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import { Card, CardBody, } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'; import {
@@ -6,16 +6,21 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'; 
   AppSidebarNav2 as AppSidebarNav,
   AppSidebarHeader,
   AppSidebarForm,
-  AppSidebarToggler
 } from '@coreui/react';
-import { Col, Container, Row, FormGroup, Input, Label, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import * as router from 'react-router-dom';
 
 import './index.scss';
 import navigation from '../../../config/nav'
 
+import { connect } from "react-redux";
+
+
+import { GET_ANALYTICS } from '../../../store/types/analytics'
+
+
 const line = {
-  labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  labels: [],
   datasets: [
     {
       fill: false,
@@ -35,7 +40,7 @@ const line = {
       pointHoverBorderWidth: 1,
       pointRadius: 4,
       pointHitRadius: 10,
-      data: [200, 270, 240, 260, 320, 300, 400],
+      data: [],
     },
   ],
 };
@@ -65,11 +70,6 @@ const options = {
     yAxes: [
       {
         display: false,
-        ticks: {
-          display: false,
-          min: Math.min.apply(Math, line.datasets[0].data) - 5,
-          max: Math.max.apply(Math, line.datasets[0].data) + 5,
-        },
       }],
   },
   elements: {
@@ -86,13 +86,13 @@ const options = {
 };
 
 const cardChartData4 = {
-  labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+  labels: [],
   datasets: [
     {
       label: 'My First dataset',
       backgroundColor: 'rgba(255,255,255,.3)',
       borderColor: 'transparent',
-      data: [78, 81, 80, 45, 34, 12, 40, 75, 34, 89, 32, 68, 54, 72, 18, 98],
+      data: [],
       barPercentage: 0.6,
     },
   ],
@@ -120,71 +120,109 @@ const cardChartOpts4 = {
 };
 
 
-class Analytics extends Component {
-  render() {
-    return (
-      <Container className='analytics' fluid>
-        <p className='title-page'>Analytics</p>
-        <Row>
-          <Col lg={2} xl={2}>
-            <AppSidebar fixed display="md">
-              <AppSidebarHeader />
-              <AppSidebarForm />
-              <Suspense>
-                <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
-              </Suspense>
-            </AppSidebar>
-          </Col>
-          <Col className='analytics__page' md={12} lg={9} xl={10}>
-            <FormGroup row className='analytics__calendar'>
-              <Col xs="12">
-                <Label htmlFor="date-input">Date Input</Label>
-              </Col>
-              <Col style={{ display: 'flex', justifyContent: 'space-between' }} xs="12">
-                <InputGroup className='analytics__calendar-picker'>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="fa fa-calendar-o"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input type="date" id="date-input" name="date-input" placeholder="date" />
-                </InputGroup>
-                <div className='d-flex'>
-                  <AppSidebarToggler className="d-md-none promote__wrapper-icon" mobile>
-                    <i className="fa fa-navicon promote__icon" />
-                  </AppSidebarToggler>
+function Analytics (props) {
+  const {
+    getAnalytics,
+    analytics,
+    userLocation: {
+      id
+    }
+  } = props
+
+
+  useEffect(() => {
+    if(id) {
+      getAnalytics(id)
+    }
+  }, [id, getAnalytics])
+
+  const lightBoxes = Object.keys(analytics)
+
+  return (
+    <Container className='analytics' fluid>
+      <p className='title-page'>Analytics</p>
+      <Row>
+        <Col lg={2} xl={2}>
+          <AppSidebar fixed display="md">
+            <AppSidebarHeader />
+            <AppSidebarForm />
+            <Suspense>
+              <AppSidebarNav navConfig={navigation} router={router} />
+            </Suspense>
+          </AppSidebar>
+        </Col>
+        <Col className='analytics__page' md={12} lg={9} xl={10}>
+
+          {lightBoxes.map(lb => {
+            const {interaction} = analytics[lb]
+            const {session} = analytics[lb]
+
+            const interactionsLabels = Object.getOwnPropertyNames(interaction)
+            const sessionsLabels = Object.getOwnPropertyNames(session)
+
+            const interactionsSum = interactionsLabels.reduce((sum, date) => {
+              return sum+interaction[date].sum_touches
+            }, 0)
+            const sessionsSum = sessionsLabels.reduce((sum, date) => {
+              return sum+session[date].count
+            }, 0)
+
+            const interactionData = interactionsLabels.reduce((list, date) => {
+              return [...list, interaction[date].sum_touches]
+            }, [])
+            const sessionData = sessionsLabels.reduce((list, date) => {
+              return [...list, session[date].count]
+            }, [])
+
+
+
+            const lineChartSetup = {...line}
+            lineChartSetup.labels = interactionsLabels
+            lineChartSetup.datasets[0].data = interactionData
+
+            const sessionsChartSetup = {...cardChartData4}
+            sessionsChartSetup.labels = interactionsLabels
+            sessionsChartSetup.datasets[0].data = sessionData
+
+            return <Row key={lb} className='analytics__wrapper-card'>
+            <Col xs={12} sm={6} md={12} lg={6}>
+              <Card className="text-white analytics__card">
+                <CardBody className="pb-0">
+                  <div className="text-value analytics__value">{interactionsSum}</div>
+                  <div className='analytics__description'>Total Interactions</div>
+                </CardBody>
+                <div className="chart-wrapper mx-10" style={{ height: '70px' }}>
+                  <Line data={lineChartSetup} options={options} height={70} id={'line-'+lb}/>
                 </div>
-              </Col>
-            </FormGroup>
-            <Row className='analytics__wrapper-card'>
-              <Col xs={12} sm={6} md={12} lg={6}>
-                <Card className="text-white analytics__card">
-                  <CardBody className="pb-0">
-                    <div className="text-value analytics__value">450</div>
-                    <div className='analytics__description'>Total Interactions</div>
-                  </CardBody>
-                  <div className="chart-wrapper mx-10" style={{ height: '70px' }}>
-                    <Line data={line} options={options} height={70} />
-                  </div>
-                </Card>
-              </Col>
-              <Col xs={12} sm={6} md={12} lg={6}>
-                <Card className="text-white  analytics__card">
-                  <CardBody className="pb-0">
-                    <div className="text-value analytics__value">300</div>
-                    <div className='analytics__description'>Total Sessions</div>
-                  </CardBody>
-                  <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                    <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
-                  </div>
-                </Card>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container >
-    )
-  }
+              </Card>
+            </Col>
+            <Col xs={12} sm={6} md={12} lg={6}>
+              <Card className="text-white  analytics__card">
+                <CardBody className="pb-0">
+                  <div className="text-value analytics__value">{sessionsSum}</div>
+                  <div className='analytics__description'>Total Sessions</div>
+                </CardBody>
+                <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                  <Bar data={sessionsChartSetup} options={cardChartOpts4} height={70} id={'bar-'+lb} />
+                </div>
+              </Card>
+            </Col>
+          </Row>
+          })}
+
+        </Col>
+      </Row>
+    </Container >
+  )
 }
 
-export default Analytics
+const mapStateToProps = state => ({
+  userLocation: state.user.userLocation,
+  analytics: state.analytics.analytics,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getAnalytics: (locationId) => dispatch({ type: GET_ANALYTICS , payload: { locationId }}),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Analytics);

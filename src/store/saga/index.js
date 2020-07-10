@@ -7,6 +7,7 @@ import instagramData from './instagramData';
 import shopifyData from './shopifyData';
 import instagramAccounts from './instagramAccounts';
 import stories from './stories';
+import analytics from './analytics';
 
 export default function* rootSaga() {
   yield all([
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     fork(shopifyData),
     fork(instagramAccounts),
     fork(stories),
+    fork(analytics),
   ])
 }
