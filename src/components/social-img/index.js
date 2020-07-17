@@ -23,7 +23,7 @@ const SocialImg = props => {
           const videoLink = i.indexOf('.mp4') !== -1
 
           return <Col key={index} className='d-flex social-side__img-block' col={3}>
-            <div onClick={handleClick(i)} className={'social-side__img ' + (activeMedia === i && 'selected')}>
+            <div onClick={handleClick(i)} className={'social-side__img ' + (activeMedia.includes(i) && 'selected')}>
           { !videoLink
             ? <img src={i} alt='img'/>
             : <video width="320" height="240">

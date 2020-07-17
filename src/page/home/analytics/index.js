@@ -125,7 +125,8 @@ function Analytics (props) {
     getAnalytics,
     analytics,
     userLocation: {
-      id
+      id,
+      name
     }
   } = props
 
@@ -184,30 +185,36 @@ function Analytics (props) {
             sessionsChartSetup.labels = interactionsLabels
             sessionsChartSetup.datasets[0].data = sessionData
 
-            return <Row key={lb} className='analytics__wrapper-card'>
-            <Col xs={12} sm={6} md={12} lg={6}>
-              <Card className="text-white analytics__card">
-                <CardBody className="pb-0">
-                  <div className="text-value analytics__value">{interactionsSum}</div>
-                  <div className='analytics__description'>Total Interactions</div>
-                </CardBody>
-                <div className="chart-wrapper mx-10" style={{ height: '70px' }}>
-                  <Line data={lineChartSetup} options={options} height={70} id={'line-'+lb}/>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={12} sm={6} md={12} lg={6}>
-              <Card className="text-white  analytics__card">
-                <CardBody className="pb-0">
-                  <div className="text-value analytics__value">{sessionsSum}</div>
-                  <div className='analytics__description'>Total Sessions</div>
-                </CardBody>
-                <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                  <Bar data={sessionsChartSetup} options={cardChartOpts4} height={70} id={'bar-'+lb} />
-                </div>
-              </Card>
-            </Col>
-          </Row>
+            return <div>
+
+              <Row key={lb} className='analytics__wrapper-card'>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  <h4>{lb} ({name})</h4>
+                </Col>
+                <Col xs={12} sm={6} md={12} lg={6}>
+                  <Card className="text-white analytics__card">
+                    <CardBody className="pb-0">
+                      <div className="text-value analytics__value">{interactionsSum}</div>
+                      <div className='analytics__description'>Total Interactions</div>
+                    </CardBody>
+                    <div className="chart-wrapper mx-10" style={{ height: '70px' }}>
+                      <Line data={lineChartSetup} options={options} height={70} id={'line-'+lb}/>
+                    </div>
+                  </Card>
+                </Col>
+                <Col xs={12} sm={6} md={12} lg={6}>
+                  <Card className="text-white  analytics__card">
+                    <CardBody className="pb-0">
+                      <div className="text-value analytics__value">{sessionsSum}</div>
+                      <div className='analytics__description'>Total Sessions</div>
+                    </CardBody>
+                    <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
+                      <Bar data={sessionsChartSetup} options={cardChartOpts4} height={70} id={'bar-'+lb} />
+                    </div>
+                  </Card>
+                </Col>
+              </Row>
+            </div>
           })}
 
         </Col>

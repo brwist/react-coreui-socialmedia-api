@@ -12,10 +12,9 @@ const PanelPreview = props => {
     stepIsSubmitting,
     isLastStep
   } =props
-  const videoLink = props.previewImage.indexOf('.mp4') !== -1
-
-  if (lastSubmitted) {
-  }
+  const mediaIsArray = Array.isArray(props.previewImage)
+  const currentMedia = mediaIsArray ? props.previewImage[0] : props.previewImage
+  const videoLink = currentMedia.indexOf('.mp4') !== -1
 
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
@@ -35,10 +34,10 @@ const PanelPreview = props => {
           :<div className="image-holder">
           {!lastSubmitted && <div>
               <img className='story-right__img' alt="phone" src={props.img} />
-              { props.previewImage && (!videoLink
-                ? <img className='image-preview' src={props.previewImage} alt='phone'/>
+              { currentMedia && (!videoLink
+                ? <img className='image-preview' src={currentMedia} alt='phone'/>
                 : <video className='image-preview' autoplay>
-                  <source src={props.previewImage} type="video/mp4" />
+                  <source src={currentMedia} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
               )}

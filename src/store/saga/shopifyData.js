@@ -7,10 +7,7 @@ export function* getShopifyData(action) {
   try {
     const shopifyLink = 'locn/'+action.payload.locationId+'/SHOPIFY/'
     const data = yield axios.get(shopifyLink+'COLLECTIONS?limit=10').then(resp => {
-      const productsRequests = resp.data.custom_list.slice(0, 10).map(collection => axios.get(`${shopifyLink}PRODUCTS?collectionID=${collection.id}`))
-      return Promise.all(productsRequests).then(resp => {
-        return resp.reduce((productsList, product) => ([...productsList, ...product.data]), [])
-      })
+      return resp.data.custom_list.slice(0, 10)
     })
 
     yield put(actions.setShopifyData(data))

@@ -7,6 +7,7 @@ import shopify from './shopifyData'
 import instagramAccounts from './instagramAccounts'
 import stories from './stories'
 import analytics from './analytics'
+import shopifyProducts from './shopifyProducts'
 
 export default combineReducers({
   account,
@@ -17,4 +18,5 @@ export default combineReducers({
   instagramAccounts,
   stories,
   analytics,
+  shopifyProducts,
 })

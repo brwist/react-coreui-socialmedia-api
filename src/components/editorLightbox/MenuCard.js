@@ -45,7 +45,7 @@ export default function MenuCard(props) {
     )) :
     items.map(item => (
       <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={handleStorySelect(item, cdnURL+item.mediaList[0].media)}>
+        <div className="dropbtn"  onClick={handleStorySelect(item, item.mediaList.map(mediaItem => cdnURL+mediaItem.media))}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}

@@ -5,6 +5,7 @@ import axios from "axios";
 
 import SocialImg from '../social-img/index';
 import { GET_SHOPIFY_DATA } from '../../store/types/shopifyData'
+import { GET_SHOPIFY_PRODUCTS } from '../../store/types/shopifyProducts'
 import { GET_USER } from '../../store/types/account'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShopify } from "@fortawesome/free-brands-svg-icons"
@@ -17,13 +18,16 @@ const MediaInputShopify = (props) => {
     shopifyData,
     isLoading,
     getUser,
+    getShopifyProducts,
+    shopifyProducts,
     user
   } = props
   const { locationId } = inputSetUp
 
-  const [ activeMedia, setMedia ] = useState('')
+  const [ activeMedia, setMedia ] = useState([])
   const [ shopifyConnectionStatus, setShopifyStatus ] = useState(false)
   const [shopName, setShopName] = useState('')
+  const [showCollections, setCollectionsState] = useState(true)
 
   useEffect(() => {
     window.localStorage.setItem('s', false)
@@ -52,9 +56,20 @@ const MediaInputShopify = (props) => {
   }, [getUser, shopifyConnectionStatus])
 
   const handleClick = url => (e) => {
-    inputSetUp.handleParamsChange(inputSetUp.name, `["${url}"]`)
-    inputSetUp.setPreviewImage(url)
-    setMedia(url)
+    const newMedia = activeMedia.includes(url) ? activeMedia.filter(media => media !== url) : [...activeMedia, url]
+    inputSetUp.handleParamsChange(inputSetUp.name, `["${newMedia.join('","')}"]`)
+    inputSetUp.setPreviewImage(newMedia)
+    setMedia(newMedia)
+
+  }
+
+  const handleCollectionsChange = (e) => {
+    setCollectionsState(!showCollections)
+  }
+
+  const selectProduct = (collectionId) => (e) => {
+    getShopifyProducts(locationId, collectionId)
+    handleCollectionsChange()
   }
 
   useEffect(() => {
@@ -112,7 +127,7 @@ const MediaInputShopify = (props) => {
   if (!shopifyData.length || isLoading) return <Spinner className='setup__spinner' color="dark" />
 
 
-  const mediaList = shopifyData.reduce((mediaList, product) => {
+  const mediaList = shopifyProducts && shopifyProducts.reduce((mediaList, product) => {
     return [...mediaList, ...product.items.map(item => item.url)]
   }, [])
 
@@ -120,18 +135,49 @@ const MediaInputShopify = (props) => {
 
   return <>
     {inputTitle}
-    <SocialImg activeMedia={activeMedia} gallery={mediaList} handleClick={handleClick} />
+    {!!activeMedia.length && <div>
+      <h4>Selected Media</h4>
+      <div className="media-preview">
+        {activeMedia.map(media => {
+        const videoLink = media.indexOf('.mp4') !== -1
+        return  media && <div className="media-holder" onClick={handleClick(media)}>{!videoLink
+        ? <img  src={media} alt='phone'/>
+        : <video autoplay>
+          <source src={media} type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>}
+      </div>
+      })}
+      </div>
+    </div>}
+
+    { showCollections
+      ? <div className="flex-container">
+        {shopifyData.map(collection => <span className="boxItem" onClick={selectProduct(collection.id)}>{collection.title}</span>)}
+      </div>
+      : <div>
+
+      <div className="products-header">
+        <i style={{cursor: 'pointer'}} className="fas fa-chevron-left" onClick={handleCollectionsChange} ></i>
+        <h4>PRODUCTS</h4>
+        <span></span>
+      </div>
+      <SocialImg activeMedia={activeMedia} gallery={mediaList} handleClick={handleClick} />
+    </div>
+    }
   </>
 }
 
 const mapStateToProps = state => ({
   shopifyData: state.shopify.shopifyData,
-  isLoading: state.shopify.isLoading,
+  shopifyProducts: state.shopifyProducts.shopifyProducts,
+  isLoading: state.shopify.isLoading || state.shopifyProducts.isLoading,
   user: state.account.user,
 })
 
 const mapDispatchToProps = dispatch => ({
   getShopifyData: (locationId) => dispatch({ type: GET_SHOPIFY_DATA , payload: {locationId }}),
+  getShopifyProducts: (locationId, collectionId) => dispatch({ type: GET_SHOPIFY_PRODUCTS , payload: {locationId, collectionId }}),
   getUser: () => dispatch({ type: GET_USER }),
 })
 
