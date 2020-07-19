@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Col, Button, Spinner } from 'reactstrap'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as far from "@fortawesome/free-regular-svg-icons";
 
 import './index.scss';
+
+library.add(far.faCaretSquareDown, far.faCaretSquareUp);
+
 
 const PanelPreview = props => {
   const {
@@ -12,8 +18,19 @@ const PanelPreview = props => {
     stepIsSubmitting,
     isLastStep
   } =props
+  const [currentPreview, setPreview] = useState(0)
+
+  const handleUp = (e) => {
+    setPreview(currentPreview !== 0 ? currentPreview-1 : 0)
+  }
+
+  const handleDown = (e) => {
+    const lastIndex = props.previewImage.length-1
+    setPreview(currentPreview !== lastIndex ? currentPreview+1 : lastIndex)
+  }
+
   const mediaIsArray = Array.isArray(props.previewImage)
-  const currentMedia = mediaIsArray ? props.previewImage[0] : props.previewImage
+  const currentMedia = mediaIsArray ? props.previewImage[currentPreview] || '' : props.previewImage
   const videoLink = currentMedia.indexOf('.mp4') !== -1
 
   return (
@@ -31,18 +48,23 @@ const PanelPreview = props => {
         </Button> : <div />}
         {stepIsSubmitting
           ? <Spinner className='setup__spinner' color="dark" />
-          :<div className="image-holder">
-          {!lastSubmitted && <div>
-              <img className='story-right__img' alt="phone" src={props.img} />
-              { currentMedia && (!videoLink
-                ? <img className='image-preview' src={currentMedia} alt='phone'/>
-                : <video className='image-preview' autoplay>
-                  <source src={currentMedia} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-              )}
+          : <div style={{display: 'flex'}}>
+            {!lastSubmitted && <div>
+              <div className="image-holder">
+                <img className='story-right__img' alt="phone" src={props.img} />
+                { currentMedia && (!videoLink
+                  ? <img className='image-preview' src={currentMedia} alt='phone'/>
+                  : <video className='image-preview' autoplay>
+                    <source src={currentMedia} type="video/mp4" />
+                      Your browser does not support the video tag.
+                  </video>
+                )}
               </div>
-            }
+              <div className='story-right__nav-wrapper'>
+                <FontAwesomeIcon onClick={handleUp} icon={far.faCaretSquareUp} />
+                <FontAwesomeIcon onClick={handleDown} icon={far.faCaretSquareDown} />
+              </div>
+            </div>}
 
           </div>
         }

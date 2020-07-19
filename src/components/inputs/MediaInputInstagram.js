@@ -23,8 +23,10 @@ const MediaInputInstagram = (props) => {
   const { locationId } = inputSetUp
 
   const [ activeTab, setTab ] = useState('posts')
-  const [ activeMedia, setMedia ] = useState('')
+  const [ activeMedia, setMedia ] = useState([])
   const [ instagramConnectionStatus, setInstagramStatus ] = useState(false)
+  const [showCollections, setCollectionsState] = useState(true)
+  const [mediaItems, setMediaItems] = useState([])
 
   const handleTabChange = tab => e => {
     setTab(tab)
@@ -67,9 +69,10 @@ const MediaInputInstagram = (props) => {
   }, [])
 
   const handleClick = url => (e) => {
-    inputSetUp.handleParamsChange(inputSetUp.name, `["${url}"]`)
-    inputSetUp.setPreviewImage(url)
-    setMedia(url)
+    const newMedia = activeMedia.includes(url) ? activeMedia.filter(media => media !== url) : [...activeMedia, url]
+    inputSetUp.handleParamsChange(inputSetUp.name, `["${newMedia.join('","')}"]`)
+    inputSetUp.setPreviewImage(newMedia)
+    setMedia(newMedia)
   }
 
   const instagramAccountsList = Object.keys(instagramAccounts).map(account => ({
@@ -107,6 +110,15 @@ const MediaInputInstagram = (props) => {
        'width=600,height=650');
   }
 
+  const handleCollectionsChange = (e) => {
+    setCollectionsState(!showCollections)
+  }
+
+  const handleSelectCollection = collectionItems => e => {
+    setMediaItems(collectionItems.map(({url}) => url))
+    handleCollectionsChange()
+  }
+
   if (!instagramConnected && user.auth) return <div>
     {inputTitle}
     <Button outline block color='dark' className="buttons-three" onClick={openIntagramConnect}>
@@ -131,15 +143,25 @@ const MediaInputInstagram = (props) => {
 
   if (!instagramData.posts || isLoading) return <Spinner className='setup__spinner' color="dark" />
 
-  const posts = instagramData.posts.reduce((mediaList, post) => {
-    return [...mediaList, ...post.items.map(item => item.url)]
-  }, [])
-  const stories = instagramData.stories.reduce((mediaList, story) => {
-    return [...mediaList, ...story.items.map(item => item.url)]
-  }, [])
+  const collections = instagramData[activeTab]
 
   return <>
     {inputTitle}
+    {!!activeMedia.length && <div>
+      <h4>Selected Media</h4>
+      <div className="media-preview">
+        {activeMedia.map(media => {
+        const videoLink = media.indexOf('.mp4') !== -1
+        return  media && <div className="media-holder" onClick={handleClick(media)}>{!videoLink
+        ? <img  src={media} alt='phone'/>
+        : <video autoplay>
+          <source src={media} type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>}
+      </div>
+      })}
+      </div>
+    </div>}
     <div>
       <p>
         <Button active={activeTab === 'posts'} outline color='dark' className="buttons-three" onClick={handleTabChange('posts')}>
@@ -149,9 +171,30 @@ const MediaInputInstagram = (props) => {
           Stories
         </Button>
       </p>
-      <SocialImg activeMedia={activeMedia} gallery={activeTab === 'posts' ? posts : stories} handleClick={handleClick} />
+      { showCollections
+      ? <div className="flex-container">
+        {collections.map(collection => {
+          const videoLink = collection.thumbnail.url.indexOf('.mp4') !== -1
+          return <span className="boxItem" onClick={handleSelectCollection(collection.items)}>
+          {collection.thumbnail.url && (!videoLink
+            ? <img src={collection.thumbnail.url} alt={collection.thumbnail.title} width="100%"/>
+            : <video className='image-preview' autoplay width="100%">
+              <source src={collection.thumbnail.url} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+          )}
+          <span>{collection.title}</span>
+        </span>})}
+      </div>
+      : <div>
+
+      <div style={{cursor: 'pointer'}} className="products-header" onClick={handleCollectionsChange}>
+        <div>← Back to collections</div>
+      </div>
+      <SocialImg activeMedia={activeMedia} gallery={mediaItems} handleClick={handleClick} />
     </div>
     }
+    </div>
   </>
 }
 

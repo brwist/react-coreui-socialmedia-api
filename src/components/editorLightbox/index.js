@@ -4,6 +4,7 @@ import './index.scss';
 import MenuCart from './MenuCard';
 import UpdateMenu from './UpdateMenu';
 
+
 const EditorLightbox = (props) => {
   const {
     stories,
@@ -17,41 +18,46 @@ const EditorLightbox = (props) => {
   const previousMenuIndex = historyList.length-2
   const allowBack = historyList.length > 1
 
-  useEffect(() => {
+  const updateHistory = (id, updatedData, deleteItem=false) => {
     if (allowBack) {
-      const currentHistory = [...historyList]
-      currentHistory[0] = stories
-      const replaceHistory = (obj) => {
-        if (obj.subList.length) {
-          for (let item of obj.subList) {
-            const indexInHistory = currentHistory.findIndex(historyState => historyState && historyState.id === item.id)
-            if (currentMenu.id === item.id) {
-              setCurrentMenu(item)
-            }
-            if (indexInHistory !== -1) {
-              currentHistory[indexInHistory] = item
-            }
-            replaceHistory(item)
-
-          }
+      const replaceNested = (historyItem) => {
+        if (historyItem.id === id) {
+          Object.keys(updatedData).forEach(function (key) {
+            historyItem[key] = updatedData[key]
+          });
         } else {
-          for (let item of obj.items) {
-            const indexInHistory = currentHistory.findIndex(historyState => historyState && historyState.id === item.id)
-            if (indexInHistory !== -1) {
-              currentHistory[indexInHistory] = item
+          if (historyItem.subList && historyItem.subList.length) {
+            if (deleteItem) {
+              const deleteIndex = historyItem.subList.findIndex(item => item && item.id === id)
+              if (deleteIndex !== -1) {
+                historyItem.subList.splice(deleteIndex, 1)
+              }
             }
-            if (currentMenu.id === item.id) {
-              setCurrentMenu(item)
+            for (let item of historyItem.subList) {
+              replaceNested(item)
+            }
+          } else if (historyItem.items) {
+            if (deleteItem) {
+              const deleteIndex = historyItem.items.findIndex(item => item && item.id === id)
+              if (deleteIndex !== -1) {
+                historyItem.items.splice(deleteIndex, 1)
+              }
+            }
+            for (let item of historyItem.items) {
+              replaceNested(item)
             }
           }
         }
+
       }
-      replaceHistory(stories)
+      const currentHistory = [...historyList]
+      for (let index in currentHistory) {
+        currentHistory[index] && replaceNested(currentHistory[index])
+      }
       setHistoryList([...currentHistory])
 
-
     }
-  }, [stories])
+  }
 
   const setMenu = menu => e => {
     setCurrentMenu(menu)
@@ -88,6 +94,7 @@ const EditorLightbox = (props) => {
         setHistoryList={setHistoryList}
       /> : <UpdateMenu
         menu={currentMenu}
+        updateHistory={updateHistory}
         handleBack={handleBack}
       />}
 

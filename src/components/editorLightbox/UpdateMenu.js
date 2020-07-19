@@ -15,7 +15,7 @@ function UpdateMenu(props) {
     userLocation: {
       id
     },
-    getStories,
+    updateHistory,
     menu: {
       id: menuId,
       label,
@@ -25,6 +25,7 @@ function UpdateMenu(props) {
   } = props
   const [title, setTitle] = useState(label || name)
   const [file, setFile] = useState('')
+  const [mediaUrl, setMediaUrl] = useState('')
   const [fileUploading, setFileUpload] = useState(false)
   const [loading, setLoading] = useState(false)
   const [updated, setUpdated] = useState(false)
@@ -32,6 +33,7 @@ function UpdateMenu(props) {
   const [error, setError] = useState('')
 
   const linkType = label ? 'menu' : 'story'
+  const labelName = label ? 'label' : 'name'
 
   const handleTitleChange = e => {
     setTitle(e.target.value)
@@ -45,9 +47,9 @@ function UpdateMenu(props) {
     axios.put(`location/${id}/media`, data).then(response => {
       setFileUpload(false)
       setFile(response.data.id)
+      setMediaUrl(response.data.media)
     }, error => setFileUpload(false))
   }
-
 
   const disableClick = e => {
     setLoading(true)
@@ -59,7 +61,7 @@ function UpdateMenu(props) {
       }
     }).then(resp => {
       setLoading(false)
-      getStories(id)
+      updateHistory(menuId, data)
       setUpdated(true)
     }, error => {
       setLoading(false)
@@ -69,13 +71,18 @@ function UpdateMenu(props) {
 
   const handleUpdate = e => {
     setLoading(true)
+    let dataForUpdate = {}
     let data = {}
     data.enabled = enabled
     if (title) {
       data.label = title
+      dataForUpdate[labelName] = title
     }
     if (file) {
       data.thumbnail = file
+      dataForUpdate.thumbnail= {
+        media: mediaUrl
+      }
     }
 
     axios.post('locn/'+id+'/'+linkType+'/'+menuId, qs.stringify(data), {
@@ -83,7 +90,7 @@ function UpdateMenu(props) {
         "Content-Type": "application/x-www-form-urlencoded"
       }
     }).then(resp => {
-      getStories(id)
+      updateHistory(menuId, dataForUpdate)
       setLoading(false)
       setUpdated(true)
     }, error => {
@@ -95,7 +102,7 @@ function UpdateMenu(props) {
   const handleDelete = e => {
     setLoading(true)
     axios.delete(linkType+'/'+menuId).then(resp => {
-      getStories(id)
+      updateHistory(menuId, null, true)
       setLoading(false)
       setDeleted(true)
     }, error => {
@@ -143,8 +150,4 @@ const mapStateToProps = state => ({
   userLocation: state.user.userLocation,
 })
 
-const mapDispatchToProps = dispatch => ({
-  getStories: (locationId) => dispatch({ type: GET_STORIES , payload: { locationId }}),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateMenu);
+export default connect(mapStateToProps)(UpdateMenu);

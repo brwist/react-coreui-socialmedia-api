@@ -109,7 +109,7 @@ const MediaInputShopify = (props) => {
   }
 
   const inputTitle = <div>
-    <h4>{inputSetUp.title}</h4>
+    <h4>Selection a collection</h4>
     <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
   </div>
 
@@ -157,10 +157,8 @@ const MediaInputShopify = (props) => {
       </div>
       : <div>
 
-      <div className="products-header">
-        <i style={{cursor: 'pointer'}} className="fas fa-chevron-left" onClick={handleCollectionsChange} ></i>
-        <h4>PRODUCTS</h4>
-        <span></span>
+      <div style={{cursor: 'pointer'}} className="products-header" onClick={handleCollectionsChange}>
+        <div>← Back to collections</div>
       </div>
       <SocialImg activeMedia={activeMedia} gallery={mediaList} handleClick={handleClick} />
     </div>

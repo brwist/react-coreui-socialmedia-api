@@ -21,7 +21,7 @@ const PhonePanel = props => {
   }
 
   const mediaIsArray = Array.isArray(props.previewImage)
-  const currentMedia = mediaIsArray ? props.previewImage[currentPreview] : props.previewImage
+  const currentMedia = mediaIsArray ? props.previewImage[currentPreview] || '' : props.previewImage
   const videoLink = currentMedia.indexOf('.mp4') !== -1
   return (
     <div style={{height: '100%', display: 'flex', justifyContent: 'center'}} className='story-right'>
