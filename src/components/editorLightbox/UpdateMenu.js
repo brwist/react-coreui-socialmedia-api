@@ -5,9 +5,6 @@ import qs from 'query-string'
 import axios  from 'axios';
 import { Button, Col, FormGroup, Input, Spinner } from 'reactstrap';
 
-import { GET_STORIES } from '../../store/types/stories'
-
-
 
 function UpdateMenu(props) {
   const {

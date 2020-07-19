@@ -26,7 +26,8 @@ function Editor(props) {
     getStories,
     stories,
     userLocation: {
-      id
+      id,
+      name: locationName
     }
   } = props
 
@@ -53,7 +54,7 @@ function Editor(props) {
         </Col>
         <Col className='d-flex justify-content-center' md={4} lg={5}>
           {stories.startMenu
-            ? <EditorLightbox className="editor-light-box" stories={stories.startMenu} setPreviewImage={setPreviewImage} />
+            ? <EditorLightbox className="editor-light-box" stories={stories.startMenu} locationName={locationName} setPreviewImage={setPreviewImage} />
             : <Spinner className='setup__spinner' color="dark" />
           }
         </Col>

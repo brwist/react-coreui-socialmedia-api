@@ -2,6 +2,7 @@ import React, {useEffect, useState}  from 'react';
 import { Spinner, Button, Input } from 'reactstrap';
 import { connect } from "react-redux";
 import axios from "axios";
+import Slider from "react-slick";
 
 import SocialImg from '../social-img/index';
 import { GET_SHOPIFY_DATA } from '../../store/types/shopifyData'
@@ -10,6 +11,16 @@ import { GET_USER } from '../../store/types/account'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShopify } from "@fortawesome/free-brands-svg-icons"
 
+
+const sliderSettings = {
+  className: "slider variable-width",
+  dots: false,
+  slidesToShow: 1,
+  infinite: false,
+  slidesToScroll: 1,
+  variableWidth: true,
+  centerMode: false,
+};
 
 const MediaInputShopify = (props) => {
   const {
@@ -131,23 +142,23 @@ const MediaInputShopify = (props) => {
     return [...mediaList, ...product.items.map(item => item.url)]
   }, [])
 
-
-
   return <>
     {inputTitle}
     {!!activeMedia.length && <div>
       <h4>Selected Media</h4>
       <div className="media-preview">
-        {activeMedia.map(media => {
-        const videoLink = media.indexOf('.mp4') !== -1
-        return  media && <div className="media-holder" onClick={handleClick(media)}>{!videoLink
-        ? <img  src={media} alt='phone'/>
-        : <video autoplay>
-          <source src={media} type="video/mp4" />
-            Your browser does not support the video tag.
-        </video>}
-      </div>
-      })}
+        <Slider {...sliderSettings}>
+          {activeMedia.map(media => {
+            const videoLink = media.indexOf('.mp4') !== -1
+            return  media && <div key={media} style={{width: 50}} className="media-holder" onClick={handleClick(media)}>{!videoLink
+            ? <img  src={media} alt='phone'/>
+            : <video autoplay>
+              <source src={media} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>}
+          </div>
+          })}
+        </Slider>
       </div>
     </div>}
 

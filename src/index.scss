@@ -6,8 +6,16 @@
 
 @import '~simple-line-icons/css/simple-line-icons.css';
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 @import './scss/style.scss';
 
+
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+}
 .title-logo {
   background-image: url('./assets/big_white_logo.png');
   height: 80px;

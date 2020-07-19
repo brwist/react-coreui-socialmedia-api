@@ -2,12 +2,23 @@ import React, {useEffect, useState}  from 'react';
 import { Spinner, Button, FormGroup, Label, Input, } from 'reactstrap';
 import { connect } from "react-redux";
 import axios from 'axios';
+import Slider from "react-slick";
 
 import SocialImg from '../social-img/index';
 import { GET_INSTAGRAM_DATA } from '../../store/types/instagramData'
 import { GET_USER } from '../../store/types/account'
 import { GET_INSTAGRAM_ACCOUNTS } from '../../store/types/instagramAccounts'
 
+
+const sliderSettings = {
+  className: "slider variable-width",
+  dots: false,
+  slidesToShow: 1,
+  infinite: false,
+  slidesToScroll: 1,
+  variableWidth: true,
+  centerMode: false,
+};
 
 const MediaInputInstagram = (props) => {
   const {
@@ -147,19 +158,32 @@ const MediaInputInstagram = (props) => {
 
   return <>
     {inputTitle}
+    {instagramAccountsList.length && <div>
+      <FormGroup>
+        <Label for="exampleSelect">Select Instagram Account</Label>
+        <Input type="select" name="select" id="InstagramSelect" onChange={handleAccountChange}>
+            <option value="" key='none' selected disabled>None</option>
+            {instagramAccountsList.map(account => {
+              return <option value={account.name} key={account.id}>{account.name}</option>
+            })}
+        </Input>
+      </FormGroup>
+    </div>}
     {!!activeMedia.length && <div>
       <h4>Selected Media</h4>
       <div className="media-preview">
-        {activeMedia.map(media => {
-        const videoLink = media.indexOf('.mp4') !== -1
-        return  media && <div className="media-holder" onClick={handleClick(media)}>{!videoLink
-        ? <img  src={media} alt='phone'/>
-        : <video autoplay>
-          <source src={media} type="video/mp4" />
-            Your browser does not support the video tag.
-        </video>}
-      </div>
-      })}
+        <Slider {...sliderSettings}>
+          {activeMedia.map(media => {
+            const videoLink = media.indexOf('.mp4') !== -1
+            return  media && <div key={media} style={{width: 50}} className="media-holder" onClick={handleClick(media)}>{!videoLink
+            ? <img  src={media} alt='phone'/>
+            : <video autoplay>
+              <source src={media} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>}
+          </div>
+          })}
+        </Slider>
       </div>
     </div>}
     <div>
