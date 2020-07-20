@@ -8,8 +8,10 @@ export default function MenuCard(props) {
     handleStorySelect,
     menu: {
       label,
+      name,
       subList,
-      items
+      items,
+      mediaList
     },
     historyList,
     allowBack,
@@ -23,16 +25,15 @@ export default function MenuCard(props) {
     setHistoryList([...historyList, null])
   }
 
-
   return <div className='box-wrapper'>
     <div className="dropdown">
       <div className="dropbtn-active">
         {allowBack ? <i className="fas fa-chevron-left" onClick={handleBack} ></i> : <span/>}
-        <span>{label}</span>
+        <span>{label || name}</span>
         <i className="fas fa-pen" onClick={handleEdit}></i>
       </div>
     </div>
-    {subList.length ? subList.map(item => (
+    {subList && subList.map(item => (
       <div key={item.id} className="dropdown">
         <div className="dropbtn"  onClick={setMenu(item)}>
           {item.thumbnail && <div className="icon">
@@ -42,10 +43,21 @@ export default function MenuCard(props) {
           <i className="fas fa-chevron-right"></i>
         </div>
       </div>
-    )) :
-    items.map(item => (
+    ))}
+    {(subList && !subList.length) && items && items.map(item => (
       <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={handleStorySelect(item, item.mediaList.map(mediaItem => cdnURL+mediaItem.media))}>
+        <div className="dropbtn"  onClick={setMenu(item)}>
+          {item.thumbnail && <div className="icon">
+            <img src={cdnURL+item.thumbnail.media} alt='icon' />
+          </div>}
+          <span>{item.name}</span>
+          <i className="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    ))}
+    {!subList && !items && mediaList.map(item => (
+      <div key={item.id} className="dropdown">
+        <div className="dropbtn"  onClick={handleStorySelect(item, [cdnURL+item.media])}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}
@@ -53,6 +65,7 @@ export default function MenuCard(props) {
           <span/>
         </div>
       </div>
-    ))}
+    ))
+    }
   </div>
 }
