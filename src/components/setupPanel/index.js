@@ -46,6 +46,9 @@ const Panel = (props) => {
   }
 
   const setAccountName = e => {
+    const popUpWindow = window.open('/',
+       'instagramConnect',
+       'width=600,height=650')
     axios.post('account/config', {
       ...user.conf,
       mediaConnectors: [
@@ -58,19 +61,24 @@ const Panel = (props) => {
       ]
     }).then(resp => {
       axios.get('account/config').then(resp => {
-        openConnect('SHOPIFY', resp.data.auth.SHOPIFY)()
+        openConnect('SHOPIFY', resp.data.auth.SHOPIFY, popUpWindow)()
       })
     })
   }
 
-  const openConnect = (account, link='') => e => {
+  const openConnect = (account, link='', popUpWindow=null) => e => {
     const authorizationLink = link || user.auth[account]
     const [authLink, encodedState] = authorizationLink.split('state=')
     const stateParams = JSON.parse(decodeURIComponent(encodedState))
     stateParams['r'] = window.location.origin+'/connection-status'
-    window.open(authLink+'state='+encodeURI(JSON.stringify(stateParams)),
+    const socialAuthLink =  authLink+'state='+encodeURI(JSON.stringify(stateParams))
+    if (popUpWindow) {
+      popUpWindow.location = socialAuthLink
+    } else {
+      window.open(socialAuthLink,
        'instagramConnect',
        'width=600,height=650');
+    }
   }
   if (!user.conf) return <Spinner className='setup__spinner' color="dark" />
 
