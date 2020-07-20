@@ -12,7 +12,8 @@ const EditorLightbox = (props) => {
     locationName
   } = props
 
-  const [currentMenu, setCurrentMenu] = useState({...stories, label: `${locationName}`})
+  const [currentMenuNoRoot, setCurrentMenu] = useState(stories)
+  const currentMenu = {...currentMenuNoRoot, label: `${locationName}`}
   const [historyList, setHistoryList] = useState([stories])
   const [editView, setEditView] = useState(false)
 
@@ -75,7 +76,6 @@ const EditorLightbox = (props) => {
 
   const handleStorySelect = (menu, media) => e => {
     setPreviewImage(media)
-    setHistoryList([...historyList, null])
   }
 
 
