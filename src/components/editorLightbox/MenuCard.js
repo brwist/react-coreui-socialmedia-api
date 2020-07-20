@@ -55,17 +55,11 @@ export default function MenuCard(props) {
         </div>
       </div>
     ))}
-    {!subList && !items && mediaList.map(item => (
-      <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={handleStorySelect(item, [cdnURL+item.media])}>
-          {item.thumbnail && <div className="icon">
-            <img src={cdnURL+item.thumbnail.media} alt='icon' />
-          </div>}
-          <span>{item.name}</span>
-          <span/>
-        </div>
-      </div>
-    ))
+    {!subList && !items && <div className="media-grid">
+      {mediaList.map(item => (
+        <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleStorySelect(item, [cdnURL+item.media])}/>
+      ))}
+    </div>
     }
   </div>
 }

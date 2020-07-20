@@ -12,9 +12,10 @@ const EditorLightbox = (props) => {
     locationName
   } = props
 
-  const [currentMenuNoRoot, setCurrentMenu] = useState(stories)
-  const currentMenu = {...currentMenuNoRoot, label: `${locationName}`}
-  const [historyList, setHistoryList] = useState([stories])
+  const storiesWithLabel = {...stories, label: `Location: ${locationName}`}
+  const [currentMenu, setCurrentMenu] = useState(storiesWithLabel)
+
+  const [historyList, setHistoryList] = useState([storiesWithLabel])
   const [editView, setEditView] = useState(false)
 
   const previousMenuIndex = historyList.length-2
@@ -72,6 +73,7 @@ const EditorLightbox = (props) => {
     currentHistoryList.splice(-1,1)
     setHistoryList([...currentHistoryList])
     setEditView(false)
+    setPreviewImage('')
   }
 
   const handleStorySelect = (menu, media) => e => {

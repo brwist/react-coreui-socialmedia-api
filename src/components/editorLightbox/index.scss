@@ -197,6 +197,20 @@
     }
 }
 
+.media-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0 0 10px;
+  flex-direction: row;
+
+  img {
+    width: 147px;
+    height: 261px;
+    margin: 2px;
+    cursor: pointer;
+  }
+}
+
 .box-wrapper {
   margin-left: 12px;
   width: 90%;
