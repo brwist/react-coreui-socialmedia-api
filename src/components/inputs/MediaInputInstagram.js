@@ -164,7 +164,7 @@ const MediaInputInstagram = (props) => {
         <Input type="select" name="select" id="InstagramSelect" onChange={handleAccountChange}>
             <option value="" key='none' selected disabled>None</option>
             {instagramAccountsList.map(account => {
-              return <option value={account.name} key={account.id}>{account.name}</option>
+              return <option value={account.name} selected={account.id === instagramConnector.account} key={account.id}>{account.name}</option>
             })}
         </Input>
       </FormGroup>
