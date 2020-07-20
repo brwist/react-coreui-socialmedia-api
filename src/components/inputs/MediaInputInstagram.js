@@ -57,10 +57,10 @@ const MediaInputInstagram = (props) => {
   }, [getInstagramData, locationId, instagramConnector, instagramConnected])
 
   useEffect(() => {
-    if (instagramConnected && !instagramConnector.account) {
+    if (instagramConnected ) {
       getInstagramAccounts(locationId);
     }
-  }, [getInstagramAccounts, locationId, instagramConnector, instagramConnected])
+  }, [getInstagramAccounts, locationId, instagramConnected])
 
 
   useEffect(() => {
