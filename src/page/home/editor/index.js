@@ -32,12 +32,15 @@ function Editor(props) {
   } = props
 
   const [previewImage, setPreviewImage] = useState('');
+  const [currentItem, setCurrentItem] = useState('');
 
   useEffect(() => {
     if(id) {
       getStories(id)
     }
   }, [id, getStories])
+
+  console.log(currentItem)
 
   return (
     <Container className='promote' fluid>
@@ -54,12 +57,17 @@ function Editor(props) {
         </Col>
         <Col className='d-flex justify-content-center' md={4} lg={5}>
           {stories.startMenu
-            ? <EditorLightbox className="editor-light-box" stories={stories.startMenu} locationName={locationName} setPreviewImage={setPreviewImage} />
+            ? <EditorLightbox
+                className="editor-light-box"
+                stories={stories.startMenu}
+                locationName={locationName}
+                setPreviewImage={setPreviewImage}
+                setCurrentItem={setCurrentItem} />
             : <Spinner className='setup__spinner' color="dark" />
           }
         </Col>
         <Col className='promote__wrapper-panel' style={{ marginTop: '30px' }} md={5} lg={5}>
-          <Panel  previewImage={previewImage}/>
+          <Panel  previewImage={previewImage} currentItem={currentItem}/>
         </Col>
       </Row>
     </Container >

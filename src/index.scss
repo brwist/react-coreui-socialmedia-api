@@ -16,6 +16,10 @@
 .slick-prev:before, .slick-next:before {
   color: black;
 }
+.slick-list {
+  width: 300px;
+}
+
 .title-logo {
   background-image: url('./assets/big_white_logo.png');
   height: 80px;
@@ -43,6 +47,11 @@
 
 body {
   background-color: #fff;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
 }
 
 @media all and (max-width: 768px) {

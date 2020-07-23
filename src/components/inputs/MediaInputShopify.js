@@ -15,7 +15,7 @@ import { faShopify } from "@fortawesome/free-brands-svg-icons"
 const sliderSettings = {
   className: "slider variable-width",
   dots: false,
-  slidesToShow: 1,
+  slidesToShow: 6,
   infinite: false,
   slidesToScroll: 1,
   variableWidth: true,

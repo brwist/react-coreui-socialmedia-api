@@ -9,6 +9,7 @@ const EditorLightbox = (props) => {
   const {
     stories,
     setPreviewImage,
+    setCurrentItem,
     locationName
   } = props
 
@@ -77,7 +78,13 @@ const EditorLightbox = (props) => {
   }
 
   const handleStorySelect = (menu, media) => e => {
+    setCurrentMenu(menu)
     setPreviewImage(media)
+    setHistoryList([...historyList, null])
+  }
+
+  const handleMediaSelect = (index) => e => {
+    setCurrentItem(index)
   }
 
 
@@ -93,6 +100,7 @@ const EditorLightbox = (props) => {
         setEditView={setEditView}
         historyList={historyList}
         setHistoryList={setHistoryList}
+        handleMediaSelect={handleMediaSelect}
       /> : <UpdateMenu
         menu={currentMenu}
         updateHistory={updateHistory}

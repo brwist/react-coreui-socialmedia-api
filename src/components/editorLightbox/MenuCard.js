@@ -8,11 +8,13 @@ export default function MenuCard(props) {
     handleStorySelect,
     menu: {
       label,
+      thumbnail,
       name,
       subList,
       items,
       mediaList
     },
+    handleMediaSelect,
     historyList,
     allowBack,
     setMenu,
@@ -28,7 +30,12 @@ export default function MenuCard(props) {
   return <div className='box-wrapper'>
     <div className="dropdown">
       <div className="dropbtn-active">
-        {allowBack ? <i className="fas fa-chevron-left" onClick={handleBack} ></i> : <span/>}
+        <div className="flex-center">
+          {allowBack ? <i className="fas fa-chevron-left" onClick={handleBack} ></i> : <span/>}
+          {thumbnail && <div className="icon">
+            <img src={cdnURL+thumbnail.media} alt='icon' />
+          </div>}
+        </div>
         <span>{label || name}</span>
         <i className="fas fa-pen" onClick={handleEdit}></i>
       </div>
@@ -46,7 +53,7 @@ export default function MenuCard(props) {
     ))}
     {(subList && !subList.length) && items && items.map(item => (
       <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={setMenu(item)}>
+        <div className="dropbtn"  onClick={handleStorySelect(item, item.mediaList.map(item => cdnURL+item.media))}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}
@@ -56,8 +63,8 @@ export default function MenuCard(props) {
       </div>
     ))}
     {!subList && !items && <div className="media-grid">
-      {mediaList.map(item => (
-        <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleStorySelect(item, [cdnURL+item.media])}/>
+      {mediaList.map((item, index) => (
+        <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleMediaSelect(index)}/>
       ))}
     </div>
     }

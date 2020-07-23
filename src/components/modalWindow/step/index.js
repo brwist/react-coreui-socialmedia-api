@@ -6,6 +6,7 @@ import PhonePanel from '../../phonePanel/index'
 import './index.scss';
 import phonePanel from '../../../assets/phone.png'
 import PanelPreview from '../panelPreview/index'
+import Panel from '../../../components/editor/index';
 
 import StoryInput from '../../inputs/index'
 
@@ -115,7 +116,7 @@ const Step = ({
 
       </Col>
       <Col className='phoneSetup offset-md-2 offset-lg-0' md={10} lg={6}>
-        <PhonePanel previewImage={previewImage} currentTab={currentTab} img={phonePanel} disableNext={stepIsInvalid} nextSteps={nextMethod} title={'Template Editor'} />
+        <Panel  previewImage={previewImage} currentTab={currentTab} img={phonePanel} disableNext={stepIsInvalid} nextSteps={nextMethod} title={'Template Editor'}/>
       </Col>
     </> : <Spinner className='setup__spinner' color="dark" />
   )

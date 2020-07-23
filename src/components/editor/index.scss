@@ -58,7 +58,29 @@
         border-radius: 4px;
       }
     }
+  .buttons-wrapper {
+    text-align: center;
+    button {
+      width: 200px;
+    }
   }
+  .control-arrows {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    left: 0;
+    top: 40%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    img {
+      height: 40px;
+      cursor: pointer;
+    }
+  }
+}
   
   @media all and (max-width: 768px) {
     .panelEditor {

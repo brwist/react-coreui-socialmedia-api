@@ -4,6 +4,8 @@ import qs from 'query-string'
 
 import axios  from 'axios';
 import { Button, Col, FormGroup, Input, Spinner } from 'reactstrap';
+import { cdnURL } from '../../config/endpoints';
+
 
 
 function UpdateMenu(props) {
@@ -15,6 +17,7 @@ function UpdateMenu(props) {
     updateHistory,
     menu: {
       id: menuId,
+      thumbnail,
       label,
       name,
       enabled
@@ -113,7 +116,12 @@ function UpdateMenu(props) {
     <div className='box'>
       <div>
         <div className="dropbtn-active">
-          <i className="fas fa-chevron-left" onClick={handleBack} ></i>
+          <div className="flex-center">
+            <i className="fas fa-chevron-left" onClick={handleBack} ></i>
+            {thumbnail && <div className="icon">
+              <img src={cdnURL+thumbnail.media} alt='icon' />
+            </div>}
+          </div>
           <span>{label || name}</span>
           <span>{deleted && <span>Deleted </span>}<i className="fas fa-trash" onClick={handleDelete}></i></span>
         </div>

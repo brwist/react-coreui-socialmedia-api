@@ -13,7 +13,7 @@ import { GET_INSTAGRAM_ACCOUNTS } from '../../store/types/instagramAccounts'
 const sliderSettings = {
   className: "slider variable-width",
   dots: false,
-  slidesToShow: 1,
+  slidesToShow: 6,
   infinite: false,
   slidesToScroll: 1,
   variableWidth: true,
