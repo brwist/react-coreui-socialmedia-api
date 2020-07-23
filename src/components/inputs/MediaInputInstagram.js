@@ -156,21 +156,8 @@ const MediaInputInstagram = (props) => {
 
   const collections = instagramData[activeTab]
 
-  console.log(instagramConnector.account)
-
   return <>
     {inputTitle}
-    {instagramAccountsList.length && <div>
-      <FormGroup>
-        <Label for="exampleSelect">Select Instagram Account</Label>
-        <Input type="select" name="select" id="InstagramSelect" onChange={handleAccountChange}>
-            <option value="" key='none' disabled>None</option>
-            {instagramAccountsList.map(account => {
-              return <option value={account.name} selected={account.id === instagramConnector.account} key={account.id}>{account.name}</option>
-            })}
-        </Input>
-      </FormGroup>
-    </div>}
     {!!activeMedia.length && <div>
       <h4>Selected Media</h4>
       <div className="media-preview">
