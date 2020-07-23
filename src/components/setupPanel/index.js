@@ -5,6 +5,9 @@ import { faShopify } from "@fortawesome/free-brands-svg-icons"
 import { connect } from "react-redux";
 import axios from 'axios';
 
+import { GET_INSTAGRAM_ACCOUNTS } from '../../store/types/instagramAccounts'
+
+
 import { GET_USER } from '../../store/types/account'
 
 import './index.scss';
@@ -12,13 +15,22 @@ import './index.scss';
 const Panel = (props) => {
   const [status, setStatus] = useState('');
   const [shopName, setShopName] = useState(props.user.conf ? props.user.conf.mediaConnectors[0].account : '');
+  const [instagramId, setInstagramId] = useState(props.user.conf ? props.user.conf.mediaConnectors[1].account : '');
   const {
     user,
-    getUser
+    getUser,
+    userLocation: {
+      id: locationId,
+    },
+    getInstagramAccounts,
+    instagramAccounts,
     } = props
 
   const shopifyShopName = props.user.conf && props.user.conf.mediaConnectors[0].account
   const isNewShopName = shopName !== shopifyShopName
+
+  const instagramConnector = user.conf && user.conf.mediaConnectors.find(connector => connector.type === "INSTAGRAM")
+  const instagramConnected = instagramConnector && instagramConnector.authorized
 
   useEffect(() => {
     getUser()
@@ -36,14 +48,31 @@ const Panel = (props) => {
     }
   }
 
+  const changeInstagramAccount = (e) => {
+    setInstagramId(e.target.value)
+  }
+
   useEffect(() => {
     window.addEventListener('storage', localStorageUpdated)
   }, [])
+
+  useEffect(() => {
+    if (instagramConnected ) {
+      getInstagramAccounts(locationId);
+    }
+  }, [getInstagramAccounts, locationId, instagramConnected])
 
   const handleShopName = e => {
     const { value } = e.target
     setShopName(value)
   }
+
+  const instagramAccountsList = instagramAccounts && Object.keys(instagramAccounts).map(account => ({
+    id: instagramAccounts[account],
+    name: account
+  }))
+
+  console.log(instagramAccountsList)
 
   const setAccountName = e => {
     const popUpWindow = window.open('/',
@@ -63,6 +92,22 @@ const Panel = (props) => {
       axios.get('account/config').then(resp => {
         openConnect('SHOPIFY', resp.data.auth.SHOPIFY, popUpWindow)()
       })
+    })
+  }
+
+  const handleInstagramAccountChange = (e) => {
+    axios.post('account/config', {
+      ...user.conf,
+      mediaConnectors: [
+        user.conf.mediaConnectors[0],
+        {
+          ...user.conf.mediaConnectors[1],
+          name: e.target.value,
+          account: instagramId
+        }
+      ]
+    }).then(resp => {
+      getUser()
     })
   }
 
@@ -97,11 +142,32 @@ const Panel = (props) => {
 
           <h2>Media Connectors</h2>
 
-          {user.auth.INSTAGRAM && <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')}>
+          {!instagramAccountsList.length && user.auth.INSTAGRAM && <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')}>
             <span><i className="fa fa-instagram icons-three" />
               {instagram.authorized ? 'Connected' : 'Instagram Connect'}
             </span>
           </Button>}
+          {!!instagramAccountsList.length && user.auth.INSTAGRAM && <div class="shopify-form ">
+            <FormGroup>
+              <Label for="exampleSelect">Select Instagram Account</Label>
+              <Input type="select" name="select" id="InstagramSelect" onChange={changeInstagramAccount}>
+                  <option value="" key='none' disabled>None</option>
+                  {instagramAccountsList && instagramAccountsList.map(account => {
+                    return <option value={account.name} selected={account.id === instagramConnector.account} key={account.id}>{account.name}</option>
+                  })}
+              </Input>
+            </FormGroup>
+            {instagramId === instagramConnector.account || !instagramId ? <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')}>
+              <span><i className="fa fa-instagram icons-three" />
+                {instagram.authorized ? 'Connected' : 'Instagram Connect'}
+              </span>
+            </Button> :
+            <Button disabled={!instagramId} outline block color='dark' className="buttons-three" onClick={handleInstagramAccountChange}>
+              <span><i className="fa fa-instagram icons-three" />
+                Save
+              </span>
+            </Button>}
+          </div>}
 
           <div class="shopify-form ">
             <FormGroup>
@@ -123,10 +189,13 @@ const Panel = (props) => {
 const mapStateToProps = state => ({
   isLoading: state.account.isLoading,
   user: state.account.user,
+  instagramAccounts: state.instagramAccounts.accounts,
+  userLocation: state.user.userLocation,
 })
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch({ type: GET_USER }),
+  getInstagramAccounts: (locationId) => dispatch({ type: GET_INSTAGRAM_ACCOUNTS , payload: {locationId }}),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Panel);
