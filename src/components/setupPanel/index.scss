@@ -23,21 +23,28 @@
        margin-bottom: 11%;
    }
 
+
   .shopify-form {
     display: flex;
     align-items: flex-end;
     .form-group {
       margin-bottom: 0;
     }
+
     select, input {
       margin-right: 1em;
       margin-right: 1em;
     }
+
     select, input, button {
       width: 12em;
       margin-bottom: 1em;
       height: 3em;
+
     }
+  }
+  .buttons-three.with-save {
+    width: 10.5rem;
   }
 
    &__accountSetup {

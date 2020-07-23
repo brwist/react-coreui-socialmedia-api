@@ -14,6 +14,8 @@ import './index.scss';
 
 const Panel = (props) => {
   const [status, setStatus] = useState('');
+  const [instagramSaving, setInstagramSaving] = useState(false);
+  const [instagramSaved, setInstagramSaved] = useState(false);
   const [shopName, setShopName] = useState(props.user.conf ? props.user.conf.mediaConnectors[0].account : '');
   const [instagramId, setInstagramId] = useState(props.user.conf ? props.user.conf.mediaConnectors[1].account : '');
   const {
@@ -94,6 +96,7 @@ const Panel = (props) => {
   }
 
   const handleInstagramAccountChange = (e) => {
+    setInstagramSaving(true)
     axios.post('account/config', {
       ...user.conf,
       mediaConnectors: [
@@ -106,6 +109,8 @@ const Panel = (props) => {
       ]
     }).then(resp => {
       getUser()
+      setInstagramSaving(false)
+      setInstagramSaved(true)
     })
   }
 
@@ -145,26 +150,34 @@ const Panel = (props) => {
               {instagram.authorized ? 'Connected' : 'Instagram Connect'}
             </span>
           </Button>}
-          {!!instagramAccountsList.length && instagram.authorized && user.auth.INSTAGRAM && <div class="shopify-form ">
-            <FormGroup>
-              <Label for="exampleSelect">Select Instagram Account</Label>
-              <Input type="select" value={instagramId} name="select" id="InstagramSelect" onChange={changeInstagramAccount}>
-                  <option value="" key='none' disabled >None</option>
-                  {instagramAccountsList && instagramAccountsList.map(account => {
-                    return <option value={account.name} key={account.id}>{account.name}</option>
-                  })}
-              </Input>
-            </FormGroup>
-            {instagramId !== instagramConnector.account || !instagramId ? <Button disabled={!instagramId} outline block color='dark' className="buttons-three" onClick={handleInstagramAccountChange}>
-              <span><i className="fa fa-instagram icons-three" />
-                Save
-              </span>
-            </Button> : <Button active={instagram.authorized} outline block color='dark' className="buttons-three" onClick={openConnect('INSTAGRAM')}>
+          {!!instagramAccountsList.length && instagram.authorized && user.auth.INSTAGRAM && <div>
+            <div class="shopify-form ">
+              <FormGroup>
+                <Label for="exampleSelect">Select Instagram Account</Label>
+                <Input type="select" value={instagramId} name="select" id="InstagramSelect" onChange={changeInstagramAccount}>
+                    <option value="" key='none' disabled >None</option>
+                    {instagramAccountsList && instagramAccountsList.map(account => {
+                      return <option value={account.name} key={account.id}>{account.name}</option>
+                    })}
+                </Input>
+
+              </FormGroup>
+              <div>
+                <Button disabled={!instagramId} outline block color='dark' className="buttons-three" onClick={handleInstagramAccountChange}>
+                  <span><i className="fa fa-instagram icons-three" />
+                    Save
+                  </span>
+                </Button>
+                {instagramSaving && <span style={{position: 'absolute'}}>Saving...</span>}
+                {instagramSaved && <span style={{position: 'absolute', color: 'green'}}>Saved</span>}
+              </div>
+            </div>
+
+            <Button active={instagram.authorized} outline block color='dark' className="buttons-three with-save" onClick={openConnect('INSTAGRAM')}>
               <span><i className="fa fa-instagram icons-three" />
                 {instagram.authorized ? 'Connected' : 'Instagram Connect'}
               </span>
             </Button>
-            }
           </div>}
 
           <div class="shopify-form ">
