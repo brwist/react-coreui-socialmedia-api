@@ -18,6 +18,7 @@ const Panel = (props) => {
   const [instagramSaved, setInstagramSaved] = useState(false);
   const [shopName, setShopName] = useState(props.user.conf ? props.user.conf.mediaConnectors[0].account : '');
   const [instagramId, setInstagramId] = useState(props.user.conf ? props.user.conf.mediaConnectors[1].account : '');
+  const [instagramName, setInstagramName] = useState(props.user.conf ? props.user.conf.mediaConnectors[1].name : '');
   const {
     user,
     getUser,
@@ -51,7 +52,9 @@ const Panel = (props) => {
   }
 
   const changeInstagramAccount = (e) => {
-    setInstagramId(e.target.value)
+    setInstagramId(e.target.value);
+    var obj = e.target;
+    setInstagramName(obj.options[obj.selectedIndex].text);
   }
 
   useEffect(() => {
@@ -96,14 +99,14 @@ const Panel = (props) => {
   }
 
   const handleInstagramAccountChange = (e) => {
-    setInstagramSaving(true)
+    setInstagramSaving(true);
     axios.post('account/config', {
       ...user.conf,
       mediaConnectors: [
         user.conf.mediaConnectors[0],
         {
           ...user.conf.mediaConnectors[1],
-          name: e.target.value,
+          name: instagramName,
           account: instagramId
         }
       ]
@@ -151,13 +154,13 @@ const Panel = (props) => {
             </span>
           </Button>}
           {!!instagramAccountsList.length && instagram.authorized && user.auth.INSTAGRAM && <div>
-            <div class="shopify-form ">
+            <div className="shopify-form ">
               <FormGroup>
                 <Label for="exampleSelect">Select Instagram Account</Label>
                 <Input type="select" value={instagramId} name="select" id="InstagramSelect" onChange={changeInstagramAccount}>
                     <option value="" key='none' disabled={instagramId} >None</option>
                     {instagramAccountsList && instagramAccountsList.map(account => {
-                      return <option value={account.name} key={account.id}>{account.name}</option>
+                      return <option value={account.id} key={account.id}>{account.name}</option>
                     })}
                 </Input>
 
@@ -180,7 +183,7 @@ const Panel = (props) => {
             </Button>
           </div>}
 
-          <div class="shopify-form ">
+          <div className="shopify-form ">
             <FormGroup>
               <Label for="shop-name">Shop Name</Label>
               <Input className="shop-input" placeholder="Shop Name" value={shopName} onChange={handleShopName} name="shop-name" id="shop-name" />
