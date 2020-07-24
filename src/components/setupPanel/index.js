@@ -155,7 +155,7 @@ const Panel = (props) => {
               <FormGroup>
                 <Label for="exampleSelect">Select Instagram Account</Label>
                 <Input type="select" value={instagramId} name="select" id="InstagramSelect" onChange={changeInstagramAccount}>
-                    <option value="" key='none' disabled >None</option>
+                    <option value="" key='none' disabled={instagramId} >None</option>
                     {instagramAccountsList && instagramAccountsList.map(account => {
                       return <option value={account.name} key={account.id}>{account.name}</option>
                     })}

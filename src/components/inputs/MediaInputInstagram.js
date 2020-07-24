@@ -112,15 +112,6 @@ const MediaInputInstagram = (props) => {
     <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
   </div>
 
-  const openIntagramConnect = () => {
-    const [authLink, encodedState] = user.auth.INSTAGRAM.split('state=')
-    const stateParams = JSON.parse(decodeURIComponent(encodedState))
-    stateParams['r'] = window.location.origin+'/connection-status'
-    window.open(authLink+'state='+encodeURI(JSON.stringify(stateParams)),
-       'instagramConnect',
-       'width=600,height=650');
-  }
-
   const handleCollectionsChange = (e) => {
     setCollectionsState(!showCollections)
   }
@@ -129,15 +120,6 @@ const MediaInputInstagram = (props) => {
     setMediaItems(collectionItems.map(({url}) => url))
     handleCollectionsChange()
   }
-
-  if (!instagramConnected && user.auth) return <div>
-    {inputTitle}
-    <Button outline block color='dark' className="buttons-three" onClick={openIntagramConnect}>
-      <span><i className="fa fa-instagram icons-three" />
-        Connect Instagram
-      </span>
-    </Button>
-  </div>
 
   if (instagramAccountsList.length && !instagramConnector.account) return <div>
     {inputTitle}
