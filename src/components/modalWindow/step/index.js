@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Col, Spinner } from 'reactstrap'
 
-import PhonePanel from '../../phonePanel/index'
 import './index.scss';
 import phonePanel from '../../../assets/phone.png'
 import PanelPreview from '../panelPreview/index'

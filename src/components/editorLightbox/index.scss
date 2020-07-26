@@ -203,6 +203,36 @@
   padding: 10px 0 0 10px;
   flex-direction: row;
 
+  .wrapper-image {
+    width: 147px;
+    height: 147px;
+    cursor: pointer;
+    margin: 2px;
+    position: relative;
+
+    &:hover:after {
+      position: absolute;
+      content: '×';
+      background-color: rgba(0, 0, 0, 0.7);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 36px;
+    }
+
+    img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 100%;
+    }
+  }
+
   img {
     width: 147px;
     height: 261px;

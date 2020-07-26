@@ -41,6 +41,7 @@ const MediaInputInstagram = (props) => {
 
   const handleTabChange = tab => e => {
     setTab(tab)
+    setCollectionsState(true)
   }
 
   useEffect(() => {
@@ -184,7 +185,7 @@ const MediaInputInstagram = (props) => {
       : <div>
 
       <div style={{cursor: 'pointer'}} className="products-header" onClick={handleCollectionsChange}>
-        <div>← Back to collections</div>
+        <div>← Back to <span style={{textTransform: 'capitalize'}}>{activeTab}</span></div>
       </div>
       <SocialImg activeMedia={activeMedia} gallery={mediaItems} handleClick={handleClick} />
     </div>

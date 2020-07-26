@@ -4,14 +4,30 @@
   margin-left: 50px;
   .image-preview {
     position: absolute;
-    width: 97%;
+    width: 93.5%;
     height: auto;
     left: 0;
     margin: auto;
     right: 0;
-    top: 17px;
-    bottom: 17px;
+    top: 0;
+    bottom: 94px;
     border-radius: 4px;
+  }
+  .control-arrows {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    left: 0;
+    top: 40%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    img {
+      height: 40px;
+      cursor: pointer;
+    }
   }
 }
 

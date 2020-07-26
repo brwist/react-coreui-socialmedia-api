@@ -1,12 +1,7 @@
 import React, {useState} from 'react'
 import { Col, Button, Spinner } from 'reactstrap'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as far from "@fortawesome/free-regular-svg-icons";
 
 import './index.scss';
-
-library.add(far.faCaretSquareDown, far.faCaretSquareUp);
 
 
 const PanelPreview = props => {
@@ -21,21 +16,22 @@ const PanelPreview = props => {
   const [currentPreview, setPreview] = useState(0)
 
   const handleUp = (e) => {
-    setPreview(currentPreview !== 0 ? currentPreview-1 : 0)
+    const lastIndex = props.previewImage.length-1
+    setPreview(currentPreview !== 0 ? currentPreview-1 : lastIndex)
   }
 
   const handleDown = (e) => {
     const lastIndex = props.previewImage.length-1
-    setPreview(currentPreview !== lastIndex ? currentPreview+1 : lastIndex)
+    setPreview(currentPreview !== lastIndex ? currentPreview+1 : 0)
   }
 
   const mediaIsArray = Array.isArray(props.previewImage)
-  const currentMedia = mediaIsArray ? props.previewImage[currentPreview] || '' : props.previewImage
-  const videoLink = currentMedia.indexOf('.mp4') !== -1
+  const currentMedia = mediaIsArray ? props.previewImage[currentPreview] : props.previewImage
+  const videoLink = currentMedia && currentMedia.indexOf('.mp4') !== -1
 
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
-      {!stepIsSubmitting && <h3 className='push-live__title'>{!lastSubmitted ? 'Panel Preview' : 'Done!'}</h3>}
+      {!stepIsSubmitting && lastSubmitted && <h3 className='push-live__title'>Done!</h3>}
       <div className='push-live__page-wrapper'>
         {!lastSubmitted ? <Button
           color='secondary'
@@ -51,7 +47,7 @@ const PanelPreview = props => {
           : <div style={{display: 'flex'}}>
             {!lastSubmitted && <div>
               <div className="image-holder">
-                <img className='story-right__img' alt="phone" src={props.img} />
+                <img className='panelEditor__phone-img' alt="phone" src={require('../../../assets/panel.png')} />
                 { currentMedia && (!videoLink
                   ? <img className='image-preview' src={currentMedia} alt='phone'/>
                   : <video className='image-preview' autoplay>
@@ -59,10 +55,10 @@ const PanelPreview = props => {
                       Your browser does not support the video tag.
                   </video>
                 )}
-              </div>
-              <div className='story-right__nav-wrapper'>
-                <FontAwesomeIcon onClick={handleUp} icon={far.faCaretSquareUp} />
-                <FontAwesomeIcon onClick={handleDown} icon={far.faCaretSquareDown} />
+                {currentMedia && <div className="control-arrows">
+                  <img  onClick={handleUp} src={require('../../../assets/arrow_left.gif')} alt=""/>
+                  <img onClick={handleDown} src={require('../../../assets/arrow_right.gif')} alt=""/>
+                </div>}
               </div>
             </div>}
 
