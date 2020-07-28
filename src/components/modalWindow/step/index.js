@@ -40,17 +40,25 @@ const Step = ({
     }
   }, [currentStoryStep, setActiveLink, onBoarding]);
 
-  const handleParamsChange = (name, value) => {
-    setParams({
-      ...params,
-      [name]: value
-    })
+  const handleParamsChange = (name, value, multipleProps=null) => {
+    let newParams = {...params}
+    if (multipleProps) {
+      newParams = {
+        ...newParams,
+        ...multipleProps
+      }
+    }
+    if (name) {
+      newParams[name] = value
+    }
+    setParams(newParams)
   }
 
   const isLastStep = index+1 === stepsLength
 
   const submitStep = (tab) => {
     setStepSubmit(true)
+    delete params["SELECT_MENU"]
     axios.post(`locn/${locationId}/workflow/${workflowId}/step/${step.stepID}`, {
       stepOp: step.stepOp,
       workflowStateID: workflowStateID,
@@ -74,7 +82,7 @@ const Step = ({
   let stepIsInvalid = false
 
   for (let workflowInput of step.workflowInputs) {
-    if (!workflowInput.optinal && !params[workflowInput.name]) {
+    if (!workflowInput.optinal && !params[workflowInput.name || workflowInput.type]) {
       stepIsInvalid = true
       continue
     }

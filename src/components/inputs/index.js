@@ -3,6 +3,7 @@ import TextInput from './TextInput'
 import MediaInput from './MediaInput'
 import MediaInputInstagram from './MediaInputInstagram'
 import MediaInputShopify from './MediaInputShopify'
+import MenuInput from './MenuInput'
 
 
 export default function StoryInput (inputSetUp) {
@@ -18,8 +19,10 @@ export default function StoryInput (inputSetUp) {
         default:
           return <MediaInput inputSetUp={inputSetUp}/>
       }
+    case 'MenuSelect':
+        return <MenuInput inputSetUp={inputSetUp}/>
 
     default:
-      return;
+      return <span/>;
   }
 }

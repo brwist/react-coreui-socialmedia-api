@@ -8,6 +8,19 @@
   overflow-x: hidden;
   overflow-y: hidden;
   border-radius: 25px;
+
+  .story-details {
+    .form-group {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+      span {
+        white-space: nowrap;
+        padding-right: 30px;
+      }
+    }
+  }
   
   & .modal-content {
     width: 100%;
