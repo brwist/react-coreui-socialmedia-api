@@ -20,6 +20,17 @@
   width: 300px;
 }
 
+.spinner {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  width: 100px;
+  height: 100px;
+  img {
+    width: 100%;
+  }
+}
+
 .title-logo {
   background-image: url('./assets/big_white_logo.png');
   height: 80px;

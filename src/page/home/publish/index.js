@@ -10,8 +10,8 @@ import {
   AppSidebarHeader,
   AppSidebarForm,
 } from '@coreui/react';
-import { Spinner } from 'reactstrap';
 
+import Spinner from '../../../components/utils/Spinner';
 import StoryMenu from '../../../components/storyMenu/index'
 import './index.scss'
 import navigation from '../../../config/nav'

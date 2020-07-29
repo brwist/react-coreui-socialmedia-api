@@ -6,8 +6,9 @@ import {
   AppSidebarHeader,
   AppSidebarForm,
 } from '@coreui/react';
-import { Col, Container, Row, Spinner } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 
+import Spinner from '../../../components/utils/Spinner';
 import Panel from '../../../components/editor/index';
 import EditorLightbox from '../../../components/editorLightbox/index'
 import './index.scss';

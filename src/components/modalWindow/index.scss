@@ -64,11 +64,11 @@
     margin-right: auto;
     margin-left: auto;
     .media-holder {
-      width: 50px;
       position: relative;
       border-radius: 4px;
       margin-right: 0;
       cursor: pointer;
+      padding: 0 2.5px;
       &.active {
         border: 2px solid rgba(0,0,0,.2);
       }
@@ -87,7 +87,7 @@
         font-size: 36px;
       }
       img, video {
-        width: 50px;
+        width: 100%;
       }
     }
 

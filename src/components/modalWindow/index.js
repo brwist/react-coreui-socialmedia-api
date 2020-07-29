@@ -3,8 +3,7 @@ import { Col, Modal, Row, Container } from 'reactstrap';
 
 import { connect } from "react-redux";
 
-import { Spinner } from 'reactstrap';
-
+import Spinner from '../utils/Spinner';
 import Navigation from './navigation/index'
 import Preview from '../preview/index'
 import SetupProfile from './setupProfile/index'

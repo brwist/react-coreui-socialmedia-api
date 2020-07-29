@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 
-import { Spinner } from 'reactstrap';
-
+import Spinner from './components/utils/Spinner';
 
 import { GET_USER_INFO } from './store/types/user'
 

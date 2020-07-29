@@ -1,9 +1,10 @@
 import React, {useEffect, useState}  from 'react';
-import { Spinner, Button, FormGroup, Label, Input, } from 'reactstrap';
+import { Button, FormGroup, Label, Input, } from 'reactstrap';
 import { connect } from "react-redux";
 import axios from 'axios';
 import Slider from "react-slick";
 
+import Spinner from '../utils/Spinner';
 import SocialImg from '../social-img/index';
 import { GET_INSTAGRAM_DATA } from '../../store/types/instagramData'
 import { GET_USER } from '../../store/types/account'

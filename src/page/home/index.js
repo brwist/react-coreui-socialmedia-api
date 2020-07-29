@@ -6,8 +6,8 @@ import {
   AppSidebar,
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
-import { Spinner } from 'reactstrap';
 
+import Spinner from '../../components/utils/Spinner';
 import './index.scss';
 import navigation from '../../config/nav'
 import ModalWindow from '../../components/modalWindow/index'

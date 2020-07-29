@@ -1,8 +1,9 @@
 import React, {useState, useRef, useEffect}  from 'react';
 import axios  from 'axios';
-import { FormGroup, Button, Spinner, Input, Label } from 'reactstrap';
+import { FormGroup, Button, Input, Label } from 'reactstrap';
 import { connect } from "react-redux";
 
+import Spinner from '../utils/Spinner';
 import { GET_MENU_LIST } from '../../store/types/menuList'
 
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import { Col, Spinner } from 'reactstrap'
+import { Col } from 'reactstrap'
 
+import Spinner from '../../utils/Spinner';
 import './index.scss';
 import phonePanel from '../../../assets/phone.png'
 import PanelPreview from '../panelPreview/index'
@@ -66,7 +67,10 @@ const Step = ({
     }). then(response => {
       setStateId(response.data.workflowStateID)
       setStepSubmit(false)
-      isLastStep && setLastSubmitted(true)
+      if (isLastStep) {
+        setLastSubmitted(true)
+        closeModal()
+      }
       return !isLastStep && handleStoryStep(+1)()
     }, error => {
       console.log(error)

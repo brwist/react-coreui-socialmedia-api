@@ -36,10 +36,10 @@ const TextInput = ({inputSetUp}) => {
     })
 
     Promise.all(uploadRequestsList).then(responses => {
-      const mediaList = responses.map(response => cdnURL+response.data.media)
+      const mediaList = responses.map(response => response.data.media)
       inputSetUp.handleParamsChange(inputSetUp.name, `["${mediaList.join(',')}"]`)
       setFileUpload(false)
-      inputSetUp.setPreviewImage(mediaList)
+      inputSetUp.setPreviewImage(mediaList.map(media => cdnURL+media))
     }, error => setFileUpload(false))
   }
   return <>
@@ -62,7 +62,7 @@ const TextInput = ({inputSetUp}) => {
         multiple/>
       <span style={{paddingRight: '10px'}}><Button onClick={clickChooseFile} color='warning'>Choose Files</Button></span>
       {!!selectedFiles.length && <Button onClick={uploadFiles} color='warning'>Upload Files</Button>}
-      {fileUploading && <span>Uploading...</span>}
+      {fileUploading && <span style={{paddingLeft: '10px'}}>Uploading...</span>}
     </FormGroup>
 
   </>

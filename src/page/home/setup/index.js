@@ -7,8 +7,9 @@ import {
   AppSidebarHeader,
   AppSidebarForm,
 } from '@coreui/react';
-import { Col, Container, Row, Spinner } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux'
+import Spinner from '../../../components/utils/Spinner';
 import * as types from '../../../store/types/account'
 
 import Panel from '../../../components/setupPanel/index';

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import { Col, Button, Spinner } from 'reactstrap'
+import { Col, Button } from 'reactstrap'
 
+import Spinner from '../../utils/Spinner';
 import './index.scss';
 
 
@@ -29,22 +30,23 @@ const PanelPreview = props => {
   const currentMedia = mediaIsArray ? props.previewImage[currentPreview] : props.previewImage
   const videoLink = currentMedia && currentMedia.indexOf('.mp4') !== -1
 
+
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
       {!stepIsSubmitting && lastSubmitted && <h3 className='push-live__title'>Done!</h3>}
-      <div className='push-live__page-wrapper'>
-        {!lastSubmitted ? <Button
-          color='secondary'
-          onClick={() => {
-            handlePreviewStep()
-          }}
-          className='push-live__btn'
-        >
-          Back
-        </Button> : <div />}
-        {stepIsSubmitting
-          ? <Spinner className='setup__spinner' color="dark" />
-          : <div style={{display: 'flex'}}>
+      {stepIsSubmitting
+        ? <Spinner className='setup__spinner' color="dark" />
+        : <div className='push-live__page-wrapper'>
+          {!lastSubmitted ? <Button
+            color='secondary'
+            onClick={() => {
+              handlePreviewStep()
+            }}
+            className='push-live__btn'
+          >
+            Back
+          </Button> : <div />}
+          <div style={{display: 'flex'}}>
             {!lastSubmitted && <div>
               <div className="image-holder">
                 <img className='panelEditor__phone-img' alt="phone" src={require('../../../assets/panel.png')} />
@@ -63,10 +65,9 @@ const PanelPreview = props => {
             </div>}
 
           </div>
-        }
-
-        <Button color='warning'  onClick={!lastSubmitted ? nextStep : closeModal} className='push-live__btn'>{lastSubmitted ? 'Close' : isLastStep ? 'Push Live' : 'Next'}</Button>
-      </div>
+          <Button color='warning'  onClick={!lastSubmitted ? nextStep : closeModal} className='push-live__btn'>{lastSubmitted ? 'Close' : isLastStep ? 'Push Live' : 'Next'}</Button>
+        </div>
+      }
       <div className='push-live__page-wrapper-small'>
         <img className='push-live__img' alt='phone' src={props.img} />
         <div>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Col, Row, Button, Form, FormGroup, Label, Spinner, Input } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShopify } from "@fortawesome/free-brands-svg-icons"
 import { connect } from "react-redux";
 import axios from 'axios';
 
+import Spinner from '../utils/Spinner';
 import { GET_INSTAGRAM_ACCOUNTS } from '../../store/types/instagramAccounts'
 
 

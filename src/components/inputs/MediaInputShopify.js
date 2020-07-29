@@ -1,9 +1,10 @@
 import React, {useEffect, useState}  from 'react';
-import { Spinner, Button, Input } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 import { connect } from "react-redux";
 import axios from "axios";
 import Slider from "react-slick";
 
+import Spinner from '../utils/Spinner';
 import SocialImg from '../social-img/index';
 import { GET_SHOPIFY_DATA } from '../../store/types/shopifyData'
 import { GET_SHOPIFY_PRODUCTS } from '../../store/types/shopifyProducts'
