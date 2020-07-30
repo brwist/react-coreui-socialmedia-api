@@ -33,7 +33,7 @@ const PanelPreview = props => {
 
   return (
     <Col className='push-live' xs={12} md={10} lg={10}>
-      {!stepIsSubmitting && lastSubmitted && <h3 className='push-live__title'>Done!</h3>}
+      {!stepIsSubmitting && lastSubmitted && <h3 className='push-live__title'>Complete!</h3>}
       {stepIsSubmitting
         ? <Spinner className='setup__spinner' color="dark" />
         : <div className='push-live__page-wrapper'>

@@ -36,10 +36,10 @@ const TextInput = ({inputSetUp}) => {
     })
 
     Promise.all(uploadRequestsList).then(responses => {
-      const mediaList = responses.map(response => response.data.media)
+      const mediaList = responses.map(response => response.data.id)
       inputSetUp.handleParamsChange(inputSetUp.name, `["${mediaList.join(',')}"]`)
       setFileUpload(false)
-      inputSetUp.setPreviewImage(mediaList.map(media => cdnURL+media))
+      inputSetUp.setPreviewImage(mediaList.map(media => responses.map(response => cdnURL+response.data.media)))
     }, error => setFileUpload(false))
   }
   return <>

@@ -69,7 +69,9 @@ const Step = ({
       setStepSubmit(false)
       if (isLastStep) {
         setLastSubmitted(true)
-        closeModal()
+        setTimeout(() => {
+          closeModal()
+        }, 700)
       }
       return !isLastStep && handleStoryStep(+1)()
     }, error => {
