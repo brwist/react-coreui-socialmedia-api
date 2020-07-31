@@ -39,7 +39,7 @@ const TextInput = ({inputSetUp}) => {
       const mediaList = responses.map(response => response.data.id)
       inputSetUp.handleParamsChange(inputSetUp.name, `["${mediaList.join(',')}"]`)
       setFileUpload(false)
-      inputSetUp.setPreviewImage(mediaList.map(media => responses.map(response => cdnURL+response.data.media)))
+      inputSetUp.setPreviewImage(responses.map(response => cdnURL+response.data.media))
     }, error => setFileUpload(false))
   }
   return <>
