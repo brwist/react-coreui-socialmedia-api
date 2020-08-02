@@ -48,7 +48,7 @@ const TextInput = ({inputSetUp}) => {
     {!!selectedFiles.length && <div className="media-grid">
       {selectedFiles.map((item, index) => {
         const src = URL.createObjectURL(item)
-        return <div className="wrapper-image" onClick={removeMedia(index)}><img key={index} src={src} alt=""/></div>
+        return <div key={index} className="wrapper-image" onClick={removeMedia(index)}><img src={src} alt=""/></div>
       })}
     </div>}
     <FormGroup className='setup-profile__form-group'>
