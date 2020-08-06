@@ -172,7 +172,7 @@ const MediaInputInstagram = (props) => {
       ? <div className="flex-container">
         {collections.map(collection => {
           const videoLink = collection.thumbnail.url.indexOf('.mp4') !== -1
-          return <span className="boxItem" onClick={handleSelectCollection(collection.items)}>
+          return <span key={collection.thumbnail.url} className="boxItem" onClick={handleSelectCollection(collection.items)}>
           {collection.thumbnail.url && (!videoLink
             ? <img src={collection.thumbnail.url} alt={collection.thumbnail.title} width="100%"/>
             : <video className='image-preview' autoplay width="100%">

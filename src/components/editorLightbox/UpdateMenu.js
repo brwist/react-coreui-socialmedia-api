@@ -106,6 +106,9 @@ function UpdateMenu(props) {
       updateHistory(menuId, null, true)
       setLoading(false)
       setDeleted(true)
+      setTimeout(() => {
+        handleBack()
+      }, 500)
     }, error => {
       setLoading(false)
       setError(error.response.data.msg)

@@ -24,7 +24,8 @@ export default function MenuCard(props) {
 
   const handleEdit = e => {
     setEditView(true)
-    setHistoryList([...historyList, null])
+    const newHistory = historyList[historyList.length-1] ? [...historyList, null] : [...historyList]
+    setHistoryList(newHistory)
   }
 
   return <div className='box-wrapper'>

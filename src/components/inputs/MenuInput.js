@@ -10,6 +10,7 @@ import { GET_MENU_LIST } from '../../store/types/menuList'
 const MenuInput = (props) => {
   const [showCreateStory, setShowCreateStory] = useState(false)
   const [fileUploading, setFileUpload] = useState(false)
+  const [fileUploaded, setFileUploaded] = useState(false)
   const {
     inputSetUp,
     menuList,
@@ -23,6 +24,14 @@ const MenuInput = (props) => {
   const hiddenFileInput = useRef(null);
 
   useEffect(() => {
+    menuList.length && inputSetUp.handleParamsChange(null, null, {
+      SELECT_MENU: true,
+      MENU_ID: menuList[0].id,
+      PARENT_MENU_ID: menuList[0].parentID || menuList[0].id
+    })
+  }, [menuList])
+
+  useEffect(() => {
     getMenuListId(locationId)
   }, [getMenuListId, locationId])
 
@@ -32,12 +41,18 @@ const MenuInput = (props) => {
 
   const changeTitle = (e) => {
     const { value } = e.target
-    inputSetUp.handleParamsChange('MENU_TITLE', value)
+    inputSetUp.handleParamsChange(null, null, {
+      SELECT_MENU: true,
+      MENU_TITLE: value,
+    })
   }
 
   const changeCheckBox = (e) => {
     const { checked } = e.target
-    inputSetUp.handleParamsChange('MAIN_PAGE', checked)
+    inputSetUp.handleParamsChange(null, null, {
+      SELECT_MENU: true,
+      MAIN_PAGE: checked,
+    })
   }
 
   const selectParentTitle = (e) => {
@@ -45,7 +60,7 @@ const MenuInput = (props) => {
     inputSetUp.handleParamsChange(null, null, {
       SELECT_MENU: true,
       MENU_ID: value,
-      PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID
+      PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID || value
     })
   }
 
@@ -56,10 +71,15 @@ const MenuInput = (props) => {
         inputSetUp.handleParamsChange(null, null, {
           SELECT_MENU: true,
           MENU_ID: value,
-          PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID
+          PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID || value
         })
       } else {
         setShowCreateStory(true)
+        inputSetUp.handleParamsChange(null, null, {
+          SELECT_MENU: true,
+          MENU_ID: menuList[0].id,
+          PARENT_MENU_ID: menuList[0].parentID || menuList[0].id
+        })
       }
     }
   }
@@ -72,6 +92,7 @@ const MenuInput = (props) => {
     axios.put(`location/${locationId}/media`, data).then(response => {
       inputSetUp.handleParamsChange('MENU_IMAGE', response.data.media)
       setFileUpload(false)
+      setFileUploaded(true)
     }, error => setFileUpload(false))
   }
 
@@ -82,7 +103,6 @@ const MenuInput = (props) => {
     <div dangerouslySetInnerHTML={{__html: inputSetUp.html}}></div>
     <FormGroup>
       <Input type="select" name="storySelect" onChange={selectStory}>
-        <option value="" key='none' selected>Stories</option>
         {menuList && menuList.map(menuItem => {
           return <option value={menuItem.id} key={menuItem.id}>{menuItem.label}</option>
         })}
@@ -105,6 +125,7 @@ const MenuInput = (props) => {
           style={{display: 'none'}}
           multiple/>
         {fileUploading && <span>Uploading...</span>}
+        {fileUploaded && <span>Upload is completed.</span>}
         <Button onClick={clickChooseFile} color='warning'>Upload</Button>
       </FormGroup>
       <FormGroup className="form-group">
