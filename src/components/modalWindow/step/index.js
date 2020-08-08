@@ -52,6 +52,11 @@ const Step = ({
     if (name) {
       newParams[name] = value
     }
+    for (let key of Object.keys(newParams)) {
+      if (!newParams[key]) {
+        delete newParams[key]
+      }
+    }
     setParams(newParams)
   }
 
@@ -121,7 +126,7 @@ const Step = ({
             <div dangerouslySetInnerHTML={{__html: step.html}}></div>
             <div>
               {step.workflowInputs.map(input => {
-                return <StoryInput {...input} key={input.name} setPreviewImage={setPreviewImage} locationId={locationId} handleParamsChange={handleParamsChange}/>
+                return <StoryInput {...input} key={input.name} setPreviewImage={setPreviewImage} locationId={locationId} params={params}  handleParamsChange={handleParamsChange}/>
               })}
             </div>
           </div>

@@ -7,6 +7,8 @@
      text-align: center;
      width: 90%;
      font-family: 'Lato', sans-serif;
+     overflow-y: scroll;
+     height: 81%;
 
      &__title {
        margin-bottom: 45px;
@@ -87,6 +89,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      &.sublist {
+        background-color: #f1ffff;
+      }
+      &.items {
+        background-color: #f8ffff;
+      }
 
 
       

@@ -24,7 +24,8 @@ export default function MenuCard(props) {
 
   const handleEdit = e => {
     setEditView(true)
-    const newHistory = historyList[historyList.length-1] ? [...historyList, null] : [...historyList]
+
+    const newHistory = [...historyList]
     setHistoryList(newHistory)
   }
 
@@ -43,7 +44,7 @@ export default function MenuCard(props) {
     </div>
     {subList && subList.map(item => (
       <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={setMenu(item)}>
+        <div className="dropbtn sublist"  onClick={setMenu(item)}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}
@@ -52,9 +53,9 @@ export default function MenuCard(props) {
         </div>
       </div>
     ))}
-    {(subList && !subList.length) && items && items.map(item => (
+    {items && items.map(item => (
       <div key={item.id} className="dropdown">
-        <div className="dropbtn"  onClick={handleStorySelect(item, item.mediaList.map(item => cdnURL+item.media))}>
+        <div className="dropbtn items"  onClick={handleStorySelect(item, item.mediaList.map(item => cdnURL+item.media))}>
           {item.thumbnail && <div className="icon">
             <img src={cdnURL+item.thumbnail.media} alt='icon' />
           </div>}

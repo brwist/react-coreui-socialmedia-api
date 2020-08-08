@@ -26,6 +26,7 @@ function Editor(props) {
   const {
     getStories,
     stories,
+    isLoading,
     userLocation: {
       id,
       name: locationName
@@ -41,7 +42,6 @@ function Editor(props) {
     }
   }, [id, getStories])
 
-  console.log(currentItem)
 
   return (
     <Container className='promote' fluid>
@@ -57,7 +57,7 @@ function Editor(props) {
           </AppSidebar>
         </Col>
         <Col className='d-flex justify-content-center' md={4} lg={5}>
-          {stories.startMenu
+          {stories.startMenu && !isLoading
             ? <EditorLightbox
                 className="editor-light-box"
                 stories={stories.startMenu}
@@ -77,6 +77,7 @@ function Editor(props) {
 
 const mapStateToProps = state => ({
   stories: state.stories.stories,
+  isLoading: state.stories.isLoading,
   userLocation: state.user.userLocation,
 })
 

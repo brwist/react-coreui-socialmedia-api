@@ -25,7 +25,7 @@ const EditorLightbox = (props) => {
   const updateHistory = (id, updatedData, deleteItem=false) => {
     if (allowBack) {
       const replaceNested = (historyItem) => {
-        if (historyItem.id === id) {
+        if (historyItem.id === id && !deleteItem) {
           Object.keys(updatedData).forEach(function (key) {
             historyItem[key] = updatedData[key]
           });
@@ -40,7 +40,8 @@ const EditorLightbox = (props) => {
             for (let item of historyItem.subList) {
               replaceNested(item)
             }
-          } else if (historyItem.items) {
+          }
+          if (historyItem.items) {
             if (deleteItem) {
               const deleteIndex = historyItem.items.findIndex(item => item && item.id === id)
               if (deleteIndex !== -1) {

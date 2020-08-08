@@ -41,8 +41,9 @@ const MenuInput = (props) => {
 
   const changeTitle = (e) => {
     const { value } = e.target
+    const isValid = inputSetUp.params.MENU_IMAGE
     inputSetUp.handleParamsChange(null, null, {
-      SELECT_MENU: true,
+      SELECT_MENU: !!isValid,
       MENU_TITLE: value,
     })
   }
@@ -57,10 +58,11 @@ const MenuInput = (props) => {
 
   const selectParentTitle = (e) => {
     const { value } = e.target
+    const isValid = inputSetUp.params.MENU_IMAGE && inputSetUp.params.MENU_TITLE
     inputSetUp.handleParamsChange(null, null, {
-      SELECT_MENU: true,
-      MENU_ID: value,
-      PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID || value
+      SELECT_MENU: !!isValid,
+      PARENT_MENU_ID: value,
+      MENU_ID: null
     })
   }
 
@@ -77,7 +79,7 @@ const MenuInput = (props) => {
         setShowCreateStory(true)
         inputSetUp.handleParamsChange(null, null, {
           SELECT_MENU: true,
-          MENU_ID: menuList[0].id,
+          MENU_ID: null,
           PARENT_MENU_ID: menuList[0].parentID || menuList[0].id
         })
       }
@@ -90,7 +92,11 @@ const MenuInput = (props) => {
     data.append('file', e.target.files[0])
     data.append('thumbnail', true)
     axios.put(`location/${locationId}/media`, data).then(response => {
-      inputSetUp.handleParamsChange('MENU_IMAGE', response.data.media)
+      const isValid = inputSetUp.params.MENU_TITLE
+      inputSetUp.handleParamsChange(null, null, {
+      SELECT_MENU: !!isValid,
+      MENU_IMAGE: response.data.id,
+    })
       setFileUpload(false)
       setFileUploaded(true)
     }, error => setFileUpload(false))
