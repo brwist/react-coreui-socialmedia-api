@@ -70,10 +70,13 @@ const MenuInput = (props) => {
     const { value } = e.target
     if (value) {
       if (value && value !== 'NEW_STORY') {
+         setShowCreateStory(false)
         inputSetUp.handleParamsChange(null, null, {
           SELECT_MENU: true,
           MENU_ID: value,
-          PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID || value
+          PARENT_MENU_ID: menuList.find(menu => menu.id === value).parentID || value,
+          MENU_TITLE: null,
+          MENU_IMAGE: null
         })
       } else {
         setShowCreateStory(true)
