@@ -65,6 +65,7 @@ const Step = ({
   const submitStep = (tab) => {
     setStepSubmit(true)
     delete params["SELECT_MENU"]
+    delete params["SAMPLE"]
     axios.post(`locn/${locationId}/workflow/${workflowId}/step/${step.stepID}`, {
       stepOp: step.stepOp,
       workflowStateID: workflowStateID,

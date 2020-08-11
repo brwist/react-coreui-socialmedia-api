@@ -65,9 +65,18 @@ export default function MenuCard(props) {
       </div>
     ))}
     {!subList && !items && <div className="media-grid">
-      {mediaList.map((item, index) => (
-        <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleMediaSelect(index)}/>
-      ))}
+      {mediaList.map((item, index) => {
+        const videoLink = item.media && item.media.indexOf('.mp4') !== -1
+        if (!videoLink) {
+          return <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleMediaSelect(index)}/>
+        } else {
+          return <video className='image-preview' autoplay>
+            <source src={cdnURL+item.media} type="video/mp4" />
+              Your browser does not support the video tag.
+          </video>
+        }
+
+      })}
     </div>
     }
   </div>

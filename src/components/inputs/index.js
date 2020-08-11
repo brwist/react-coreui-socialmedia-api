@@ -4,6 +4,7 @@ import MediaInput from './MediaInput'
 import MediaInputInstagram from './MediaInputInstagram'
 import MediaInputShopify from './MediaInputShopify'
 import MenuInput from './MenuInput'
+import SampleInput from './SampleInput'
 
 
 export default function StoryInput (inputSetUp) {
@@ -21,6 +22,8 @@ export default function StoryInput (inputSetUp) {
       }
     case 'MenuSelect':
         return <MenuInput inputSetUp={inputSetUp}/>
+    case 'SampleInput':
+        return <SampleInput inputSetUp={inputSetUp}/>
 
     default:
       return <span/>;

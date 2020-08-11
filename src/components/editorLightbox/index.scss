@@ -7,7 +7,7 @@
      text-align: center;
      width: 90%;
      font-family: 'Lato', sans-serif;
-     overflow-y: scroll;
+     overflow-y: auto;
      height: 81%;
 
      &__title {
@@ -241,7 +241,7 @@
     }
   }
 
-  img {
+  video, img {
     width: 147px;
     height: 261px;
     margin: 2px;
