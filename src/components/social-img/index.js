@@ -26,7 +26,7 @@ const SocialImg = props => {
             <div onClick={handleClick(i)} className={'social-side__img ' + (activeMedia.includes(i) && 'selected')}>
           { !videoLink
             ? <img src={i} alt='img'/>
-            : <video width="320" height="240">
+            : <video width="320" height="240" autoPlay muted loop>
               <source src={i} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
