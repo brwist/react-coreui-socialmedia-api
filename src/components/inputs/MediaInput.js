@@ -32,6 +32,7 @@ const TextInput = ({inputSetUp}) => {
     const uploadRequestsList = selectedFiles.map(file => {
       const data = new FormData()
       data.append('file', file)
+      data.append('thumbnail', true)
       return axios.put(`location/${inputSetUp.locationId}/media`, data)
     })
 

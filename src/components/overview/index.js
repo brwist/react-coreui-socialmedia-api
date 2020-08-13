@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import TimezonePicker from 'react-bootstrap-timezone-picker';
 import * as types from '../../store/types/account'
@@ -28,14 +29,6 @@ class Overview extends React.Component {
     }))
   }
 
-  componentDidUpdate(prevProps) {
-  if (prevProps.user.logo.name !== this.props.user.logo.name) {
-      this.setState({
-        fileName: this.props.user.logo.name
-      })
-    }
-  }
-
   handleChange = (tz) => this.setState({ tz })
 
   onChange = e => {
@@ -46,10 +39,19 @@ class Overview extends React.Component {
 
   fileChange = e => {
     e.preventDefault();
+    const data = new FormData()
+    data.append('file', e.target.files[0])
+    data.append('thumbnail', true)
+    axios.put(`location/${this.props.userLocation.id}/media`, data).then(
+      response => {
+        this.setState({
+          file: response.data,
+          fileName: response.data.media
+        })
+      }
+    )
 
-    this.setState({
-      file: e.target.files[0]
-    })
+
   }
 
   onSubmit = e => {
@@ -59,14 +61,9 @@ class Overview extends React.Component {
 
     user.name = name;
     user.tz = tz;
-
-    if (user.logo.name) {
-      user.logo.name = file?.name;
-    }
-
-    if (file.size) {
-      user.logo.sizeMB = (file?.size / (1024 * 1024)).toFixed(2);
-    }
+    user.logo = file;
+    user.logo.name = file.media
+    delete user.logo.media
 
     this.props.changeUser(user);
 
@@ -77,7 +74,6 @@ class Overview extends React.Component {
     })
 
     setTimeout(() => {
-      this.props.getUser()
       this.setState({
         isSend: false
       })
@@ -143,6 +139,7 @@ class Overview extends React.Component {
 const mapStateToProps = state => {
   return ({
     user: state.account.user.conf,
+    userLocation: state.user.userLocation
   })
 }
 
