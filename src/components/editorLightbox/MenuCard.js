@@ -70,7 +70,7 @@ export default function MenuCard(props) {
         if (!videoLink) {
           return <img key={item.id} src={cdnURL+item.media} alt={item.media} onClick={handleMediaSelect(index)}/>
         } else {
-          return <video className='image-preview' autoplay>
+          return <video key={item.id} className='image-preview' onClick={handleMediaSelect(index)} autoplay>
             <source src={cdnURL+item.media} type="video/mp4" />
               Your browser does not support the video tag.
           </video>
