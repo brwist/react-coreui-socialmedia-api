@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import TimezonePicker from 'react-bootstrap-timezone-picker';
 import * as types from '../../store/types/account'
+import { cdnURL } from '../../config/endpoints';
 
 import './index.scss';
 
@@ -13,6 +14,7 @@ class Overview extends React.Component {
     tz: '',
     email: '',
     file: '',
+    fileName: '',
     isSend: false,
   }
 
@@ -22,7 +24,16 @@ class Overview extends React.Component {
       name: this.props.user.name,
       tz: this.props.user.tz,
       file: this.props.user.logo,
+      fileName: this.props.user.logo.name,
     }))
+  }
+
+  componentDidUpdate(prevProps) {
+  if (prevProps.user.logo.name !== this.props.user.logo.name) {
+      this.setState({
+        fileName: this.props.user.logo.name
+      })
+    }
   }
 
   handleChange = (tz) => this.setState({ tz })
@@ -65,14 +76,16 @@ class Overview extends React.Component {
       isSend: true
     })
 
-    setTimeout(() => this.setState({
-      isSend: false
-    }), 2000)
+    setTimeout(() => {
+      this.props.getUser()
+      this.setState({
+        isSend: false
+      })
+    }, 2000)
   }
 
   render() {
-    const { name, tz, isSend } = this.state;
-
+    const { name, tz, isSend, fileName } = this.state;
 
     return (
       <div className='overview'>
@@ -80,7 +93,11 @@ class Overview extends React.Component {
         <Form onSubmit={this.onSubmit}>
           <FormGroup>
             Upload Brand Logo
-        <Input onChange={this.fileChange} type="file" name="" id="" />
+            <div className="flex-wrapper">
+              {fileName && <div className="icon" style={{backgroundImage: `url(${cdnURL+fileName})`}}>
+              </div>}
+              <Input onChange={this.fileChange} type="file" name="" id="" />
+            </div>
           </FormGroup>
 
           <FormGroup>
@@ -130,7 +147,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeUser: user => dispatch({ type: types.CHANGE_USER, user })
+  changeUser: user => dispatch({ type: types.CHANGE_USER, user }),
+  getUser: () => dispatch({ type: types.GET_USER }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Overview)
