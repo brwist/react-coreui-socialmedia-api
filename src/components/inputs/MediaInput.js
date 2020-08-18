@@ -1,6 +1,6 @@
 import React, {useState, useRef}  from 'react';
 import axios  from 'axios';
-import { FormGroup, Button } from 'reactstrap';
+import {FormGroup, Button, Col} from 'reactstrap';
 
 import { cdnURL } from '../../config/endpoints';
 
@@ -32,7 +32,7 @@ const TextInput = ({inputSetUp}) => {
     const uploadRequestsList = selectedFiles.map(file => {
       const data = new FormData()
       data.append('file', file)
-      data.append('thumbnail', true)
+      data.append('thumbnail', false)
       return axios.put(`location/${inputSetUp.locationId}/media`, data)
     })
 
@@ -49,7 +49,18 @@ const TextInput = ({inputSetUp}) => {
     {!!selectedFiles.length && <div className="media-grid">
       {selectedFiles.map((item, index) => {
         const src = URL.createObjectURL(item)
-        return <div key={index} className="wrapper-image" onClick={removeMedia(index)}><img src={src} alt=""/></div>
+        const videoLink = selectedFiles[index].name.indexOf('.mp4') !== -1
+
+        return <div key={index} className="wrapper-image" onClick={removeMedia(index)}  style={{overflow: "hidden"}}>
+                { !videoLink
+                    ? <img src={src} alt='img'/>
+                    : <video width="320" height="240" autoPlay muted loop>
+                      <source src={src} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                }
+              </div>
+
       })}
     </div>}
     <FormGroup className='setup-profile__form-group'>
