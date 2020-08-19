@@ -8,6 +8,7 @@ import { cdnURL } from '../../config/endpoints';
 const TextInput = ({inputSetUp}) => {
   const [selectedFiles, setSelectedFiles] = useState([])
   const [fileUploading, setFileUpload] = useState(false)
+  const [fileInputKey, setFileInputKey] = useState(new Date().toLocaleString())
 
   const hiddenFileInput = useRef(null);
 
@@ -23,6 +24,7 @@ const TextInput = ({inputSetUp}) => {
 
   const handleSelectFile = e => {
     const {files} =e.target
+    setFileInputKey(new Date().toLocaleString())
     setSelectedFiles([...selectedFiles, ...files])
   }
 
@@ -69,6 +71,7 @@ const TextInput = ({inputSetUp}) => {
         id={inputSetUp.name}
         name={inputSetUp.name}
         onChange={handleSelectFile}
+        key={fileInputKey}
         ref={hiddenFileInput}
         style={{display: 'none'}}
         multiple/>
