@@ -1,6 +1,8 @@
 import React, {useState, useRef}  from 'react';
 import axios  from 'axios';
-import {FormGroup, Button, Col} from 'reactstrap';
+import {FormGroup, Button} from 'reactstrap';
+
+import Promise from 'bluebird'
 
 import { cdnURL } from '../../config/endpoints';
 
@@ -31,19 +33,18 @@ const TextInput = ({inputSetUp}) => {
   const uploadFiles = (e) => {
     setFileUpload(true)
 
-    const uploadRequestsList = selectedFiles.map(file => {
+    Promise.mapSeries(selectedFiles, (file) => {
       const data = new FormData()
       data.append('file', file)
       data.append('thumbnail', false)
       return axios.put(`location/${inputSetUp.locationId}/media`, data)
-    })
-
-    Promise.all(uploadRequestsList).then(responses => {
+    }).then(function(responses) {
       const mediaList = responses.map(response => response.data.id)
       inputSetUp.handleParamsChange(inputSetUp.name, `["${mediaList.join('","')}"]`)
       setFileUpload(false)
       inputSetUp.setPreviewImage(responses.map(response => cdnURL+response.data.media))
-    }, error => setFileUpload(false))
+    })
+
   }
   return <>
     <h4>{inputSetUp.title}</h4>
