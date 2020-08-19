@@ -10,6 +10,7 @@ import { cdnURL } from '../../config/endpoints';
 const TextInput = ({inputSetUp}) => {
   const [selectedFiles, setSelectedFiles] = useState([])
   const [fileUploading, setFileUpload] = useState(false)
+  const [fileName, setFileName] = useState('')
   const [fileInputKey, setFileInputKey] = useState(new Date().toLocaleString())
 
   const hiddenFileInput = useRef(null);
@@ -37,6 +38,7 @@ const TextInput = ({inputSetUp}) => {
       const data = new FormData()
       data.append('file', file)
       data.append('thumbnail', false)
+      setFileName(file.name)
       return axios.put(`location/${inputSetUp.locationId}/media`, data)
     }).then(function(responses) {
       const mediaList = responses.map(response => response.data.id)
@@ -78,7 +80,7 @@ const TextInput = ({inputSetUp}) => {
         multiple/>
       <span style={{paddingRight: '10px'}}><Button onClick={clickChooseFile} color='warning'>Choose Files</Button></span>
       {!!selectedFiles.length && <Button onClick={uploadFiles} color='warning'>Upload Files</Button>}
-      {fileUploading && <span style={{paddingLeft: '10px'}}>Uploading...</span>}
+      {fileUploading && <span style={{paddingLeft: '10px'}}>Uploading {fileName}...</span>}
     </FormGroup>
 
   </>
