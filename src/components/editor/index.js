@@ -37,7 +37,7 @@ const Panel = (props) => {
             <img className='panelEditor__phone-img' alt="phone" src={require('../../assets/panel.png')} />
             { currentMedia && (!videoLink
               ? <img className='image-preview' src={currentMedia} alt='phone'/>
-              : <video className='image-preview' autoPlay muted loop>
+              : <video key={currentMedia} className='image-preview' autoPlay muted loop>
                 <source src={currentMedia} type="video/mp4" />
                   Your browser does not support the video tag.
               </video>

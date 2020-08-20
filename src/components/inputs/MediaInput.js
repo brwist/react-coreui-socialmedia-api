@@ -80,7 +80,7 @@ const TextInput = ({inputSetUp}) => {
         multiple/>
       <span style={{paddingRight: '10px'}}><Button onClick={clickChooseFile} color='warning'>Choose Files</Button></span>
       {!!selectedFiles.length && <Button onClick={uploadFiles} color='warning'>Upload Files</Button>}
-      {fileUploading && <span style={{paddingLeft: '10px'}}>Uploading {fileName}...</span>}
+      {fileUploading && <div>Uploading {fileName}...</div>}
     </FormGroup>
 
   </>
